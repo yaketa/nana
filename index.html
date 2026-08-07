@@ -268,9 +268,9 @@ main b{
 
 /* ---------- セクション共通 ---------- */
 .section{padding-block:clamp(2.8rem,7vw,4.6rem);--c:var(--red)}
-/* となり合うセクションの境目。淡い色どうしだと境界がぼやけるので、
-   表紙やナビの下辺と同じ「インキの線」でくっきり区切る */
-.section+.section{border-top:3px solid var(--ink)}
+/* となり合うセクションの境目。淡い色どうしだと境界がぼやけるので細い線で区切る。
+   真っ黒だと主張が強すぎるため、インキを薄めた控えめな線にしている（利用者の好み） */
+.section+.section{border-top:2px solid rgba(51,48,42,.4)}
 /* どのセクションも同じ余白で終わるように、最後の要素の下マージンを切る
    （これが残ると、締めが段落や Q&A のセクションだけ下が間のびする） */
 .section .wrap>:last-child{margin-bottom:0}
