@@ -282,6 +282,20 @@ main b{
   border:2px solid var(--ink);border-radius:7px;
   padding:.1em .75em;margin:0 0 .7rem;box-shadow:2px 2px 0 rgba(51,48,42,.25);
 }
+/* きっちり2×2にならべる版。せまい画面では1列に落とす */
+.cards--2{grid-template-columns:1fr}
+@media (min-width:52rem){.cards--2{grid-template-columns:1fr 1fr}}
+/* 写真つきカード。写真はカードの上辺いっぱいに敷く */
+.card--photo{padding-top:0;overflow:hidden}
+.card-shot{margin:0 -1.2rem 1rem}
+.card-shot img{
+  border:0;border-radius:0;border-bottom:2.5px solid var(--ink);
+  box-shadow:none;aspect-ratio:16/9;object-fit:cover;
+}
+.card-shot figcaption{
+  margin:.45rem 1.2rem 0;text-align:right;
+  font-size:.68rem;line-height:1.5;
+}
 figure{margin:2rem 0}
 figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
 
@@ -782,23 +796,55 @@ footer a:hover{color:#ffd966}
           <h2>あわせて寄りたい、ふもとの楽しみ</h2>
         </div>
       </header>
-      <div class="cards">
-        <div class="card" style="--tag:var(--orange)">
+      <div class="cards cards--2">
+        <div class="card card--photo" style="--tag:var(--orange)">
+          <figure class="shot card-shot">
+            <img src="images/michinoeki-hase-960.jpg"
+                 srcset="images/michinoeki-hase-480.jpg 480w, images/michinoeki-hase-960.jpg 960w"
+                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 width="960" height="540" loading="lazy" decoding="async"
+                 alt="道の駅の売り場。焼きたてのミニクロワッサンが数個、四角い皿にのっている">
+            <figcaption><span class="credit">写真：Araisyohei／<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>（切り抜いて使用）</span></figcaption>
+          </figure>
           <span class="tag">GOURMET</span>
           <h3>道の駅 南アルプスむら長谷</h3>
           <p>峠へ向かう国道152号ぞい。焼きたてのミニクロワッサンが大人気で、お昼どきには地元食材のランチも。行き帰りの立ち寄り定番です。</p>
         </div>
-        <div class="card" style="--tag:var(--pink)">
+        <div class="card card--photo" style="--tag:var(--pink)">
+          <figure class="shot card-shot">
+            <img src="images/senryuso-960.jpg"
+                 srcset="images/senryuso-480.jpg 480w, images/senryuso-960.jpg 960w"
+                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 width="960" height="540" loading="lazy" decoding="async"
+                 alt="仙流荘となりのバス乗り場。木造の待合所の前に登山客がならび、奥に南アルプスの谷がひらけている">
+            <figcaption><span class="credit">写真：Koda6029／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span></figcaption>
+          </figure>
           <span class="tag">ONSEN</span>
           <h3>仙流荘（戸台パーク）</h3>
           <p>バス発着地のすぐとなりにある温泉宿。日帰り入浴ができ、山なみを眺めるお風呂とサウナで、峠のしずけさの余韻にひたれます。</p>
         </div>
-        <div class="card" style="--tag:var(--indigo)">
+        <div class="card card--photo" style="--tag:var(--indigo)">
+          <figure class="shot card-shot">
+            <img src="images/kozosen-museum-960.jpg"
+                 srcset="images/kozosen-museum-480.jpg 480w, images/kozosen-museum-960.jpg 960w"
+                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 width="960" height="540" loading="lazy" decoding="async"
+                 alt="新緑の山を背にした中央構造線博物館の建物。前庭にはいろいろな種類の岩石がならべて展示されている">
+            <figcaption><span class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜いて使用）</span></figcaption>
+          </figure>
           <span class="tag">GEO</span>
           <h3>中央構造線博物館・北川露頭</h3>
           <p>峠の南、大鹿村へ。日本でここだけの断層専門博物館と、断層の境目をじかに観察できる露頭。ゼロ磁場の「足もとの正体」に出会えます。</p>
         </div>
-        <div class="card" style="--tag:var(--red)">
+        <div class="card card--photo" style="--tag:var(--red)">
+          <figure class="shot card-shot">
+            <img src="images/takato-sakura-960.jpg"
+                 srcset="images/takato-sakura-480.jpg 480w, images/takato-sakura-960.jpg 960w"
+                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 width="960" height="540" loading="lazy" decoding="async"
+                 alt="淡紅色の桜におおわれた高遠城址公園を見おろした景色。桜の海のなかに朱色の屋根の建物がのぞいている">
+            <figcaption><span class="credit">写真：MaedaAkihiko／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span></figcaption>
+          </figure>
           <span class="tag">SAKURA</span>
           <h3>高遠城址公園</h3>
           <p>「天下第一の桜」とうたわれる、日本屈指の桜の名所。春に訪れるなら、淡紅色のタカトオコヒガンザクラと峠をセットでどうぞ。</p>
@@ -941,6 +987,10 @@ footer a:hover{color:#ffd966}
       <li>分杭峠の標識 — 撮影：alonfloc／<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>（<a href="https://commons.wikimedia.org/wiki/File:%E5%88%86%E6%9D%AD%E5%B3%A0_-_panoramio.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
       <li>北川露頭 — 撮影：Kumiko Korezumi／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（<a href="https://commons.wikimedia.org/wiki/File:MedianTectonicLine.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
       <li>安康露頭 — 撮影：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（<a href="https://commons.wikimedia.org/wiki/File:Median_Tectonic_Line-Ankou_outcrop-01.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
+      <li>道の駅 南アルプスむら長谷 — 撮影：Araisyohei／<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>（<a href="https://commons.wikimedia.org/wiki/File:Michinoeki_South_Alps_village_Hase_2019-11-16_%281%29_sa.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
+      <li>仙流荘のバス乗り場 — 撮影：Koda6029／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（<a href="https://commons.wikimedia.org/wiki/File:%E4%BB%99%E6%B5%81%E8%8D%98%E3%81%AE%E3%83%90%E3%82%B9%E5%81%9C.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
+      <li>中央構造線博物館 — 撮影：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（<a href="https://commons.wikimedia.org/wiki/File:Median_Tectonic_Line_Museum.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
+      <li>高遠城址公園の桜 — 撮影：MaedaAkihiko／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（<a href="https://commons.wikimedia.org/wiki/File:Takato-Joshi-Park_Cherry.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
     </ul>
     <p class="fineprint">このページは、分杭峠が好きな個人がつくった非公式の紹介サイトです。掲載情報は2026年8月時点の調べにもとづきます。バスの時刻・料金・通行止めなどの最新情報は、上の公式サイトでご確認ください。効果・効能をうたうものではありません。</p>
   </div>
