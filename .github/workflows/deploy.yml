@@ -52,4 +52,5 @@ jobs:
         uses: actions/deploy-pages@v4
       - name: スキップした理由を表示
         if: ${{ steps.pages.outcome != 'success' }}
-        run: echo "GitHub Pages がまだ有効化できないため、公開をスキップしました（リポジトリが非公開の場合、無料プランでは Pages を使えません）。"
+        run: |
+          echo "::warning::GitHub Pages が未設定のため、公開をスキップしました。リポジトリを Public にし、Settings → Pages → Source を「GitHub Actions」にすると、次回から自動公開されます（くわしくは README）。"
