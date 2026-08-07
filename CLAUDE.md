@@ -86,6 +86,8 @@
 - CI（.github/workflows/ci.yml）: push / PR のたびに `node --test` を実行する
 - 公開: GitHub Pages。main が更新されると .github/workflows/deploy.yml が
   テスト → 公開を自動で行う。URL は https://yaketa.github.io/nana/
+  ※ただしリポジトリが非公開のままだと無料プランでは Pages を使えないため、
+  その間 deploy.yml は公開ステップを自動でスキップする（エラーにはならない）
 - サイト内の交通情報（バスの期間・料金など）は 2026 年 8 月時点の調べ。
   シーズンが変わったら公式サイトを確認して更新する
 

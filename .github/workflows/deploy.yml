@@ -1,6 +1,8 @@
 name: Deploy
 
-# main が更新されたら（= PR をマージしたら）サイトを GitHub Pages に公開する
+# main が更新されたら（= PR をマージしたら）サイトを GitHub Pages に公開する。
+# GitHub Pages がまだ使えない場合（リポジトリが非公開のままなど）は、
+# エラーにせず公開ステップだけをスキップする。
 on:
   push:
     branches: [main]
@@ -33,11 +35,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - name: Pages が使えるか確認
+        id: pages
+        continue-on-error: true
+        uses: actions/configure-pages@v5
         with:
           enablement: true
-      - uses: actions/upload-pages-artifact@v3
+      - name: サイト一式をアップロード
+        if: ${{ steps.pages.outcome == 'success' }}
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      - id: deployment
+      - name: 公開
+        if: ${{ steps.pages.outcome == 'success' }}
+        id: deployment
         uses: actions/deploy-pages@v4
+      - name: スキップした理由を表示
+        if: ${{ steps.pages.outcome != 'success' }}
+        run: echo "GitHub Pages がまだ有効化できないため、公開をスキップしました（リポジトリが非公開の場合、無料プランでは Pages を使えません）。"
