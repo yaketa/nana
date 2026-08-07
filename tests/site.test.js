@@ -214,6 +214,17 @@ test("バス時刻表：caption は表題だけ、時刻は tt-time、「土休�
     "ラベルの意味を説明する注記（表の下の note）が消えている");
 });
 
+test("セクションの境目と余白が整っている（境界線・ジャンプの着地・末尾の余白）", () => {
+  assert.match(html, /\.section\+\.section\{border-top:3px solid var\(--ink\)\}/,
+    "となり合うセクションを区切るインキの線が消えている（淡い色どうしだと境目がぼやける）");
+  assert.match(html, /\[id\]\{scroll-margin-top:3\.2rem\}/,
+    "ページ内ジャンプの着地位置の指定が変わっている（ナビの高さ 約59px より深くすると、ナビの下に前のセクションの色が帯状に見える）");
+  assert.match(html, /\.section \.wrap>:last-child\{margin-bottom:0\}/,
+    "セクション最後の要素の下マージンを切る指定が消えている（一部のセクションだけ下の余白が間のびする）");
+  assert.ok(!/style="[^"]*margin/.test(html),
+    "余白の指定が HTML に直書きされている（余白はスタイル表でまとめて管理する）");
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });
