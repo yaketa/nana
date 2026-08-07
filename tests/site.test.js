@@ -143,19 +143,18 @@ test("標高バッジ（星形）：本文の枠の中にあり、インキの�
   assert.match(html, /\.hero-copy\{[^}]*position:relative/,
     "位置の基準になる .hero-copy の position:relative が消えている");
 
-  // 縁取りが静かに消える事故を防ぐ：clip-path と filter を同じ要素に書くと、
-  // Chrome 系では filter が描く縁取り・影が clip-path ごと切り落とされて見えなくなる。
-  // だから切り抜き（clip-path）は ::before に、縁取り（drop-shadow の --ink）は本体に分ける
+  // 星の形は SVG の path、縁取りは stroke（インキ色）で描く決まり。
+  // CSS の clip-path 方式に戻すと、filter との同居で縁取りが消える
+  // Chrome 系の不具合を踏むうえ、深いトゲで縁の太さが不ぞろいになる
+  assert.match(html, /<p class="burst"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M[^"]+"\/><\/svg>標高<br>1,424m<\/p>/,
+    "バッジの作りが変わっている（p.burst の中に aria-hidden の SVG（星の path）＋標高の文字、の形にする）");
   const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
-  const burst = css.match(/\.burst\{([\s\S]*?)\}/);
-  assert.ok(burst, "バッジのスタイル（.burst）が見つからない");
-  assert.match(burst[1], /drop-shadow\([^)]*var\(--ink\)\)/,
-    "バッジのインキ縁取り（drop-shadow の --ink）が消えている（縁が無いと切り紙のようで安っぽく見える）");
-  assert.ok(!burst[1].includes("clip-path"),
-    ".burst 本体に clip-path を書かない（filter と同居させると Chrome 系で縁取りと影が消える。切り抜きは ::before へ）");
-  const burstBefore = css.match(/\.burst::before\{([\s\S]*?)\}/);
-  assert.ok(burstBefore && burstBefore[1].includes("clip-path"),
-    "星の切り抜き（.burst::before の clip-path）が見つからない");
+  const burstPath = css.match(/\.burst svg path\{([^}]*)\}/);
+  assert.ok(burstPath, "バッジの星のスタイル（.burst svg path）が見つからない");
+  assert.match(burstPath[1], /stroke:var\(--ink\)/,
+    "バッジのインキ縁取り（stroke:var(--ink)）が消えている（縁が無いと切り紙のようで安っぽく見える）");
+  assert.ok(!css.includes(".burst::before"),
+    "旧方式（.burst::before の clip-path）が復活している。星は SVG で描く");
 });
 
 test("表紙の題字：赤の版ズレは filter 方式で行う（text-shadow だと iPhone で崩れる）", () => {
