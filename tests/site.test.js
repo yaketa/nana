@@ -144,6 +144,19 @@ test("標高バッジ（星形）は本文の枠の中にある（広い画面�
     "位置の基準になる .hero-copy の position:relative が消えている");
 });
 
+test("表紙の題字：赤の版ズレは filter 方式で行う（text-shadow だと iPhone で崩れる）", () => {
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  const h1 = css.match(/\.hero h1\{([\s\S]*?)\}/);
+  assert.ok(h1, "題字のスタイル（.hero h1）が見つからない");
+  assert.ok(!h1[1].includes("--red"),
+    "題字の text-shadow に赤が戻っている。ブラウザによっては影が本体と別の大きさで描かれ、" +
+      "題字のうしろに巨大な赤い文字のかけらが出る。赤の版ズレは .h1-txt の filter で行う");
+  assert.match(css, /\.h1-txt\{filter:drop-shadow\(.*var\(--red\)\)\}/,
+    "赤の版ズレ（.h1-txt の drop-shadow）が消えている");
+  assert.match(html, /<h1><ruby><span class="h1-txt">分杭峠<\/span><rt>/,
+    "題字の文字が .h1-txt で包まれていない（filter をふりがなにまで掛けないための包み）");
+});
+
 test("周辺スポットが 2×2 の 4 枚で、どのカードにも写真が入っている", () => {
   const sec = html.match(/<section[^>]*id="around"[\s\S]*?<\/section>/);
   assert.ok(sec, "周辺スポットのセクションが見つからない");

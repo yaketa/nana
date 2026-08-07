@@ -203,13 +203,20 @@ main b{
   letter-spacing:.04em;line-height:1.05;color:#fff;
   text-shadow:
     3px 3px 0 var(--ink),-3px 3px 0 var(--ink),3px -3px 0 var(--ink),-3px -3px 0 var(--ink),
-    4px 0 0 var(--ink),-4px 0 0 var(--ink),0 4px 0 var(--ink),0 -4px 0 var(--ink),
-    .1em .12em 0 var(--red);
+    4px 0 0 var(--ink),-4px 0 0 var(--ink),0 4px 0 var(--ink),0 -4px 0 var(--ink);
 }
 .hero h1 rt{
   font-family:var(--pop);font-weight:700;font-size:.2em;letter-spacing:.55em;
   color:var(--ink);text-shadow:none;padding-bottom:.5em;
 }
+/* 題字の赤い「版ズレ」は filter で複写する。以前は text-shadow の 9 個目で
+   赤をずらしていたが、iPhone などのブラウザに影を本体と別の大きさで描く
+   不具合があり、題字のうしろへ巨大な赤い文字のかけらが見えていた。
+   filter 方式なら描き上がった題字ごとずらすので大きさが狂わない。
+   かける先はふりがなを含まない題字の文字だけ（.h1-txt）。ずらし量は
+   旧指定（文字を .1em/.12em ずらし、黒フチ 4px からはみ出た分が見える）と
+   赤の見え幅がそろうように黒フチの厚みを引いた値 */
+.h1-txt{filter:drop-shadow(calc(.1em - 4px) calc(.12em - 4px) 0 var(--red))}
 .hero-lead{
   position:relative;margin-top:1.5rem;max-width:36.5rem;
   background:#fff;border:2.5px solid var(--ink);border-radius:14px;
@@ -707,7 +714,7 @@ footer a:hover{color:#ffd966}
 <header class="hero" id="top">
   <div class="wrap hero-copy">
     <p class="hero-badges"><span class="pill-loc">長野県 伊那市 × 大鹿村</span></p>
-    <h1><ruby>分杭峠<rt>ぶんぐいとうげ</rt></ruby></h1>
+    <h1><ruby><span class="h1-txt">分杭峠</span><rt>ぶんぐいとうげ</rt></ruby></h1>
     <div class="hero-lead">
       <span class="burst-pad" aria-hidden="true"></span>
       <p>日本最大級の断層「中央構造線」の、ちょうど真上。世界的な気功師が「世界でも有数の気場」と評したことから、“ゼロ磁場の聖地”と呼ばれるようになった峠です。深い森としずけさに、会いに行きませんか。</p>
