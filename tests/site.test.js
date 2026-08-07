@@ -179,6 +179,20 @@ test("行き方の 3 枚カードは分量がそろっている（下に大き�
   );
 });
 
+test("バス時刻表：caption は表題だけ、時刻は tt-time、「土休日のみ」ラベルは 6 個", () => {
+  const cap = html.match(/<caption>([\s\S]*?)<\/caption>/);
+  assert.ok(cap, "時刻表の caption が見つからない");
+  assert.strictEqual(cap[1], "バス時刻表（2026年・発車時刻）",
+    "caption は表題だけにする（＊印や凡例の文を caption に書かない）");
+  const times = [...html.matchAll(/<span class="tt-time">\d{1,2}:\d{2}/g)];
+  assert.strictEqual(times.length, 14, "時刻の span（tt-time）が 7 行 × 2 列の 14 個ない");
+  const days = [...html.matchAll(/<span class="tt-day">土休日のみ<\/span>/g)];
+  assert.strictEqual(days.length, 6, "「土休日のみ」ラベルが 6 個ない");
+  assert.ok(!/＊/.test(html), "旧形式の ＊印 が残っている");
+  assert.match(html, /「土休日のみ」の便は、土曜・休日など決まった日だけの運行です。/,
+    "ラベルの意味を説明する注記（表の下の note）が消えている");
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });
