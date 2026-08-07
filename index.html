@@ -167,6 +167,8 @@ main b{
 .btn-red:hover{background:var(--red-deep);color:#fff}
 .btn-white{background:#fff;color:var(--ink)}
 .btn-white:hover{background:var(--marker);color:var(--ink)}
+/* 星形の標高バッジ。本文の枠（hero-copy）の中に置くこと。
+   枠の外に出すと画面の右端が基準になり、広い画面で本文から遠く離れてしまう */
 .burst{
   position:absolute;z-index:4;margin:0;
   right:clamp(.5rem,4vw,3.5rem);top:clamp(9.8rem,26vw,12rem);
@@ -627,10 +629,9 @@ footer a:hover{color:#ffd966}
         <span class="credit">写真：alonfloc／<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>（切り抜いて使用）</span>
       </figcaption>
     </figure>
+
+    <p class="burst">標高<br>1,424m</p>
   </div>
-
-  <p class="burst">標高<br>1,424m</p>
-
 </header>
 
 <main id="main">

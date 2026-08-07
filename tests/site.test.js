@@ -123,6 +123,26 @@ test("心得のチェックリストが、チェックできる形になって�
   }
 });
 
+test("標高バッジ（星形）は本文の枠の中にある（広い画面で本文から離れない）", () => {
+  const hero = html.match(/<header class="hero"[\s\S]*?<\/header>/);
+  assert.ok(hero, "表紙（hero）が見つからない");
+  const openAt = hero[0].indexOf('<div class="wrap hero-copy">');
+  assert.ok(openAt >= 0, "本文の枠（wrap hero-copy）が見つからない");
+  // div の開きと閉じを数えながら進み、この枠自身の閉じタグの位置を探す
+  let depth = 0, closeAt = -1;
+  for (const m of hero[0].slice(openAt).matchAll(/<div\b|<\/div>/g)) {
+    depth += m[0] === "</div>" ? -1 : 1;
+    if (depth === 0) { closeAt = openAt + m.index; break; }
+  }
+  assert.ok(closeAt > openAt, "本文の枠（wrap hero-copy）が閉じられていない");
+  const at = hero[0].indexOf('class="burst"');
+  assert.ok(at >= 0, "標高バッジ（burst）が見つからない");
+  assert.ok(openAt < at && at < closeAt,
+    "バッジが本文の枠（wrap hero-copy）の外にある。外だと画面の右端が基準になり、広い画面で本文から遠く離れる");
+  assert.match(html, /\.hero-copy\{[^}]*position:relative/,
+    "位置の基準になる .hero-copy の position:relative が消えている");
+});
+
 test("周辺スポットが 2×2 の 4 枚で、どのカードにも写真が入っている", () => {
   const sec = html.match(/<section[^>]*id="around"[\s\S]*?<\/section>/);
   assert.ok(sec, "周辺スポットのセクションが見つからない");
