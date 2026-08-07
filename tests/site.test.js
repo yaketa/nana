@@ -157,6 +157,23 @@ test("表紙の題字：赤の版ズレは filter 方式で行う（text-shadow 
     "題字の文字が .h1-txt で包まれていない（filter をふりがなにまで掛けないための包み）");
 });
 
+test("表紙の題字：黒い縁取りは輪郭線（text-stroke）で描く", () => {
+  // 説明コメントの中の語に反応しないよう、コメントを除いてから調べる
+  const css = html
+    .match(/<style>([\s\S]*?)<\/style>/)[1]
+    .replace(/\/\*[\s\S]*?\*\//g, "");
+  const h1 = css.match(/\.hero h1\{([\s\S]*?)\}/);
+  assert.ok(h1, "題字のスタイル（.hero h1）が見つからない");
+  assert.match(h1[1], /-webkit-text-stroke:8px var\(--ink\)/,
+    "縁取りの輪郭線（-webkit-text-stroke）が消えている");
+  assert.match(h1[1], /paint-order:stroke fill/,
+    "paint-order が無いと、輪郭線の内側半分が白い塗りを侵食して文字が細る");
+  assert.ok(!h1[1].includes("text-shadow"),
+    "題字に text-shadow の縁取りが戻っている（影を8方向に重ねる方式は、丸い書体だと縁がコブ状に波打つ）");
+  assert.match(css, /\.hero h1 rt\{[^}]*-webkit-text-stroke:0/,
+    "ふりがなの輪郭線を打ち消す指定が消えている（text-stroke は継承されるので、無いとふりがなが黒くつぶれる）");
+});
+
 test("周辺スポットが 2×2 の 4 枚で、どのカードにも写真が入っている", () => {
   const sec = html.match(/<section[^>]*id="around"[\s\S]*?<\/section>/);
   assert.ok(sec, "周辺スポットのセクションが見つからない");

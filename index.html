@@ -201,13 +201,17 @@ main b{
 .hero h1{
   font-size:clamp(3.2rem,13vw,5.8rem);
   letter-spacing:.04em;line-height:1.05;color:#fff;
-  text-shadow:
-    3px 3px 0 var(--ink),-3px 3px 0 var(--ink),3px -3px 0 var(--ink),-3px -3px 0 var(--ink),
-    4px 0 0 var(--ink),-4px 0 0 var(--ink),0 4px 0 var(--ink),0 -4px 0 var(--ink);
+  /* 黒い縁取りは、文字の輪郭に沿った本物の線で描く。以前は影（text-shadow）を
+     8方向にずらして重ねる方式だったが、丸い書体では拡大するとコブ状に
+     波打って見えた。線は輪郭の内外に半分ずつ乗るので、8px 指定で外側に
+     4px の縁が出る。paint-order で線を白い塗りの下に敷かないと、
+     内側半分が塗りを侵食して文字が細る */
+  -webkit-text-stroke:8px var(--ink);
+  paint-order:stroke fill;
 }
 .hero h1 rt{
   font-family:var(--pop);font-weight:700;font-size:.2em;letter-spacing:.55em;
-  color:var(--ink);text-shadow:none;padding-bottom:.5em;
+  color:var(--ink);-webkit-text-stroke:0;padding-bottom:.5em;
 }
 /* 題字の赤い「版ズレ」は filter で複写する。以前は text-shadow の 9 個目で
    赤をずらしていたが、iPhone などのブラウザに影を本体と別の大きさで描く
