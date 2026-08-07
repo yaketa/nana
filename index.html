@@ -41,6 +41,10 @@
   --pop:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","HG Maru Gothic M-PRO","Yu Gothic","YuGothic",system-ui,sans-serif;
   --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic",system-ui,sans-serif;
   --hard:4px 4px 0 rgba(51,48,42,.14);   /* ずらし影（小） */
+  /* ページの基準幅（1本だけ）。本文の読みやすい行長（1行 全角44字ほど）に合わせ、
+     見出し帯・写真・表・カードもぜんぶ同じ幅にそろえる。
+     部品ごとに幅を変えると、狭い部品の横に大きな空白ができて目立つ */
+  --page:48rem;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -64,7 +68,7 @@ a:hover{color:var(--red)}
   padding:.5em 1em;z-index:100;border-radius:0 0 .5em 0;
 }
 .skip:focus{left:0}
-.wrap{max-width:66rem;margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
+.wrap{max-width:var(--page);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
 /* ページ内ジャンプの着地位置。ナビの実際の高さ（約59px）よりわずかに浅くして、
    ナビの下に前のセクションの色が細い帯で挟まって見えないようにする */
 [id]{scroll-margin-top:3.2rem}
@@ -88,7 +92,7 @@ main b{
 }
 .nav-inner{
   display:flex;align-items:center;gap:.6rem;
-  max-width:66rem;margin-inline:auto;
+  max-width:var(--page);margin-inline:auto;
   padding:.5rem clamp(1.1rem,4vw,2rem);
 }
 .brand{
@@ -114,14 +118,15 @@ main b{
 @media (min-width:54rem){
   .menu-btn,.menu-scrim,.nav-links .menu-close{display:none}
   .nav-links{
-    display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;
+    display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;
     -webkit-overflow-scrolling:touch;padding-block:.15rem;min-width:0;
   }
   .nav-links::-webkit-scrollbar{display:none}
+  /* 余白はつめ気味。ゆるくすると基準幅（--page）の1行に全チップが入らない */
   .nav-links a{
-    display:inline-flex;gap:.38em;
+    display:inline-flex;gap:.32em;
     font-size:.8rem;white-space:nowrap;
-    padding:.28em .8em;border-radius:999px;border:2px solid var(--ink);background:#fff;
+    padding:.28em .55em;border-radius:999px;border:2px solid var(--ink);background:#fff;
   }
 }
 
@@ -218,9 +223,8 @@ main b{
   border-radius:2px;
 }
 .hero-lead p{margin:0}
-/* 星形バッジがパネル角に重なるぶん、文章をよけさせる（スマホ〜タブレット） */
+/* 星形バッジがパネル角に重なるぶん、文章をよけさせる */
 .burst-pad{float:right;width:4.6rem;height:3.8rem;margin-left:.5rem}
-@media (min-width:50rem){.burst-pad{display:none}}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.5rem}
 .btn{
   display:inline-block;text-decoration:none;border-radius:999px;
@@ -305,7 +309,6 @@ main b{
 .sec-head--ink{color:var(--ink)}
 .sec-head--ink .sec-no{background:rgba(51,48,42,.1);border-right-color:rgba(51,48,42,.35)}
 
-.prose{max-width:44rem}
 .prose h3,.h3s{
   font-size:1.15rem;margin:1.8rem 0 .6rem;
   display:inline-block;
@@ -319,8 +322,9 @@ main b{
 .note b{background:none;color:var(--red-deep)}
 
 /* ---------- DATA ボックス ---------- */
-.duo{display:grid;gap:1.6rem;align-items:start}
-@media (min-width:52rem){.duo{grid-template-columns:1.55fr 1fr}}
+/* 本文の下に DATA を置く。横ならびにすると本文の行が短くなりすぎるため、
+   ページの基準幅（--page）の中では縦に積む */
+.duo{display:grid;gap:1.6rem}
 .data-box{
   position:relative;background:#fff;
   border:2.5px solid var(--ink);border-radius:14px;
@@ -464,6 +468,9 @@ figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
 .alert p{margin:0}
 .alert b{background:none;color:var(--red-deep)}
 .access-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));margin-top:1.4rem}
+/* 2列のならびで3個目が半端にあまるときは、全幅にのばして右横に空白を作らない */
+.access-grid>:last-child:nth-child(odd),
+.voices>:last-child:nth-child(odd){grid-column:1/-1}
 .tt{
   background:#fff;border:2.5px solid var(--ink);border-radius:14px;
   box-shadow:var(--hard);overflow:hidden;margin-top:2rem;
@@ -523,7 +530,7 @@ figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
   grid-template-columns:repeat(auto-fit,minmax(13.5rem,1fr));
 }
 .ticket{
-  --cut:7.6em;                      /* ミシン目の位置 */
+  --cut:6.8em;                      /* ミシン目の位置 */
   display:grid;grid-template-columns:var(--cut) 1fr;
   background:#fff;border:2.5px solid var(--ink);border-radius:10px;
   box-shadow:var(--hard);overflow:hidden;
@@ -537,8 +544,8 @@ figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
 }
 .ticket-price{                      /* ミシン目の右＝金額。数字と「円」は同じ行に */
   display:flex;align-items:baseline;justify-content:center;
-  padding:.3em .4em;
-  font-family:var(--pop);font-weight:900;font-size:1.5rem;
+  padding:.3em .4em;white-space:nowrap;   /* 金額を途中で折り返させない */
+  font-family:var(--pop);font-weight:900;font-size:1.4rem;
   color:var(--red-deep);font-variant-numeric:tabular-nums;
 }
 .ticket-price .yen{font-size:.56em;margin-left:.12em}
@@ -701,7 +708,7 @@ footer a:hover{color:#ffd966}
     <figure class="shot shot-hero">
       <img src="images/bungui-touge-1136.jpg"
            srcset="images/bungui-touge-720.jpg 720w, images/bungui-touge-1136.jpg 1136w"
-           sizes="(min-width:68rem) 62rem, 92vw"
+           sizes="(min-width:48rem) 44rem, 92vw"
            width="1136" height="639" decoding="async"
            alt="夏の緑につつまれた分杭峠の頂上。国道152号ぞいに「分杭峠 Bunkuitoge 標高1424m」と書かれた青い道路標識が立っている">
       <figcaption>峠の頂上、国道152号ぞいの標識。ここが標高1,424mの分杭峠です。
@@ -769,7 +776,7 @@ footer a:hover{color:#ffd966}
       <figure class="shot">
         <img src="images/kitagawa-rotou-1200.jpg"
              srcset="images/kitagawa-rotou-800.jpg 800w, images/kitagawa-rotou-1200.jpg 1200w"
-             sizes="(min-width:68rem) 62rem, 92vw"
+             sizes="(min-width:48rem) 44rem, 92vw"
              width="1200" height="525" loading="lazy" decoding="async"
              alt="斜面の左半分は茶色っぽい岩、右半分は灰色の岩。断層を境に、まったくちがう岩がななめの線でぶつかり合っている">
         <figcaption>これが、押し合っている大地の境目。大鹿村の「北川露頭（きたがわろとう）」では、中央構造線をはさんで左右の岩の色がまるでちがいます。分杭峠の足もとにも、この境目がつづいています。
@@ -787,7 +794,7 @@ footer a:hover{color:#ffd966}
       <figure class="shot">
         <img src="images/ankou-rotou-1280.jpg"
              srcset="images/ankou-rotou-800.jpg 800w, images/ankou-rotou-1280.jpg 1280w"
-             sizes="(min-width:68rem) 62rem, 92vw"
+             sizes="(min-width:48rem) 44rem, 92vw"
              width="1280" height="400" loading="lazy" decoding="async"
              alt="川ぞいにむき出しになった岩壁。オレンジ色と灰色の岩が帯のように交互にならんでいる">
         <figcaption>大鹿村の「安康露頭（あんこうろとう）」。川に削られて、断層の断面がむき出しになっています。オレンジと灰色の帯は、押し合ってくだかれた岩です。
@@ -945,7 +952,7 @@ footer a:hover{color:#ffd966}
           <figure class="shot card-shot">
             <img src="images/michinoeki-hase-960.jpg"
                  srcset="images/michinoeki-hase-480.jpg 480w, images/michinoeki-hase-960.jpg 960w"
-                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 sizes="(min-width:52rem) 21.4rem, 90vw"
                  width="960" height="540" loading="lazy" decoding="async"
                  alt="道の駅の売り場。焼きたてのミニクロワッサンが数個、四角い皿にのっている">
             <figcaption><span class="credit">写真：Araisyohei／<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>（切り抜いて使用）</span></figcaption>
@@ -958,7 +965,7 @@ footer a:hover{color:#ffd966}
           <figure class="shot card-shot">
             <img src="images/senryuso-960.jpg"
                  srcset="images/senryuso-480.jpg 480w, images/senryuso-960.jpg 960w"
-                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 sizes="(min-width:52rem) 21.4rem, 90vw"
                  width="960" height="540" loading="lazy" decoding="async"
                  alt="仙流荘となりのバス乗り場。木造の待合所の前に登山客がならび、奥に南アルプスの谷がひらけている">
             <figcaption><span class="credit">写真：Koda6029／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span></figcaption>
@@ -971,7 +978,7 @@ footer a:hover{color:#ffd966}
           <figure class="shot card-shot">
             <img src="images/kozosen-museum-960.jpg"
                  srcset="images/kozosen-museum-480.jpg 480w, images/kozosen-museum-960.jpg 960w"
-                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 sizes="(min-width:52rem) 21.4rem, 90vw"
                  width="960" height="540" loading="lazy" decoding="async"
                  alt="新緑の山を背にした中央構造線博物館の建物。前庭にはいろいろな種類の岩石がならべて展示されている">
             <figcaption><span class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜いて使用）</span></figcaption>
@@ -984,7 +991,7 @@ footer a:hover{color:#ffd966}
           <figure class="shot card-shot">
             <img src="images/takato-sakura-960.jpg"
                  srcset="images/takato-sakura-480.jpg 480w, images/takato-sakura-960.jpg 960w"
-                 sizes="(min-width:70rem) 30rem, (min-width:52rem) 45vw, 90vw"
+                 sizes="(min-width:52rem) 21.4rem, 90vw"
                  width="960" height="540" loading="lazy" decoding="async"
                  alt="淡紅色の桜におおわれた高遠城址公園を見おろした景色。桜の海のなかに朱色の屋根の建物がのぞいている">
             <figcaption><span class="credit">写真：MaedaAkihiko／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span></figcaption>
