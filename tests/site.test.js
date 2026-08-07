@@ -372,3 +372,22 @@ test("表紙のふりがなは、ブラウザ標準のルビ配置のまま。�
   assert.match(html, /<h1><ruby><span class="h1-txt">分杭峠<\/span><rt>ぶんぐいとうげ<\/rt><\/ruby><\/h1>/,
     "題字の ruby / rt の書き方が変わっている（読み上げでのふりがなの扱いが崩れる）");
 });
+
+test("iPhone だけふりがなを題字へ引き寄せる指定がある（他の端末には効かせない）", () => {
+  // iPhone では、箱の大きさをそろえてもなお題字から離れて見えた。
+  // 残っていたのは「箱を題字のどれだけ上に置くか」というブラウザ内部の判断で、
+  // CSS からは指定できない。近さちがいの見本を実機で見てもらって値を決めた。
+  const ios = html.match(/@supports \(-webkit-touch-callout:none\)\{([\s\S]*?)\n\}/);
+  assert.ok(ios, "iPhone 向けの引き寄せ指定（@supports -webkit-touch-callout）が無い");
+  assert.match(ios[1], /\.hero h1 rt\{margin-bottom:-[.\d]+em\}/,
+    "引き寄せは、ふりがなへの負の margin-bottom で行う（position は使わない）");
+
+  // 引き寄せは iPhone 限定。全ブラウザに当てると Chrome で題字と重なる
+  const bare = html.replace(/@supports \(-webkit-touch-callout:none\)\{[\s\S]*?\n\}/, "");
+  assert.ok(!/\.hero h1 rt\{margin-bottom:-/.test(bare),
+    "引き寄せが @supports の外にも書かれている（パソコンで題字とふりがなが重なる）");
+
+  // 一時的に公開した見くらべページは、選んでもらったあと必ず消す
+  assert.ok(!html.includes("preview-furigana"),
+    "見くらべページへの参照が残っている（一時ページは役目を終えたら消す）");
+});
