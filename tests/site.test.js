@@ -240,6 +240,37 @@ test("内容の幅が 1 本の基準（--page）にそろっている（本文�
     `基準幅（--page）以外の max-width がある: ${extra.join(" / ") || "（検出失敗）"}`);
 });
 
+test("セクション見出しがスマホの幅で行儀よく収まる（帯の右側に大きな空白を作らない）", () => {
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  // 幅 375px の iPhone で 14 字の見出しがちょうど 1 行に入る組み合わせ。
+  // 文字サイズの下限・字間・帯の中の余白はワンセットで、どれか 1 つを緩めると
+  // 見出しが 2 行に折れ、帯の右側に大きなオレンジの空白が戻ってくる
+  assert.match(css, /\.sec-head h2\{font-size:clamp\(1\.1rem,4\.6vw,2rem\)/,
+    "見出しの文字サイズの下限が変わっている（上げるとスマホで 2 行に折れる）");
+  const narrow = css.match(/@media \(max-width:25\.98rem\)\{([\s\S]*?)\n\}/);
+  assert.ok(narrow, "スマホ幅で見出しまわりをつめる @media (max-width:25.98rem) が消えている");
+  for (const rule of [".sec-no{min-width:3rem}", ".sec-head-body{padding-inline:.8rem}", ".sec-head h2{letter-spacing:0}"]) {
+    assert.ok(narrow[1].includes(rule), `スマホ幅のつめの指定が消えている: ${rule}`);
+  }
+
+  // それでも入らない長い見出しは 2 行になる。そのとき「〜って、ど / んなところ？」の
+  // ような変な位置で切れないよう、語句のまとまりを <span> で書いておく決まり
+  assert.match(css, /\.sec-head h2 span\{display:inline-block\}/,
+    "span を語句のまとまりとして折り返す CSS が消えている");
+  const heads = [...html.matchAll(/<header class="sec-head[^"]*">[\s\S]*?<h2>([\s\S]*?)<\/h2>/g)]
+    .map((m) => m[1]);
+  assert.ok(heads.length >= 7, "セクション見出しが見つからない（構造が変わった？）");
+  for (const inner of heads) {
+    const plain = inner.replace(/<[^>]*>/g, "");
+    if ([...plain].length >= 13) {
+      assert.ok(inner.includes("</span><span>"),
+        `13 字以上の見出しには語句の切れ目の <span> を入れる（例: <span>分杭峠って、</span><span>どんなところ？</span>）: ${plain}`);
+    }
+    assert.ok(!/>\s+</.test(inner),
+      `見出しの span のあいだに空白や改行を入れない（すき間と変な折り返しになる）: ${plain}`);
+  }
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });
