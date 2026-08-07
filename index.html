@@ -208,10 +208,30 @@ main b{
      内側半分が塗りを侵食して文字が細る */
   -webkit-text-stroke:8px var(--ink);
   paint-order:stroke fill;
+  /* ふりがなを自分で置くための土台。幅を題字ちょうどに縮めて、
+     上に .28em ぶんの余白を作り、そこをふりがなの席にする */
+  position:relative;
+  width:fit-content;
+  padding-top:.28em;
 }
+/* ふりがなは、ブラウザまかせの自動配置をやめて、置き場所を自分で指定する。
+   自動配置だと題字とのすき間が「書体が内部に持つ余白」と「ブラウザごとの
+   ルビの実装」で決まってしまい、iPhone などでは題字から大きく離れて
+   浮いて見えた（下の赤い版ズレのときと同じ種類の、端末差による不具合）。
+   題字の枠の上端に貼りつければ、どの端末でも同じすき間になる。
+   すき間も大きさも題字の文字サイズ基準（em）なので、画面幅が変わっても
+   見え方の比率は変わらない。text-align-last:justify は、自動配置のときと
+   同じように、かなを題字の幅いっぱいへ均等に散らすためのもの。
+   <ruby>/<rt> の書き方自体は変えていないので、読み上げソフトからの
+   見え方はこれまでどおり */
 .hero h1 rt{
+  position:absolute;top:0;left:0;right:0;
+  /* 余白は 0 と言い切る。言わずにおくとブラウザの初期値が効いてしまい、
+     結局そこで端末差が出る（この不具合の元と同じ理屈） */
+  display:block;line-height:1;margin:0;padding:0;
   font-family:var(--pop);font-weight:700;font-size:.2em;letter-spacing:.55em;
-  color:var(--ink);-webkit-text-stroke:0;padding-bottom:.5em;
+  color:var(--ink);-webkit-text-stroke:0;
+  text-align:justify;text-align-last:justify;
 }
 /* 題字の赤い「版ズレ」は filter で複写する。以前は text-shadow の 9 個目で
    赤をずらしていたが、iPhone などのブラウザに影を本体と別の大きさで描く
