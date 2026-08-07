@@ -9,26 +9,38 @@
 <meta property="og:description" content="中央構造線の真上、標高1,424mの峠でしずかに“気”を浴びる。ゼロ磁場の物語としくみ、行き方、過ごし方をまとめた非公式ガイド。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta name="theme-color" content="#122b34">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='46'%20fill='%23122b34'/%3E%3Ccircle%20cx='50'%20cy='50'%20r='38'%20fill='none'%20stroke='%23c9a25a'%20stroke-width='4'/%3E%3Cpolygon%20points='50,18%2058,50%2050,44%2042,50'%20fill='%23d3564a'/%3E%3Cpolygon%20points='50,82%2042,50%2050,56%2058,50'%20fill='%23f3ecdd'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#e8442e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='47'%20fill='%23fff'%20stroke='%2333302a'%20stroke-width='6'/%3E%3Cpolygon%20points='50,14%2060,50%2050,43%2040,50'%20fill='%23e8442e'/%3E%3Cpolygon%20points='50,86%2040,50%2050,57%2060,50'%20fill='%2333302a'/%3E%3Ccircle%20cx='50'%20cy='50'%20r='5'%20fill='%2333302a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap">
 <style>
+/* =========================================================
+   ガイドブック風デザイン
+   紙の旅行誌（るるぶ的なもの）の文法：
+   ・ビビッドな色でセクションを色分け
+   ・極太の丸ゴシック見出し＋インキの縁取り
+   ・ぼかし影ではなく「ずらした固い影」（印刷物のノリ）
+   ・マーカー線、吹き出し、DATA欄、スタンプ風バッジ
+   ========================================================= */
 :root{
-  --paper:#f6f4ec;
-  --card:#fffdf6;
-  --ink:#26332f;
-  --ink-soft:#5b6a64;
-  --line:#e3ddcc;
-  --green:#2d5c4a;
-  --green-deep:#1d4034;
-  --teal:#6fa08f;
-  --gold:#c9a25a;
-  --gold-ink:#8a6a2b;
-  --red:#c4574e;
-  --night-1:#0e1b2c;
-  --night-2:#14313a;
-  --night-3:#1d4a44;
-  --serif:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","BIZ UDPMincho",serif;
-  --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","BIZ UDPGothic",system-ui,sans-serif;
+  --paper:#fff8ed;        /* 誌面のクリーム紙 */
+  --ink:#33302a;          /* インキの黒（少し温かい） */
+  --ink-soft:#6e675c;
+  --line:#e5dcc8;
+  --red:#e8442e;          /* 表紙の朱赤 */
+  --red-deep:#c22f1b;
+  --yellow:#ffc72c;
+  --marker:#ffe45c;       /* 蛍光マーカー */
+  --orange:#f58220;       /* 01 ABOUT */
+  --indigo:#5f63b8;       /* 02 LEARN（ふしぎ担当） */
+  --green:#279b5e;        /* 03 EXPERIENCE */
+  --blue:#1d9ac2;         /* 04 ACCESS */
+  --pink:#e8618c;         /* 05 AROUND */
+  --teal:#0fa3a8;         /* 07 Q&A */
+  --pop:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","HG Maru Gothic M-PRO","Yu Gothic","YuGothic",system-ui,sans-serif;
+  --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic",system-ui,sans-serif;
+  --hard:4px 4px 0 rgba(51,48,42,.14);   /* ずらし影（小） */
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -41,89 +53,138 @@ body{
   overflow-wrap:anywhere;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.4;margin:0}
+h1,h2,h3{font-family:var(--pop);font-weight:900;line-height:1.35;margin:0}
 p{margin:0 0 1.1em}
-a{color:var(--green);text-underline-offset:.2em}
-a:hover{color:var(--green-deep)}
+a{color:var(--red-deep);text-underline-offset:.2em;text-decoration-thickness:2px}
+a:hover{color:var(--red)}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px;border-radius:4px}
+::selection{background:var(--marker);color:var(--ink)}
 .skip{
   position:absolute;left:-999px;top:0;background:#fff;color:var(--ink);
   padding:.5em 1em;z-index:100;border-radius:0 0 .5em 0;
 }
 .skip:focus{left:0}
 .wrap{max-width:66rem;margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
-section{scroll-margin-top:4.2rem}
+section{scroll-margin-top:4.6rem}
+
+/* 本文中の太字＝蛍光マーカー */
+main b{
+  font-weight:700;
+  background:linear-gradient(transparent 60%,var(--marker) 60% 92%,transparent 92%);
+}
 
 /* ---------- ナビ ---------- */
 .nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(16,34,30,.86);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  border-bottom:1px solid rgba(255,255,255,.08);
+  background:#fff;
+  border-bottom:3px solid var(--ink);
 }
 .nav-inner{
-  display:flex;align-items:center;gap:.4rem;
+  display:flex;align-items:center;gap:.6rem;
   max-width:66rem;margin-inline:auto;
-  padding:.55rem clamp(1.1rem,4vw,2rem);
+  padding:.5rem clamp(1.1rem,4vw,2rem);
 }
 .brand{
-  font-family:var(--serif);color:#f3eeda;text-decoration:none;
-  font-size:1.02rem;letter-spacing:.08em;white-space:nowrap;margin-right:.4rem;
+  font-family:var(--pop);font-weight:900;font-size:.98rem;
+  color:#fff;background:var(--red);text-decoration:none;
+  padding:.18em .7em .22em;border-radius:10px;
+  border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
+  white-space:nowrap;letter-spacing:.04em;
 }
-.brand b{color:var(--gold);font-weight:600}
+.brand:hover{color:#fff;background:var(--red-deep)}
 .nav-links{
-  display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
+  display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;padding-block:.15rem;min-width:0;
 }
 .nav-links::-webkit-scrollbar{display:none}
 .nav-links a{
-  color:#dfe7dd;text-decoration:none;font-size:.82rem;white-space:nowrap;
-  padding:.34em .85em;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+  display:inline-flex;align-items:center;gap:.38em;
+  color:var(--ink);text-decoration:none;
+  font-family:var(--pop);font-weight:700;font-size:.8rem;white-space:nowrap;
+  padding:.28em .8em;border-radius:999px;border:2px solid var(--ink);background:#fff;
 }
-.nav-links a:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav-links a::before{
+  content:"";width:.55em;height:.55em;border-radius:50%;
+  background:var(--c,var(--red));flex:none;
+}
+.nav-links a:hover{background:var(--marker);color:var(--ink)}
 
-/* ---------- ヒーロー ---------- */
+/* ---------- ヒーロー（表紙） ---------- */
 .hero{
-  position:relative;color:#f2efe2;
-  background:
-    radial-gradient(58rem 30rem at 78% 62%, rgba(235,166,97,.28), transparent 60%),
-    linear-gradient(180deg,var(--night-1) 0%,var(--night-2) 55%,var(--night-3) 100%);
-  min-height:min(46rem,92svh);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  overflow:hidden;
+  position:relative;overflow:hidden;
+  background:#a6ddf2;
+  min-height:min(46rem,94svh);
+  display:flex;flex-direction:column;justify-content:flex-start;
 }
+.hero-art{position:absolute;inset:0;z-index:1}
+.hero-art svg{display:block;width:100%;height:100%}
 .hero-copy{
   position:relative;z-index:3;
-  padding-top:clamp(4rem,12vh,7rem);
-  padding-bottom:clamp(13rem,34vw,19rem);
-  max-width:38rem;
+  padding-top:clamp(2.6rem,7vh,4.6rem);
+  padding-bottom:clamp(15rem,42vw,21rem);
+  max-width:44rem;
 }
-.eyebrow{
-  font-size:.78rem;letter-spacing:.24em;color:var(--gold);
-  margin:0 0 1rem;font-weight:700;
+.hero-badges{display:flex;align-items:center;gap:.7rem;margin:0 0 1rem}
+.pill-loc{
+  font-family:var(--pop);font-weight:700;font-size:.8rem;letter-spacing:.1em;
+  background:var(--ink);color:#fff;border-radius:999px;padding:.3em 1.1em;
 }
 .hero h1{
-  font-size:clamp(2.7rem,9vw,4.6rem);letter-spacing:.06em;color:#faf7ea;
+  font-size:clamp(3.2rem,13vw,5.8rem);
+  letter-spacing:.04em;line-height:1.05;color:#fff;
+  text-shadow:
+    3px 3px 0 var(--ink),-3px 3px 0 var(--ink),3px -3px 0 var(--ink),-3px -3px 0 var(--ink),
+    4px 0 0 var(--ink),-4px 0 0 var(--ink),0 4px 0 var(--ink),0 -4px 0 var(--ink),
+    .1em .12em 0 var(--red);
 }
-.hero h1 rt{font-size:.24em;letter-spacing:.5em;color:#cfd8c8;font-family:var(--sans)}
-.hero .lead{
-  margin-top:1.2rem;font-size:clamp(.95rem,2.6vw,1.08rem);
-  color:#dde4d6;text-wrap:balance;
+.hero h1 rt{
+  font-family:var(--pop);font-weight:700;font-size:.2em;letter-spacing:.55em;
+  color:var(--ink);text-shadow:none;padding-bottom:.5em;
 }
-.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+.hero-lead{
+  position:relative;margin-top:1.5rem;max-width:36.5rem;
+  background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:5px 5px 0 rgba(51,48,42,.2);
+  padding:1.1rem 1.3rem .95rem;
+  font-size:clamp(.92rem,2.6vw,1rem);
+}
+.hero-lead::before{
+  content:"";position:absolute;top:-.85rem;left:1.4rem;width:6rem;height:1.5rem;
+  background:rgba(255,199,44,.8);transform:rotate(-4deg);
+  border-radius:2px;
+}
+.hero-lead p{margin:0}
+/* 星形バッジがパネル角に重なるぶん、文章をよけさせる（スマホ〜タブレット） */
+.burst-pad{float:right;width:4.6rem;height:3.8rem;margin-left:.5rem}
+@media (min-width:50rem){.burst-pad{display:none}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.5rem}
 .btn{
   display:inline-block;text-decoration:none;border-radius:999px;
-  padding:.62em 1.5em;font-size:.92rem;letter-spacing:.06em;
+  font-family:var(--pop);font-weight:900;font-size:.95rem;letter-spacing:.04em;
+  padding:.6em 1.5em;border:2.5px solid var(--ink);
+  box-shadow:0 4px 0 var(--ink);transition:translate .08s,box-shadow .08s;
 }
-.btn-gold{background:var(--gold);color:#20221a;font-weight:700}
-.btn-gold:hover{background:#d9b26a;color:#20221a}
-.btn-ghost{border:1px solid rgba(255,255,255,.45);color:#f2efe2}
-.btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
-.hero-art{position:absolute;inset:auto 0 0 0;z-index:1}
-.hero-art svg{display:block;width:100%;height:auto}
+.btn:active{translate:0 3px;box-shadow:0 1px 0 var(--ink)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep);color:#fff}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-white:hover{background:var(--marker);color:var(--ink)}
+.burst{
+  position:absolute;z-index:4;margin:0;
+  right:clamp(.5rem,4vw,3.5rem);top:clamp(9.8rem,26vw,12rem);
+  width:clamp(6rem,16vw,7.8rem);aspect-ratio:1;
+  clip-path:polygon(100% 50%,83.3% 63.8%,85.4% 85.4%,63.8% 83.3%,50% 100%,36.2% 83.3%,14.6% 85.4%,16.7% 63.8%,0% 50%,16.7% 36.2%,14.6% 14.6%,36.2% 16.7%,50% 0%,63.8% 16.7%,85.4% 14.6%,83.3% 36.2%);
+  background:var(--yellow);
+  display:grid;place-items:center;text-align:center;
+  font-family:var(--pop);font-weight:900;font-size:clamp(.82rem,2.2vw,1.05rem);
+  line-height:1.3;color:var(--ink);
+  rotate:-8deg;
+  filter:drop-shadow(3px 3px 0 rgba(51,48,42,.25));
+}
 .compass{
-  position:absolute;z-index:2;right:clamp(.6rem,6vw,5rem);
-  top:clamp(4.2rem,10vh,6.5rem);
-  width:clamp(4.6rem,13vw,7.5rem);opacity:.92;
+  position:absolute;z-index:2;
+  right:clamp(.7rem,5vw,4.5rem);top:clamp(3rem,7vh,4.2rem);
+  width:clamp(3.6rem,9vw,5.4rem);
 }
 .needle{transform-origin:50% 50%;animation:sway 7s ease-in-out infinite alternate}
 @keyframes sway{
@@ -132,148 +193,305 @@ section{scroll-margin-top:4.2rem}
   60%{transform:rotate(-8deg)}
   100%{transform:rotate(26deg)}
 }
-.mist{animation:drift 46s linear infinite}
-.mist-b{animation-duration:64s;animation-direction:reverse}
+.cloud{animation:drift 40s ease-in-out infinite alternate}
+.cloud-b{animation-duration:55s;animation-direction:alternate-reverse}
 @keyframes drift{
-  0%{transform:translateX(-4%)}
-  50%{transform:translateX(4%)}
-  100%{transform:translateX(-4%)}
+  from{transform:translateX(-18px)}
+  to{transform:translateX(18px)}
 }
 @media (prefers-reduced-motion:reduce){
-  .needle,.mist,.mist-b{animation:none}
+  .needle,.cloud,.cloud-b{animation:none}
   html{scroll-behavior:auto}
 }
 
 /* ---------- セクション共通 ---------- */
-.section{padding-block:clamp(3.2rem,8vw,5.2rem)}
-.section-alt{background:#efece0}
-.section-green{background:#e8eee5}
-.kicker{
-  font-size:.76rem;letter-spacing:.26em;color:var(--gold-ink);
-  font-weight:700;margin:0 0 .6rem;
+.section{padding-block:clamp(2.8rem,7vw,4.6rem);--c:var(--red)}
+#about{--c:var(--orange);background:#fff2e2}
+#zeroba{--c:var(--indigo);background:#eef0fb}
+#visit{--c:var(--green);background:#e9f6ec}
+#access{--c:var(--blue);background:#e8f5fb}
+#around{--c:var(--pink);background:#fdeef4}
+#tips{--c:var(--yellow);background:#fff6d8}
+#faq{--c:var(--teal);background:#e9f7f6}
+
+.sec-head{
+  display:flex;align-items:stretch;
+  background:var(--c);color:#fff;
+  border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);
+  margin:0 0 1.8rem;overflow:hidden;
 }
-.section h2{font-size:clamp(1.65rem,5vw,2.3rem);color:var(--green-deep);margin-bottom:1.4rem}
-.section h3{font-size:1.13rem;color:var(--green-deep);margin:0 0 .6rem}
-.prose{max-width:42rem}
+.sec-no{
+  display:grid;place-items:center;flex:none;
+  min-width:3.4rem;padding:.3rem .5rem;
+  font-family:var(--pop);font-weight:900;font-size:1.5rem;
+  background:rgba(0,0,0,.16);
+  border-right:2px dashed rgba(255,255,255,.55);
+}
+.sec-head-body{padding:.55rem 1rem .65rem}
+.sec-en{
+  margin:0;font-family:var(--pop);font-weight:700;
+  font-size:.68rem;letter-spacing:.3em;opacity:.9;
+}
+.sec-head h2{font-size:clamp(1.2rem,4.6vw,2rem);letter-spacing:.03em;color:inherit;text-wrap:balance}
+.sec-head--ink{color:var(--ink)}
+.sec-head--ink .sec-no{background:rgba(51,48,42,.1);border-right-color:rgba(51,48,42,.35)}
+
+.prose{max-width:44rem}
+.prose h3,.h3s{
+  font-size:1.15rem;margin:1.8rem 0 .6rem;
+  display:inline-block;
+  background:linear-gradient(transparent 66%,color-mix(in srgb,var(--c) 32%,transparent) 66%);
+  padding-right:.3em;
+}
+.prose h3:first-child{margin-top:0}
 .note{font-size:.82rem;color:var(--ink-soft)}
-.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.4rem 0 0;padding:0;list-style:none}
-.chips li{
-  background:var(--card);border:1px solid var(--line);border-radius:999px;
-  padding:.4em 1em;font-size:.85rem;color:var(--green-deep);
+.note b{background:none;color:var(--red-deep)}
+
+/* ---------- DATA ボックス ---------- */
+.duo{display:grid;gap:1.6rem;align-items:start}
+@media (min-width:52rem){.duo{grid-template-columns:1.55fr 1fr}}
+.data-box{
+  position:relative;background:#fff;
+  border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);
+  padding:1.6rem 1.2rem 1.1rem;margin-top:.9rem;
 }
-.chips b{color:var(--gold-ink)}
-.cards{display:grid;gap:1rem;margin-top:1.8rem;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr))}
+.data-label{
+  position:absolute;top:-.95rem;left:1rem;
+  font-family:var(--pop);font-weight:900;font-size:.85rem;letter-spacing:.14em;
+  background:var(--red);color:#fff;
+  border:2px solid var(--ink);border-radius:8px;
+  padding:.1em .8em;rotate:-2deg;box-shadow:2px 2px 0 var(--ink);
+}
+.data-list{margin:0;display:grid;gap:.55rem}
+.data-list>div{display:grid;grid-template-columns:5.4em 1fr;gap:.7em;align-items:baseline}
+.data-list dt{
+  font-family:var(--pop);font-weight:700;font-size:.78rem;text-align:center;
+  background:color-mix(in srgb,var(--c) 18%,#fff);color:var(--ink);
+  border:1.5px solid var(--ink);border-radius:6px;padding:.05em 0;
+}
+.data-list dd{margin:0;font-size:.92rem}
+
+/* ---------- カード ---------- */
+.cards{display:grid;gap:1.2rem;margin-top:1.6rem;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr))}
 .card{
-  background:var(--card);border:1px solid var(--line);border-radius:16px;
-  padding:1.3rem 1.3rem 1.1rem;box-shadow:0 1px 0 rgba(38,51,47,.04);
+  background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+  padding:1.2rem 1.2rem 1.05rem;box-shadow:var(--hard);
 }
 .card p{margin-bottom:0;font-size:.92rem}
+.card h3{font-size:1.08rem;margin:0 0 .5rem}
 .card .tag{
-  display:inline-block;font-size:.72rem;letter-spacing:.14em;color:var(--gold-ink);
-  border:1px solid var(--line);border-radius:999px;padding:.1em .8em;margin-bottom:.7rem;
+  display:inline-block;rotate:-2deg;
+  font-family:var(--pop);font-weight:900;font-size:.7rem;letter-spacing:.16em;
+  background:var(--tag,var(--red));color:#fff;
+  border:2px solid var(--ink);border-radius:7px;
+  padding:.1em .75em;margin:0 0 .7rem;box-shadow:2px 2px 0 rgba(51,48,42,.25);
 }
 figure{margin:2rem 0}
-figure svg{display:block;width:100%;height:auto;border-radius:16px}
+figure svg{
+  display:block;width:100%;height:auto;
+  background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);
+}
 figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
 
-/* ---------- 正直パネル ---------- */
-.honest{
-  background:var(--green-deep);color:#e9eee4;border-radius:18px;
-  padding:clamp(1.4rem,4vw,2.2rem);margin-top:2.2rem;
+/* ---------- コラム（正直パネル） ---------- */
+.column-box{
+  position:relative;background:#fffdf3;
+  border:2.5px solid var(--ink);border-radius:6px;
+  box-shadow:var(--hard);
+  padding:1.7rem 1.4rem 1.1rem;margin-top:2.4rem;
 }
-.honest h3{color:var(--gold);font-size:1.15rem;margin-bottom:.7rem}
-.honest p{color:#dde5d6;font-size:.95rem}
-.honest p:last-child{margin-bottom:0}
-
-/* ---------- 声 ---------- */
-.voices{display:grid;gap:1rem;margin-top:1.6rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
-.voice{
-  background:var(--card);border:1px solid var(--line);border-radius:16px;
-  padding:1.2rem 1.3rem;font-size:.92rem;position:relative;
+.column-box::before,.column-box::after{
+  content:"";position:absolute;width:6rem;height:1.5rem;
+  background:rgba(255,199,44,.8);border-radius:2px;
 }
-.voice::before{
-  content:"“";font-family:var(--serif);font-size:2.6rem;line-height:1;
-  color:var(--gold);position:absolute;top:.5rem;left:.9rem;
+.column-box::before{top:-.8rem;left:-1.1rem;transform:rotate(-8deg)}
+.column-box::after{top:-.8rem;right:-1.1rem;transform:rotate(7deg)}
+.column-label{
+  position:absolute;top:-1rem;left:50%;translate:-50% 0;
+  font-family:var(--pop);font-weight:900;font-size:.8rem;letter-spacing:.3em;
+  background:var(--indigo);color:#fff;border:2px solid var(--ink);border-radius:999px;
+  padding:.12em 1.2em .12em 1.5em;
 }
-.voice p{margin:0;padding-top:1.1rem}
-.voice .who{display:block;margin-top:.6rem;font-size:.78rem;color:var(--ink-soft)}
+.column-box h3{font-size:1.13rem;margin-bottom:.7rem}
+.column-box p{font-size:.94rem}
+.column-box p:last-child{margin-bottom:0}
 
 /* ---------- 過ごし方ステップ ---------- */
-.steps{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:.9rem;counter-reset:step}
+.steps{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:1rem;counter-reset:step}
 .steps li{
-  counter-increment:step;background:var(--card);border:1px solid var(--line);
-  border-radius:14px;padding:1rem 1.2rem 1rem 3.4rem;position:relative;font-size:.94rem;
+  counter-increment:step;background:#fff;border:2.5px solid var(--ink);
+  border-radius:14px;box-shadow:var(--hard);
+  padding:1rem 1.2rem 1rem 4rem;position:relative;font-size:.94rem;
 }
 .steps li::before{
-  content:counter(step);position:absolute;left:1rem;top:1rem;
-  width:1.7rem;height:1.7rem;border-radius:50%;background:var(--green);
-  color:#f4f1e4;font-family:var(--serif);font-size:.95rem;
-  display:grid;place-items:center;
+  content:counter(step);position:absolute;left:.95rem;top:.95rem;
+  width:2.15rem;height:2.15rem;border-radius:50%;
+  background:var(--c);border:2px solid var(--ink);
+  color:#fff;font-family:var(--pop);font-weight:900;font-size:1.15rem;
+  display:grid;place-items:center;box-shadow:2px 2px 0 rgba(51,48,42,.25);
 }
-.steps b{color:var(--green-deep)}
+
+/* ---------- 吹き出し（声） ---------- */
+.voices{display:grid;gap:1.4rem;margin-top:1.2rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.voice{
+  position:relative;background:#fff;
+  border:2.5px solid var(--ink);border-radius:16px;
+  box-shadow:var(--hard);
+  padding:1.1rem 1.2rem;font-size:.92rem;
+  margin-bottom:1rem;
+}
+.voice::before,.voice::after{
+  content:"";position:absolute;left:2rem;
+  border-style:solid;border-color:transparent;
+}
+.voice::before{
+  bottom:-1.05rem;
+  border-width:1.05rem .8rem 0 0;border-top-color:var(--ink);
+}
+.voice::after{
+  bottom:-.63rem;left:2.2rem;
+  border-width:.72rem .55rem 0 0;border-top-color:#fff;
+}
+.voice p{margin:0}
+.voice .who{display:block;margin-top:.6rem;font-size:.76rem;color:var(--ink-soft)}
+.warn{
+  margin-top:1.8rem;background:#fdecec;
+  border:2px dashed var(--red);border-radius:12px;
+  padding:.8rem 1.1rem;font-size:.85rem;
+}
+.warn b{background:none;color:var(--red-deep)}
 
 /* ---------- アクセス ---------- */
 .alert{
-  border:1.5px solid var(--gold);background:#faf3df;border-radius:16px;
-  padding:1.1rem 1.3rem;margin:0 0 1.8rem;font-size:.95rem;
+  position:relative;background:#fff3c4;
+  border:3px solid var(--red);border-radius:14px;
+  box-shadow:var(--hard);
+  padding:1.05rem 1.3rem 1rem 3.6rem;margin:0 0 1.8rem;font-size:.95rem;
 }
-.alert b{color:var(--gold-ink)}
-.access-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));margin-top:1.4rem}
+.alert::before{
+  content:"！";position:absolute;left:1rem;top:1.05rem;
+  width:1.9rem;height:1.9rem;border-radius:50%;
+  background:var(--red);color:#fff;
+  font-family:var(--pop);font-weight:900;font-size:1.1rem;
+  display:grid;place-items:center;
+}
+.alert-title{
+  margin:0 0 .3em;font-family:var(--pop);font-weight:900;
+  color:var(--red-deep);font-size:1.02rem;
+}
+.alert p{margin:0}
+.alert b{background:none;color:var(--red-deep)}
+.access-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));margin-top:1.4rem}
+.tt{
+  background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);overflow:hidden;margin-top:2rem;
+}
+.tt caption{
+  caption-side:top;text-align:left;
+  font-family:var(--pop);font-weight:900;font-size:.92rem;color:#fff;
+  background:var(--blue);padding:.5em 1em;
+}
 table{
-  width:100%;border-collapse:collapse;font-size:.92rem;margin:.6rem 0 .3rem;
+  width:100%;border-collapse:collapse;font-size:.94rem;
   font-variant-numeric:tabular-nums;
 }
-caption{text-align:left;font-size:.85rem;color:var(--ink-soft);margin-bottom:.4rem}
-th,td{border:1px solid var(--line);padding:.5em .7em;text-align:center;background:var(--card)}
-th{background:#eee9d9;color:var(--green-deep);font-weight:600}
-.fare{display:flex;flex-wrap:wrap;gap:.6rem;margin:.4rem 0 .6rem;padding:0;list-style:none}
-.fare li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.5em .9em;font-size:.9rem}
-.fare b{color:var(--green-deep);font-size:1.05em}
+th,td{padding:.5em .7em;text-align:center;border-top:1.5px solid var(--line)}
+thead th{
+  background:#d9f0fa;color:var(--ink);border-top:none;
+  font-family:var(--pop);font-weight:700;font-size:.88rem;
+}
+tbody tr:nth-child(even) td{background:#f2fafd}
+td+td,th+th{border-left:1.5px solid var(--line)}
+.fare{display:flex;flex-wrap:wrap;gap:.6rem;margin:.5rem 0 .7rem;padding:0;list-style:none}
+.fare li{
+  background:#fff;border:2px dashed var(--ink);border-radius:10px;
+  padding:.42em .9em;font-size:.88rem;
+}
+.fare b{background:none;color:var(--red-deep);font-family:var(--pop);font-size:1.15em}
 
 /* ---------- モデルコース ---------- */
-.timeline{list-style:none;margin:1.8rem 0 0;padding:0;position:relative}
+.timeline{list-style:none;margin:1.6rem 0 0;padding:0;position:relative}
 .timeline::before{
-  content:"";position:absolute;left:.55rem;top:.5rem;bottom:.5rem;
-  width:2px;background:var(--teal);opacity:.5;
+  content:"";position:absolute;left:2.05rem;top:.6rem;bottom:.6rem;
+  border-left:3px dotted var(--c);
 }
-.timeline li{position:relative;padding:0 0 1.35rem 2.2rem}
+.timeline li{position:relative;padding:0 0 1.15rem 5.4rem;min-height:2.4rem}
 .timeline li:last-child{padding-bottom:0}
-.timeline li::before{
-  content:"";position:absolute;left:0;top:.42rem;width:1.1rem;height:1.1rem;
-  border-radius:50%;background:var(--paper);border:3px solid var(--green);
-}
 .timeline .t{
-  font-family:var(--serif);color:var(--gold-ink);font-size:.95rem;
-  letter-spacing:.05em;display:inline-block;min-width:4.4em;
+  position:absolute;left:0;top:0;
+  width:4.15rem;text-align:center;
+  font-family:var(--pop);font-weight:900;font-size:.88rem;color:var(--ink);
+  background:#fff;border:2px solid var(--c);border-radius:999px;
+  padding:.12em 0;
 }
-.timeline p{margin:0;font-size:.93rem}
+.timeline p{margin:0;font-size:.93rem;padding-top:.1rem}
+
+/* ---------- 心得チップ ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0 0;padding:0;list-style:none}
+.chips li{
+  display:inline-flex;align-items:center;gap:.45em;
+  background:#fff;border:2px solid var(--ink);border-radius:999px;
+  box-shadow:2px 2px 0 rgba(51,48,42,.14);
+  padding:.4em 1.05em;font-size:.86rem;
+}
+.chips li::before{
+  content:"";flex:none;width:.62em;height:.34em;
+  border-left:3px solid var(--red);border-bottom:3px solid var(--red);
+  transform:rotate(-45deg) translateY(-25%);
+}
 
 /* ---------- FAQ ---------- */
 details{
-  background:var(--card);border:1px solid var(--line);border-radius:14px;
-  margin-bottom:.8rem;overflow:hidden;
+  background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);
+  margin-bottom:1rem;overflow:hidden;
 }
 summary{
-  cursor:pointer;list-style:none;padding:1rem 2.8rem 1rem 1.2rem;
-  font-weight:600;color:var(--green-deep);position:relative;font-size:.97rem;
+  cursor:pointer;list-style:none;
+  padding:.95rem 2.8rem .95rem 3.6rem;
+  font-family:var(--pop);font-weight:700;color:var(--ink);
+  position:relative;font-size:.97rem;line-height:1.6;
 }
 summary::-webkit-details-marker{display:none}
+summary::before{
+  content:"Q";position:absolute;left:1rem;top:.95rem;
+  width:1.9rem;height:1.9rem;border-radius:50%;
+  background:var(--c);color:#fff;
+  font-family:var(--pop);font-weight:900;font-size:1.05rem;
+  display:grid;place-items:center;
+}
 summary::after{
   content:"＋";position:absolute;right:1.1rem;top:50%;translate:0 -50%;
-  color:var(--gold-ink);font-size:1.05rem;transition:rotate .25s;
+  color:var(--c);font-weight:900;font-size:1.2rem;transition:rotate .25s;
 }
 details[open] summary::after{rotate:45deg}
-details .a{padding:0 1.2rem 1.1rem;font-size:.93rem}
+details .a{
+  padding:.2rem 1.2rem 1.1rem 3.6rem;font-size:.93rem;position:relative;
+}
+details .a::before{
+  content:"A";position:absolute;left:1rem;top:.25rem;
+  width:1.9rem;height:1.9rem;border-radius:50%;
+  background:#fff;border:2px solid var(--red);color:var(--red);
+  font-family:var(--pop);font-weight:900;font-size:1.05rem;
+  display:grid;place-items:center;
+}
 details .a p:last-child{margin-bottom:0}
 
 /* ---------- フッター ---------- */
-footer{background:var(--night-1);color:#c9d2c5;padding:3.2rem 0 2.6rem;margin-top:0}
-footer h2{color:#efe9d3;font-size:1.2rem;margin-bottom:1rem}
-footer a{color:#a8c6b4}
-footer a:hover{color:#d7e6da}
+footer{
+  background:var(--ink);color:#e9e2d2;
+  border-top:8px solid var(--red);
+  padding:3rem 0 2.6rem;
+}
+footer h2{color:#fff;font-size:1.25rem;margin-bottom:1rem}
+footer a{color:var(--yellow)}
+footer a:hover{color:#ffd966}
 .src-list{margin:.4rem 0 1.6rem;padding-left:1.2em;font-size:.86rem}
 .src-list li{margin-bottom:.35em}
-.fineprint{font-size:.8rem;color:#8d9a8c;border-top:1px solid rgba(255,255,255,.12);padding-top:1.3rem}
+.fineprint{font-size:.8rem;color:#a89e8c;border-top:1px solid rgba(255,255,255,.16);padding-top:1.3rem}
 </style>
 </head>
 <body>
@@ -281,70 +499,144 @@ footer a:hover{color:#d7e6da}
 
 <nav class="nav" aria-label="ページ内メニュー">
   <div class="nav-inner">
-    <a class="brand" href="#top">分杭峠<b>ガイド</b></a>
+    <a class="brand" href="#top">分杭峠ガイド</a>
     <div class="nav-links">
-      <a href="#about">分杭峠とは</a>
-      <a href="#zeroba">ゼロ磁場を知る</a>
-      <a href="#visit">過ごし方</a>
-      <a href="#access">行き方</a>
-      <a href="#around">周辺スポット</a>
-      <a href="#faq">Q&amp;A</a>
+      <a href="#about" style="--c:var(--orange)">分杭峠とは</a>
+      <a href="#zeroba" style="--c:var(--indigo)">ゼロ磁場を知る</a>
+      <a href="#visit" style="--c:var(--green)">過ごし方</a>
+      <a href="#access" style="--c:var(--blue)">行き方</a>
+      <a href="#around" style="--c:var(--pink)">周辺スポット</a>
+      <a href="#faq" style="--c:var(--teal)">Q&amp;A</a>
     </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap hero-copy">
-    <p class="eyebrow">NAGANO ／ 伊那市 × 大鹿村 ／ 標高 1,424m</p>
+    <p class="hero-badges"><span class="pill-loc">長野県 伊那市 × 大鹿村</span></p>
     <h1><ruby>分杭峠<rt>ぶんぐいとうげ</rt></ruby></h1>
-    <p class="lead">日本最大級の断層「中央構造線」の、ちょうど真上。世界的な気功師が「世界でも有数の気場」と評したことから、“ゼロ磁場の聖地”と呼ばれるようになった峠です。深い森としずけさに、会いに行きませんか。</p>
+    <div class="hero-lead">
+      <span class="burst-pad" aria-hidden="true"></span>
+      <p>日本最大級の断層「中央構造線」の、ちょうど真上。世界的な気功師が「世界でも有数の気場」と評したことから、“ゼロ磁場の聖地”と呼ばれるようになった峠です。深い森としずけさに、会いに行きませんか。</p>
+    </div>
     <div class="hero-cta">
-      <a class="btn btn-gold" href="#zeroba">ゼロ磁場って何？</a>
-      <a class="btn btn-ghost" href="#access">行き方を見る</a>
+      <a class="btn btn-red" href="#zeroba">ゼロ磁場って何？</a>
+      <a class="btn btn-white" href="#access">行き方を見る</a>
     </div>
   </div>
 
+  <p class="burst">標高<br>1,424m</p>
+
   <svg class="compass" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-    <circle cx="60" cy="60" r="56" fill="rgba(10,20,26,.55)"/>
-    <circle cx="60" cy="60" r="49" fill="none" stroke="#c9a25a" stroke-width="2.5"/>
-    <g stroke="#c9a25a" stroke-width="2" opacity=".8">
-      <line x1="60" y1="8" x2="60" y2="17"/><line x1="60" y1="103" x2="60" y2="112"/>
-      <line x1="8" y1="60" x2="17" y2="60"/><line x1="103" y1="60" x2="112" y2="60"/>
-    </g>
-    <g fill="#e8dfc6" font-size="11" font-family="serif" text-anchor="middle">
-      <text x="60" y="30">N</text><text x="60" y="99">S</text>
-      <text x="27" y="64">W</text><text x="93" y="64">E</text>
+    <circle cx="60" cy="60" r="54" fill="#fff" stroke="#33302a" stroke-width="5"/>
+    <g stroke="#33302a" stroke-width="3" stroke-linecap="round" opacity=".85">
+      <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
+      <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
     </g>
     <g class="needle">
-      <polygon points="60,24 67,60 60,54 53,60" fill="#d3564a"/>
-      <polygon points="60,96 53,60 60,66 67,60" fill="#f3ecdd"/>
+      <polygon points="60,22 69,60 60,53 51,60" fill="#e8442e" stroke="#33302a" stroke-width="2.5" stroke-linejoin="round"/>
+      <polygon points="60,98 51,60 60,67 69,60" fill="#fff" stroke="#33302a" stroke-width="2.5" stroke-linejoin="round"/>
     </g>
-    <circle cx="60" cy="60" r="4" fill="#c9a25a"/>
+    <circle cx="60" cy="60" r="5" fill="#33302a"/>
   </svg>
 
   <div class="hero-art" aria-hidden="true">
-    <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice" focusable="false">
-      <g fill="#fff" opacity=".55">
-        <circle cx="150" cy="60" r="1.4"/><circle cx="380" cy="112" r="1"/>
-        <circle cx="640" cy="48" r="1.2"/><circle cx="905" cy="90" r="1"/>
-        <circle cx="1150" cy="42" r="1.4"/><circle cx="1330" cy="120" r="1"/>
-        <circle cx="255" cy="160" r="1"/><circle cx="1040" cy="150" r="1.1"/>
+    <svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <defs>
+        <pattern id="ht" width="24" height="24" patternUnits="userSpaceOnUse">
+          <circle cx="6" cy="6" r="2.6" fill="#ffffff"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="640" fill="#a6ddf2"/>
+      <rect x="880" y="24" width="560" height="170" fill="url(#ht)" opacity=".45"/>
+      <rect x="0" y="24" width="300" height="120" fill="url(#ht)" opacity=".3"/>
+
+      <!-- 太陽 -->
+      <g transform="translate(400,84)">
+        <g stroke="#f58220" stroke-width="8" stroke-linecap="round">
+          <line x1="0" y1="-64" x2="0" y2="-86"/><line x1="0" y1="64" x2="0" y2="86"/>
+          <line x1="-64" y1="0" x2="-86" y2="0"/><line x1="64" y1="0" x2="86" y2="0"/>
+          <line x1="-45" y1="-45" x2="-61" y2="-61"/><line x1="45" y1="-45" x2="61" y2="-61"/>
+          <line x1="-45" y1="45" x2="-61" y2="61"/><line x1="45" y1="45" x2="61" y2="61"/>
+        </g>
+        <circle r="50" fill="#ffc72c" stroke="#33302a" stroke-width="4"/>
       </g>
-      <path d="M0,300 C130,262 250,286 370,246 C490,206 575,254 690,228 C805,202 900,246 1020,218 C1140,190 1265,238 1440,206 L1440,560 L0,560 Z" fill="#3c5a63" opacity=".55"/>
-      <g class="mist" fill="#cfe4dc" opacity=".16">
-        <ellipse cx="330" cy="318" rx="290" ry="30"/>
-        <ellipse cx="1010" cy="296" rx="330" ry="26"/>
+
+      <!-- 雲 -->
+      <g class="cloud" fill="#ffffff" opacity=".95">
+        <ellipse cx="255" cy="128" rx="58" ry="26"/>
+        <ellipse cx="300" cy="112" rx="44" ry="22"/>
+        <ellipse cx="215" cy="114" rx="36" ry="19"/>
       </g>
-      <path d="M0,382 C150,340 270,372 390,330 C510,288 630,340 750,312 C870,284 985,332 1105,302 C1225,272 1330,322 1440,292 L1440,560 L0,560 Z" fill="#28464b" opacity=".8"/>
-      <g class="mist mist-b" fill="#d8e9e0" opacity=".14">
-        <ellipse cx="560" cy="402" rx="360" ry="32"/>
-        <ellipse cx="1230" cy="380" rx="240" ry="24"/>
+      <g class="cloud-b" fill="#ffffff" opacity=".92">
+        <ellipse cx="640" cy="82" rx="50" ry="22"/>
+        <ellipse cx="682" cy="70" rx="36" ry="18"/>
+        <ellipse cx="606" cy="70" rx="30" ry="15"/>
       </g>
-      <path d="M0,462 C170,414 330,446 480,404 C630,362 770,424 910,394 C1050,364 1190,420 1440,384 L1440,560 L0,560 Z" fill="#16302c"/>
-      <path d="M705,560 C680,528 736,514 712,492 C692,474 650,478 664,458 C678,440 716,444 706,426" fill="none" stroke="#d8cfa8" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 8" opacity=".38"/>
-      <path d="M0,522 C240,486 470,516 720,494 C970,472 1210,510 1440,482 L1440,560 L0,560 Z" fill="#0e211d"/>
-      <path d="M0,532 C240,560 480,540 720,552 C960,564 1200,544 1440,556 L1440,560 L0,560 Z" fill="#f6f4ec"/>
-      <path d="M0,546 C240,566 480,548 720,556 C960,564 1200,550 1440,558 L1440,560 L0,560 Z" fill="#f6f4ec"/>
+      <g class="cloud" fill="#ffffff" opacity=".9">
+        <ellipse cx="1180" cy="205" rx="52" ry="22"/>
+        <ellipse cx="1222" cy="192" rx="36" ry="17"/>
+      </g>
+
+      <!-- 鳥 -->
+      <g fill="none" stroke="#33302a" stroke-width="3.5" stroke-linecap="round">
+        <path d="M508,196 q7,-8 14,0 q7,-8 14,0"/>
+        <path d="M566,172 q6,-7 12,0 q6,-7 12,0"/>
+      </g>
+
+      <!-- 山なみ（奥→手前） -->
+      <path d="M0,352 L120,300 L230,344 L360,272 L490,342 L610,296 L720,336 L840,276 L960,338 L1090,290 L1210,340 L1330,302 L1440,344 L1440,640 L0,640 Z"
+            fill="#cbe7a9" stroke="#33302a" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M0,432 L150,364 L300,428 L440,352 L580,430 L720,380 L860,436 L1010,356 L1160,430 L1300,376 L1440,428 L1440,640 L0,640 Z"
+            fill="#8fcb6b" stroke="#33302a" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M0,520 L130,468 L280,516 L430,452 L560,508 L668,452 L708,436 L732,436 L772,452 L880,506 L1020,452 L1160,514 L1300,464 L1440,512 L1440,640 L0,640 Z"
+            fill="#4fa35b" stroke="#33302a" stroke-width="3" stroke-linejoin="round"/>
+
+      <!-- 峠へのぼる道 -->
+      <path d="M640,660 C600,600 660,560 700,530 C740,500 704,472 722,448"
+            fill="none" stroke="#33302a" stroke-width="36" stroke-linecap="round"/>
+      <path d="M640,660 C600,600 660,560 700,530 C740,500 704,472 722,448"
+            fill="none" stroke="#f6eeda" stroke-width="29" stroke-linecap="round"/>
+      <path d="M640,660 C600,600 660,560 700,530 C740,500 704,472 722,448"
+            fill="none" stroke="#f58220" stroke-width="3.5" stroke-dasharray="14 12" stroke-linecap="round"/>
+
+      <!-- 峠の旗とかんばん -->
+      <g stroke="#33302a" stroke-linejoin="round">
+        <line x1="780" y1="458" x2="780" y2="400" stroke-width="5" stroke-linecap="round"/>
+        <polygon points="782,400 830,412 782,426" fill="#e8442e" stroke-width="3.5"/>
+      </g>
+      <g transform="translate(766,470)">
+        <line x1="34" y1="30" x2="34" y2="54" stroke="#33302a" stroke-width="5"/>
+        <rect x="-4" y="0" width="76" height="32" rx="6" fill="#fff" stroke="#33302a" stroke-width="3.5"/>
+        <text x="34" y="23" text-anchor="middle" font-size="17" font-weight="900" fill="#33302a">分杭峠</text>
+      </g>
+
+      <!-- 木 -->
+      <g stroke="#33302a" stroke-width="3" stroke-linejoin="round">
+        <polygon points="180,520 208,458 236,520" fill="#1f6b3a"/>
+        <polygon points="320,540 350,470 380,540" fill="#2c7a3f"/>
+        <polygon points="520,540 546,482 572,540" fill="#1f6b3a"/>
+        <polygon points="812,530 840,466 868,530" fill="#2c7a3f"/>
+        <polygon points="950,548 980,480 1010,548" fill="#1f6b3a"/>
+        <polygon points="1120,540 1146,486 1172,540" fill="#2c7a3f"/>
+        <polygon points="1250,530 1280,462 1310,530" fill="#1f6b3a"/>
+      </g>
+
+      <!-- バス -->
+      <g transform="translate(618,540) rotate(-9)">
+        <rect x="0" y="0" width="118" height="52" rx="12" fill="#e8442e" stroke="#33302a" stroke-width="3.5"/>
+        <rect x="10" y="9" width="30" height="20" rx="4" fill="#dff3fb" stroke="#33302a" stroke-width="3"/>
+        <rect x="48" y="9" width="30" height="20" rx="4" fill="#dff3fb" stroke="#33302a" stroke-width="3"/>
+        <rect x="86" y="9" width="22" height="20" rx="4" fill="#dff3fb" stroke="#33302a" stroke-width="3"/>
+        <rect x="8" y="36" width="102" height="7" rx="3.5" fill="#fff" stroke="#33302a" stroke-width="2.5"/>
+        <circle cx="28" cy="52" r="10" fill="#33302a"/>
+        <circle cx="28" cy="52" r="4" fill="#fff"/>
+        <circle cx="90" cy="52" r="10" fill="#33302a"/>
+        <circle cx="90" cy="52" r="4" fill="#fff"/>
+      </g>
+
+      <!-- 誌面へつづく紙の波 -->
+      <path d="M0,612 C240,592 480,632 720,614 C960,596 1200,634 1440,610 L1440,640 L0,640 Z" fill="#fff8ed"/>
     </svg>
   </div>
 </header>
@@ -354,107 +646,122 @@ footer a:hover{color:#d7e6da}
   <!-- ================= 分杭峠とは ================= -->
   <section class="section" id="about">
     <div class="wrap">
-      <p class="kicker">ABOUT</p>
-      <h2>分杭峠とは</h2>
-      <div class="prose">
-        <p>分杭峠は、長野県の伊那市長谷と大鹿村のさかいにある、標高1,424mの峠です。南アルプスのふもと、深い山あいを縫う国道152号の途中にあり、あたりは鳥の声と風の音しか聞こえないような、静かな森につつまれています。</p>
-        <p>この道はかつて「秋葉街道」と呼ばれ、信州と遠州（静岡）をむすぶ塩の道・信仰の道として、旅人が行き交いました。峠の名前は、江戸時代に高遠藩が領地のさかいに「分杭（くい）」を立てたことに由来するといわれます。</p>
-        <p>そして1995年。この静かな峠は、ある出来事をきっかけに「ゼロ磁場の聖地」「日本有数のパワースポット」として、全国にその名を知られることになります。</p>
+      <header class="sec-head">
+        <span class="sec-no" aria-hidden="true">01</span>
+        <div class="sec-head-body">
+          <p class="sec-en">ABOUT</p>
+          <h2>分杭峠って、どんなところ？</h2>
+        </div>
+      </header>
+      <div class="duo">
+        <div class="prose">
+          <p>分杭峠は、長野県の伊那市長谷と大鹿村のさかいにある、標高1,424mの峠です。南アルプスのふもと、深い山あいを縫う国道152号の途中にあり、あたりは鳥の声と風の音しか聞こえないような、静かな森につつまれています。</p>
+          <p>この道はかつて「秋葉街道」と呼ばれ、信州と遠州（静岡）をむすぶ塩の道・信仰の道として、旅人が行き交いました。峠の名前は、江戸時代に高遠藩が領地のさかいに「分杭（くい）」を立てたことに由来するといわれます。</p>
+          <p>そして1995年。この静かな峠は、ある出来事をきっかけに<b>「ゼロ磁場の聖地」「日本有数のパワースポット」</b>として、全国にその名を知られることになります。</p>
+        </div>
+        <div class="data-box">
+          <span class="data-label">分杭峠 DATA</span>
+          <dl class="data-list">
+            <div><dt>標高</dt><dd>1,424m</dd></div>
+            <div><dt>場所</dt><dd>長野県 伊那市長谷・大鹿村のさかい（国道152号）</dd></div>
+            <div><dt>足もと</dt><dd>日本最大級の断層「中央構造線」の真上</dd></div>
+            <div><dt>旧街道</dt><dd>秋葉街道（塩の道・信仰の道）</dd></div>
+            <div><dt>異名</dt><dd>“日本三大パワースポット”に数えられることも</dd></div>
+          </dl>
+        </div>
       </div>
-      <ul class="chips">
-        <li>標高 <b>1,424m</b></li>
-        <li>中央構造線の<b>真上</b></li>
-        <li>旧・秋葉街道（塩の道）</li>
-        <li>“日本三大パワースポット”に数えられることも</li>
-      </ul>
     </div>
   </section>
 
   <!-- ================= ゼロ磁場を知る ================= -->
-  <section class="section section-alt" id="zeroba">
+  <section class="section" id="zeroba">
     <div class="wrap">
-      <p class="kicker">LEARN</p>
-      <h2>ゼロ磁場を知る</h2>
+      <header class="sec-head">
+        <span class="sec-no" aria-hidden="true">02</span>
+        <div class="sec-head-body">
+          <p class="sec-en">LEARN</p>
+          <h2>“ゼロ磁場”を知る</h2>
+        </div>
+      </header>
 
       <div class="prose">
         <h3>はじまりの物語 — 1995年夏</h3>
-        <p>1995年7月、「気」の研究をしていた工学者・佐々木茂美氏の招きで、中国の著名な気功師・張志祥（ちょう・ししょう）氏が、この峠を訪れました。張氏は、中国で気功の聖地とされる蓮花山（れんかざん）を見いだした人物。その張氏が分杭峠に立ち、「ここは蓮花山に勝るとも劣らない、世界でも有数の気場だ」と語ったのです。</p>
+        <p>1995年7月、「気」の研究をしていた工学者・佐々木茂美氏の招きで、中国の著名な気功師・張志祥（ちょう・ししょう）氏が、この峠を訪れました。張氏は、中国で気功の聖地とされる蓮花山（れんかざん）を見いだした人物。その張氏が分杭峠に立ち、<b>「ここは蓮花山に勝るとも劣らない、世界でも有数の気場だ」</b>と語ったのです。</p>
         <p>このひとことが、すべてのはじまりでした。以来、分杭峠は「ゼロ磁場」という言葉とともにテレビや雑誌でくり返し紹介され、全国から人が訪れる場所になりました。</p>
 
         <h3>「ゼロ磁場」といわれるわけ</h3>
-        <p>分杭峠の足もとには、九州から関東まで約1,000kmもつづく日本最大級の断層「中央構造線」が走っています。この断層を境に、西側と東側の大地が長い年月をかけて押し合っており、その力がぶつかり合う場所では、磁力などのエネルギーが打ち消し合って「ゼロ」の状態になっている——。これが「ゼロ磁場」と呼ばれる理由として語られている説です。</p>
+        <p>分杭峠の足もとには、九州から関東まで<b>約1,000kmもつづく日本最大級の断層「中央構造線」</b>が走っています。この断層を境に、西側と東側の大地が長い年月をかけて押し合っており、その力がぶつかり合う場所では、磁力などのエネルギーが打ち消し合って「ゼロ」の状態になっている——。これが「ゼロ磁場」と呼ばれる理由として語られている説です。</p>
         <p>「方位磁石の針がゆれて定まらない」「手をかざすとぴりぴりする」といった体験談も、まことしやかに語りつがれています。</p>
       </div>
 
       <figure>
         <svg viewBox="0 0 760 400" role="img" aria-label="ゼロ磁場のしくみの模式図。断層を境に両側の大地が押し合い、その真上の峠で力がつり合っているイメージ">
-          <rect width="760" height="400" fill="#fffdf6"/>
-          <rect width="760" height="400" fill="none" stroke="#e3ddcc"/>
-          <text x="380" y="46" text-anchor="middle" font-size="19" fill="#1d4034" font-family="serif">「ゼロ磁場」といわれるしくみ（イメージ）</text>
-          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 C388,214 405,225 440,232 C540,252 640,238 760,258 L760,400 L0,400 Z" fill="#dfe8da"/>
-          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 L380,400 L0,400 Z" fill="#cfdec6"/>
-          <path d="M380,206 L380,400" stroke="#c4574e" stroke-width="4" stroke-dasharray="10 7"/>
-          <text x="380" y="388" text-anchor="middle" font-size="13" fill="#c4574e">中央構造線（断層）</text>
-          <g fill="#2d5c4a" font-size="14">
+          <rect width="760" height="400" fill="#ffffff"/>
+          <text x="380" y="46" text-anchor="middle" font-size="20" font-weight="900" fill="#33302a">「ゼロ磁場」といわれるしくみ（イメージ）</text>
+          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 C388,214 405,225 440,232 C540,252 640,238 760,258 L760,400 L0,400 Z" fill="#cdebb4"/>
+          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 L380,400 L0,400 Z" fill="#a9db8e"/>
+          <path d="M380,206 L380,400" stroke="#e8442e" stroke-width="5" stroke-dasharray="11 8"/>
+          <text x="380" y="388" text-anchor="middle" font-size="13" font-weight="700" fill="#c22f1b">中央構造線（断層）</text>
+          <g fill="#1c7a49" font-size="14" font-weight="700">
             <text x="150" y="315" text-anchor="middle">西側の大地</text>
-            <text x="150" y="334" text-anchor="middle" font-size="12" fill="#5b6a64">（伊那山地がわ）</text>
+            <text x="150" y="334" text-anchor="middle" font-size="12" font-weight="400" fill="#6e675c">（伊那山地がわ）</text>
             <text x="610" y="315" text-anchor="middle">東側の大地</text>
-            <text x="610" y="334" text-anchor="middle" font-size="12" fill="#5b6a64">（南アルプスがわ）</text>
+            <text x="610" y="334" text-anchor="middle" font-size="12" font-weight="400" fill="#6e675c">（南アルプスがわ）</text>
           </g>
-          <g stroke="#2d5c4a" stroke-width="7" fill="#2d5c4a">
+          <g stroke="#279b5e" stroke-width="8" fill="#279b5e">
             <line x1="215" y1="290" x2="305" y2="280"/>
-            <polygon points="330,277 300,266 306,294"/>
+            <polygon points="332,277 300,265 306,295"/>
             <line x1="545" y1="290" x2="455" y2="280"/>
-            <polygon points="430,277 460,266 454,294"/>
+            <polygon points="428,277 460,265 454,295"/>
           </g>
           <g>
-            <circle cx="380" cy="150" r="34" fill="#fffdf6" stroke="#c9a25a" stroke-width="2.5"/>
-            <g stroke="#c9a25a" stroke-width="1.6" opacity=".8">
+            <circle cx="380" cy="150" r="34" fill="#ffffff" stroke="#33302a" stroke-width="3"/>
+            <g stroke="#33302a" stroke-width="2" opacity=".7">
               <line x1="380" y1="120" x2="380" y2="127"/><line x1="380" y1="173" x2="380" y2="180"/>
               <line x1="350" y1="150" x2="357" y2="150"/><line x1="403" y1="150" x2="410" y2="150"/>
             </g>
-            <polygon points="380,128 386,152 380,148 374,152" fill="#d3564a" transform="rotate(28 380 150)"/>
+            <polygon points="380,128 386,152 380,148 374,152" fill="#e8442e" transform="rotate(28 380 150)"/>
             <polygon points="380,172 374,148 380,152 386,148" fill="#9aa79e" transform="rotate(28 380 150)"/>
-            <circle cx="380" cy="150" r="2.6" fill="#c9a25a"/>
+            <circle cx="380" cy="150" r="2.8" fill="#33302a"/>
           </g>
-          <text x="380" y="106" text-anchor="middle" font-size="13" fill="#5b6a64">針がゆれて定まらない…？</text>
-          <text x="380" y="240" text-anchor="middle" font-size="13" fill="#1d4034">押し合う力がつり合い、エネルギーが打ち消し合う——という説</text>
+          <text x="380" y="106" text-anchor="middle" font-size="13" fill="#6e675c">針がゆれて定まらない…？</text>
+          <text x="380" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#33302a">押し合う力がつり合い、エネルギーが打ち消し合う——という説</text>
         </svg>
         <figcaption>※あくまで語られている「説」のイメージ図です。科学的に確認されたしくみではありません。</figcaption>
       </figure>
 
       <div class="prose">
         <h3>中央構造線 — 足もとにある、日本の大断層</h3>
-        <p>ゼロ磁場のうわさを抜きにしても、分杭峠が地質学的にとくべつな場所であることは本当です。中央構造線は、日本列島がまだ大陸のふちにあった約1億年前にはたらいた、日本最大級の断層。九州から四国、紀伊半島をとおって関東へとつづき、分杭峠のある谷は、まさにその断層がつくった地形です。</p>
+        <p>ゼロ磁場のうわさを抜きにしても、<b>分杭峠が地質学的にとくべつな場所であることは本当</b>です。中央構造線は、日本列島がまだ大陸のふちにあった約1億年前にはたらいた、日本最大級の断層。九州から四国、紀伊半島をとおって関東へとつづき、分杭峠のある谷は、まさにその断層がつくった地形です。</p>
         <p>峠の南、大鹿村には断層の境目をじかに見られる「北川露頭（きたがわろとう）」や、日本でここだけの断層専門博物館「中央構造線博物館」もあり、このあたり一帯は「南アルプスジオパーク」にも認定されています。大地のエネルギーを、科学の目でたしかめられる場所でもあるのです。</p>
       </div>
 
       <figure>
         <svg viewBox="0 0 760 190" role="img" aria-label="中央構造線の位置を示す模式図。九州から四国、紀伊半島、分杭峠を通って関東へつづく線のイメージ">
-          <rect width="760" height="190" fill="#fffdf6"/>
-          <rect width="760" height="190" fill="none" stroke="#e3ddcc"/>
-          <text x="380" y="40" text-anchor="middle" font-size="17" fill="#1d4034" font-family="serif">中央構造線はどこを通る？（イメージ）</text>
-          <path d="M60,140 C180,150 300,138 420,128 C520,120 600,98 700,78" fill="none" stroke="#c4574e" stroke-width="5" stroke-linecap="round" opacity=".85"/>
-          <g fill="#2d5c4a">
+          <rect width="760" height="190" fill="#ffffff"/>
+          <text x="380" y="40" text-anchor="middle" font-size="18" font-weight="900" fill="#33302a">中央構造線はどこを通る？（イメージ）</text>
+          <path d="M60,140 C180,150 300,138 420,128 C520,120 600,98 700,78" fill="none" stroke="#e8442e" stroke-width="6" stroke-linecap="round" opacity=".9"/>
+          <g fill="#279b5e" stroke="#33302a" stroke-width="2">
             <circle cx="60" cy="140" r="7"/>
             <circle cx="215" cy="145" r="7"/>
             <circle cx="360" cy="133" r="7"/>
             <circle cx="700" cy="78" r="7"/>
           </g>
-          <circle cx="530" cy="112" r="11" fill="#c9a25a" stroke="#fffdf6" stroke-width="3"/>
-          <g font-size="13" fill="#26332f" text-anchor="middle">
+          <circle cx="530" cy="112" r="12" fill="#ffc72c" stroke="#33302a" stroke-width="3"/>
+          <g font-size="13" fill="#33302a" text-anchor="middle">
             <text x="60" y="168">九州</text>
             <text x="215" y="173">四国</text>
             <text x="360" y="161">紀伊半島</text>
             <text x="700" y="106">関東へ</text>
           </g>
-          <text x="530" y="88" text-anchor="middle" font-size="15" fill="#8a6a2b" font-weight="bold">★ 分杭峠</text>
-          <text x="530" y="142" text-anchor="middle" font-size="12" fill="#5b6a64">全長 約1,000km</text>
+          <text x="530" y="88" text-anchor="middle" font-size="16" fill="#c22f1b" font-weight="900">★ 分杭峠</text>
+          <text x="530" y="142" text-anchor="middle" font-size="12" fill="#6e675c">全長 約1,000km</text>
         </svg>
         <figcaption>※位置関係をごく簡単にあらわしたイメージ図です。</figcaption>
       </figure>
 
-      <div class="honest">
+      <div class="column-box">
+        <span class="column-label">COLUMN</span>
         <h3>正直にいうと — 科学的には、どうなの？</h3>
         <p>「ゼロ磁場」や「気場」は、いまのところ科学的に確認・証明されたものではありません。公的な機関が「ここは磁場が特別だ」と認めた事実もなく、方位磁石が必ず狂うわけでもない、というのが正直なところです。</p>
         <p>それでも、多くの人が「なんだか落ち着く」「すっきりした」と感じて帰っていきます。標高1,400mの澄んだ空気、断層がつくった深い谷、森のしずけさ。理屈はどうあれ、心と体がゆるむ場所であることはたしかです。不思議は不思議のまま、たしかめに行く——それがこの峠のいちばん楽しい歩き方だと思います。</p>
@@ -463,10 +770,15 @@ footer a:hover{color:#d7e6da}
   </section>
 
   <!-- ================= 気場での過ごし方 ================= -->
-  <section class="section section-green" id="visit">
+  <section class="section" id="visit">
     <div class="wrap">
-      <p class="kicker">EXPERIENCE</p>
-      <h2>「気場」でのしずかな過ごし方</h2>
+      <header class="sec-head">
+        <span class="sec-no" aria-hidden="true">03</span>
+        <div class="sec-head-body">
+          <p class="sec-en">EXPERIENCE</p>
+          <h2>「気場」でのしずかな過ごし方</h2>
+        </div>
+      </header>
       <div class="prose">
         <p>バスを降りたら、案内にそって坂道を3〜5分ほど下ります。木々のあいだに、斜面にそって段々に置かれたベンチが見えてきたら、そこが「気場（きば）」。張志祥氏が「とくに気が強い」と示したと伝わる、分杭峠の中心スポットです。</p>
         <p>ここでやることは、たったひとつ。<b>すわって、しずかに過ごすこと。</b>それだけです。</p>
@@ -477,35 +789,43 @@ footer a:hover{color:#d7e6da}
         <li><b>30分〜1時間、ただ「いる」。</b>スマホはポケットへ。なにかを感じても、感じなくても、それが答えです。</li>
         <li><b>帰るまえに、峠の空気をもうひと呼吸。</b>おみやげは、ゆるんだ心と体。ゴミはぜんぶ持ち帰りましょう。</li>
       </ol>
+
+      <h3 class="h3s" style="margin-top:2.4rem">訪れた人の声</h3>
       <div class="voices">
         <div class="voice">
           <p>30分ほどすわっていたら、手のひらがじんわりあたたかくなってきた気がして。帰るころには肩が軽くなっていました。</p>
-          <span class="who">— 訪れた人の声（個人の感想です）</span>
+          <span class="who">— 個人の感想です</span>
         </div>
         <div class="voice">
           <p>正直、とくべつな何かは感じませんでした。でも、標高1,400mの森で1時間ぼーっとする体験そのものが贅沢。ものすごくリフレッシュできました。</p>
-          <span class="who">— 訪れた人の声（個人の感想です）</span>
+          <span class="who">— 個人の感想です</span>
         </div>
         <div class="voice">
           <p>方位磁石を持っていきました。狂ったかどうかは…ぜひ自分の目でたしかめてみてください。それが一番おもしろいので。</p>
-          <span class="who">— 訪れた人の声（個人の感想です）</span>
+          <span class="who">— 個人の感想です</span>
         </div>
       </div>
-      <p class="note" style="margin-top:1.4rem">※気場より下の沢（「水場」「裏気場」と呼ばれていた場所）は、落石などの危険があるため<b>立ち入り禁止</b>です。ロープの先には入らないでください。バス降り場の近くに水洗トイレがあります。</p>
+      <p class="warn">※気場より下の沢（「水場」「裏気場」と呼ばれていた場所）は、落石などの危険があるため<b>立ち入り禁止</b>です。ロープの先には入らないでください。バス降り場の近くに水洗トイレがあります。</p>
     </div>
   </section>
 
   <!-- ================= 行き方 ================= -->
   <section class="section" id="access">
     <div class="wrap">
-      <p class="kicker">ACCESS</p>
-      <h2>行き方 — 峠へはバスで</h2>
+      <header class="sec-head">
+        <span class="sec-no" aria-hidden="true">04</span>
+        <div class="sec-head-body">
+          <p class="sec-en">ACCESS</p>
+          <h2>行き方 — 峠へはバスで</h2>
+        </div>
+      </header>
       <div class="alert">
-        <b>だいじなポイント：</b>分杭峠には駐車場がなく、峠周辺は駐停車禁止です。ふもとの「<b>南アルプス長谷 戸台パーク</b>」（仙流荘となり・約600台駐車可）に車をとめて、路線バス「<b>分杭 気の里ライン</b>」で向かいます。
+        <p class="alert-title">ここだけは、まず押さえて！</p>
+        <p>分杭峠には駐車場がなく、峠周辺は駐停車禁止です。ふもとの「<b>南アルプス長谷 戸台パーク</b>」（仙流荘となり・約600台駐車可）に車をとめて、路線バス「<b>分杭 気の里ライン</b>」で向かいます。</p>
       </div>
 
       <div class="access-grid">
-        <div class="card">
+        <div class="card" style="--tag:var(--red)">
           <span class="tag">BUS</span>
           <h3>分杭 気の里ライン（2026年）</h3>
           <p>戸台パーク ⇔ 分杭峠頂上を約30分でむすぶ路線バス。2026年は<b>4月12日〜12月1日（予定）</b>の運行です。チケットは仙流荘内の発券機・窓口で（クレジットカード・電子マネー・コード決済OK）。</p>
@@ -516,36 +836,38 @@ footer a:hover{color:#d7e6da}
           </ul>
           <p class="note">問い合わせ：南アルプス林道バス営業所 0265-98-2821（運行期間中 7:30〜17:00）</p>
         </div>
-        <div class="card">
+        <div class="card" style="--tag:var(--blue)">
           <span class="tag">CAR</span>
           <h3>車で戸台パークへ</h3>
           <p>中央道の<b>伊那IC・小黒川スマートIC</b>から約40分（駒ヶ根ICからも約20km）。東京方面からも名古屋方面からも、日帰りできる距離です。国道152号の峠区間は<b>冬期（12月〜3月ごろ）通行止め</b>になります。</p>
         </div>
-        <div class="card">
+        <div class="card" style="--tag:var(--green)">
           <span class="tag">TRAIN &amp; BUS</span>
           <h3>電車の人は茅野駅から</h3>
           <p>JR中央本線の<b>茅野駅</b>から、登山バス「南アルプスジオライナー」で戸台パークへ。2026年は7月17日〜10月12日の金・土・日・祝を中心に運行（お盆・秋の連休期間は毎日）。運行日が限られるので、事前にJRバス関東の案内をご確認ください。</p>
         </div>
       </div>
 
-      <table>
-        <caption>バス時刻表（2026年・発車時刻）　＊印は土休日など特定日のみ運行</caption>
-        <thead>
-          <tr><th scope="col">のぼり：戸台パーク発</th><th scope="col">くだり：分杭峠発</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>9:00</td><td>10:00</td></tr>
-          <tr><td>9:45 ＊</td><td>10:45 ＊</td></tr>
-          <tr><td>10:30</td><td>12:00</td></tr>
-          <tr><td>11:30 ＊</td><td>12:30 ＊</td></tr>
-          <tr><td>13:00</td><td>14:00</td></tr>
-          <tr><td>14:00 ＊</td><td>15:00 ＊</td></tr>
-          <tr><td>14:30</td><td>16:00</td></tr>
-        </tbody>
-      </table>
-      <p class="note">所要は片道約30分。ダイヤ・料金は変わることがあります。おでかけ前に<a href="https://inashi-kankoukyoukai.jp/topics/bunkuitouge-bus-guide/" target="_blank" rel="noopener noreferrer">伊那市観光協会の最新運行情報</a>か<a href="https://www.inacity.jp/kankojoho/sangaku_alps/minamialps/bunkuikinosartorain.html" target="_blank" rel="noopener noreferrer">伊那市公式ページ</a>をご確認ください。</p>
+      <div class="tt">
+        <table>
+          <caption>バス時刻表（2026年・発車時刻）　＊印は土休日など特定日のみ運行</caption>
+          <thead>
+            <tr><th scope="col">のぼり：戸台パーク発</th><th scope="col">くだり：分杭峠発</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>9:00</td><td>10:00</td></tr>
+            <tr><td>9:45 ＊</td><td>10:45 ＊</td></tr>
+            <tr><td>10:30</td><td>12:00</td></tr>
+            <tr><td>11:30 ＊</td><td>12:30 ＊</td></tr>
+            <tr><td>13:00</td><td>14:00</td></tr>
+            <tr><td>14:00 ＊</td><td>15:00 ＊</td></tr>
+            <tr><td>14:30</td><td>16:00</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:.8rem">所要は片道約30分。ダイヤ・料金は変わることがあります。おでかけ前に<a href="https://inashi-kankoukyoukai.jp/topics/bunkuitouge-bus-guide/" target="_blank" rel="noopener noreferrer">伊那市観光協会の最新運行情報</a>か<a href="https://www.inacity.jp/kankojoho/sangaku_alps/minamialps/bunkuikinosartorain.html" target="_blank" rel="noopener noreferrer">伊那市公式ページ</a>をご確認ください。</p>
 
-      <h3 style="margin-top:2.4rem">モデルコース — ゆったり半日プラン</h3>
+      <h3 class="h3s" style="margin-top:2.4rem">モデルコース — ゆったり半日プラン</h3>
       <ol class="timeline">
         <li><span class="t">8:40</span><p>戸台パーク着。駐車して、仙流荘でバスチケットを購入。</p></li>
         <li><span class="t">9:00</span><p>バスで出発。断層の谷を見おろす山道を、のんびり30分。</p></li>
@@ -561,27 +883,32 @@ footer a:hover{color:#d7e6da}
   </section>
 
   <!-- ================= 周辺スポット ================= -->
-  <section class="section section-alt" id="around">
+  <section class="section" id="around">
     <div class="wrap">
-      <p class="kicker">AROUND</p>
-      <h2>あわせて寄りたい、ふもとの楽しみ</h2>
+      <header class="sec-head">
+        <span class="sec-no" aria-hidden="true">05</span>
+        <div class="sec-head-body">
+          <p class="sec-en">AROUND</p>
+          <h2>あわせて寄りたい、ふもとの楽しみ</h2>
+        </div>
+      </header>
       <div class="cards">
-        <div class="card">
+        <div class="card" style="--tag:var(--orange)">
           <span class="tag">GOURMET</span>
           <h3>道の駅 南アルプスむら長谷</h3>
           <p>峠へ向かう国道152号ぞい。焼きたてのミニクロワッサンが大人気で、お昼どきには地元食材のランチも。行き帰りの立ち寄り定番です。</p>
         </div>
-        <div class="card">
+        <div class="card" style="--tag:var(--pink)">
           <span class="tag">ONSEN</span>
           <h3>仙流荘（戸台パーク）</h3>
           <p>バス発着地のすぐとなりにある温泉宿。日帰り入浴ができ、山なみを眺めるお風呂とサウナで、峠のしずけさの余韻にひたれます。</p>
         </div>
-        <div class="card">
+        <div class="card" style="--tag:var(--indigo)">
           <span class="tag">GEO</span>
           <h3>中央構造線博物館・北川露頭</h3>
           <p>峠の南、大鹿村へ。日本でここだけの断層専門博物館と、断層の境目をじかに観察できる露頭。ゼロ磁場の「足もとの正体」に出会えます。</p>
         </div>
-        <div class="card">
+        <div class="card" style="--tag:var(--red)">
           <span class="tag">SAKURA</span>
           <h3>高遠城址公園</h3>
           <p>「天下第一の桜」とうたわれる、日本屈指の桜の名所。春に訪れるなら、淡紅色のタカトオコヒガンザクラと峠をセットでどうぞ。</p>
@@ -593,8 +920,13 @@ footer a:hover{color:#d7e6da}
   <!-- ================= 心得 ================= -->
   <section class="section" id="tips">
     <div class="wrap">
-      <p class="kicker">TIPS</p>
-      <h2>訪れるまえの、ちいさな心得</h2>
+      <header class="sec-head sec-head--ink">
+        <span class="sec-no" aria-hidden="true">06</span>
+        <div class="sec-head-body">
+          <p class="sec-en">TIPS</p>
+          <h2>訪れるまえの、ちいさな心得</h2>
+        </div>
+      </header>
       <ul class="chips">
         <li>標高1,424m。夏でも<b>羽織りもの</b>を1枚</li>
         <li>坂道があるので<b>歩きやすい靴</b>で</li>
@@ -609,10 +941,15 @@ footer a:hover{color:#d7e6da}
   </section>
 
   <!-- ================= FAQ ================= -->
-  <section class="section section-alt" id="faq">
+  <section class="section" id="faq">
     <div class="wrap">
-      <p class="kicker">Q&amp;A</p>
-      <h2>よくある質問</h2>
+      <header class="sec-head">
+        <span class="sec-no" aria-hidden="true">07</span>
+        <div class="sec-head-body">
+          <p class="sec-en">Q&amp;A</p>
+          <h2>よくある質問</h2>
+        </div>
+      </header>
 
       <details>
         <summary>本当に方位磁石が狂うんですか？</summary>

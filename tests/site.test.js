@@ -45,3 +45,7 @@ test("画像タグにはすべて alt（代替テキスト）がある", () => {
 test("書きかけのメモ（TODO など）が残っていない", () => {
   assert.ok(!/TODO|FIXME|XXX|lorem ipsum/i.test(html), "書きかけの目印が残っている");
 });
+
+test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
+  assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
+});

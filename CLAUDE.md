@@ -101,6 +101,8 @@
   テストと CI は Node 標準の `node --test`
 - 2026-08-07: 公開先は無料の GitHub Pages（利用者の希望は「GitHub Pages か
   Cloudflare か Vercel」。追加のアカウント登録が不要な GitHub Pages を採用）
+- 2026-08-07: サイトの見た目は「るるぶ」のような旅行ガイドブック風
+  （ビビッドな配色・太い丸ゴシック見出し・イラストの表紙）。基本フォントは Noto Sans JP
 
 ## この指示書について
 
