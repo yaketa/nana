@@ -124,7 +124,7 @@ test("心得のチェックリストが、チェックできる形になって�
   }
 });
 
-test("標高バッジ（星形）は本文の枠の中にある（広い画面で本文から離れない）", () => {
+test("標高バッジ（星形）：本文の枠の中にあり、インキの縁取りが消えない作りになっている", () => {
   const hero = html.match(/<header class="hero"[\s\S]*?<\/header>/);
   assert.ok(hero, "表紙（hero）が見つからない");
   const openAt = hero[0].indexOf('<div class="wrap hero-copy">');
@@ -142,6 +142,20 @@ test("標高バッジ（星形）は本文の枠の中にある（広い画面�
     "バッジが本文の枠（wrap hero-copy）の外にある。外だと画面の右端が基準になり、広い画面で本文から遠く離れる");
   assert.match(html, /\.hero-copy\{[^}]*position:relative/,
     "位置の基準になる .hero-copy の position:relative が消えている");
+
+  // 縁取りが静かに消える事故を防ぐ：clip-path と filter を同じ要素に書くと、
+  // Chrome 系では filter が描く縁取り・影が clip-path ごと切り落とされて見えなくなる。
+  // だから切り抜き（clip-path）は ::before に、縁取り（drop-shadow の --ink）は本体に分ける
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  const burst = css.match(/\.burst\{([\s\S]*?)\}/);
+  assert.ok(burst, "バッジのスタイル（.burst）が見つからない");
+  assert.match(burst[1], /drop-shadow\([^)]*var\(--ink\)\)/,
+    "バッジのインキ縁取り（drop-shadow の --ink）が消えている（縁が無いと切り紙のようで安っぽく見える）");
+  assert.ok(!burst[1].includes("clip-path"),
+    ".burst 本体に clip-path を書かない（filter と同居させると Chrome 系で縁取りと影が消える。切り抜きは ::before へ）");
+  const burstBefore = css.match(/\.burst::before\{([\s\S]*?)\}/);
+  assert.ok(burstBefore && burstBefore[1].includes("clip-path"),
+    "星の切り抜き（.burst::before の clip-path）が見つからない");
 });
 
 test("表紙の題字：赤の版ズレは filter 方式で行う（text-shadow だと iPhone で崩れる）", () => {
