@@ -1,7 +1,27 @@
 # nana
 
 Claude に開発をまかせて、あなたは「何を作るか」と「使った感想」に集中するための
-リポジトリです。（何を作るかは、これから決めます）
+リポジトリです。
+
+## いま作っているもの
+
+長野県の“ゼロ磁場”パワースポット **分杭峠（ぶんぐいとうげ）** の紹介サイトです。
+
+- 見る: ブラウザで `index.html` を開く（公開後は https://yaketa.github.io/nana/ ）
+- しくみ: フレームワークなしの HTML + CSS が 1 ファイルに入っているだけ
+- 公開: main が更新されると、自動で GitHub Pages に反映されます
+
+### サイトをインターネットに公開するには（最初の 1 回だけ）
+
+GitHub の設定を 2 か所さわる必要があります（無料プランの GitHub Pages は
+「公開リポジトリ」でしか使えないため）。
+
+1. GitHub でこのリポジトリを開き **Settings** へ
+2. ページ一番下の **Danger Zone** → **Change repository visibility** →
+   **Make public**（リポジトリ名の入力を求められます: `yaketa/nana`）
+3. 同じ Settings の左メニュー **Pages** → Build and deployment の
+   **Source** を **GitHub Actions** に変更
+4. Claude に「公開設定したよ」と伝えると、公開の実行と確認まで行います
 
 ## 開発の回し方
 

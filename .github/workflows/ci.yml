@@ -6,7 +6,20 @@ on:
   pull_request:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: サイトのチェック（node --test）
+        run: node --test
+
+  # 旧 CI のジョブ名。ブランチ保護の「必須チェック」がこの名前を参照している
+  # 場合に備え、テスト成功後に同じ名前でも成功を報告する
   ready:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - run: echo ready
