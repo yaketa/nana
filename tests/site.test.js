@@ -340,3 +340,28 @@ test("スマホ用メニュー：ボタン・パネル・とじる仕掛けが�
   assert.ok(!/\bid="_"/.test(html),
     'id="_" を作ってはいけない（「#_」はどこにも飛ばないからこそ、画面を動かさずにとじられる）');
 });
+
+test("表紙のふりがなは、題字の枠に自分で貼りつけてある（端末まかせにしない）", () => {
+  // ふりがな（ぶんぐいとうげ）が題字から離れて浮いて見える不具合の再発防止。
+  // 原因は、ふりがなの位置をブラウザの自動配置にまかせていたこと。
+  // すき間が書体の内部余白とブラウザごとのルビ実装で決まるため、
+  // iPhone など環境によって題字から大きく離れてしまっていた。
+  const h1Rule = html.match(/\.hero h1\{([\s\S]*?)\}/);
+  assert.ok(h1Rule, ".hero h1 の指定が見つからない");
+  assert.match(h1Rule[1], /position:relative/, "題字が基準の枠になっていない（ふりがなの貼り先が消える）");
+  assert.match(h1Rule[1], /width:fit-content/, "題字の幅が中身ぴったりでない（ふりがなの幅が題字とずれる）");
+  assert.match(h1Rule[1], /padding-top:/, "ふりがなの席（上の余白）が確保されていない");
+
+  const rtRule = html.match(/\.hero h1 rt\{([\s\S]*?)\}/);
+  assert.ok(rtRule, ".hero h1 rt の指定が見つからない");
+  assert.match(rtRule[1], /position:absolute/, "ふりがなが自動配置に戻っている（端末ごとに位置がずれる）");
+  assert.match(rtRule[1], /top:0/, "ふりがなが題字の枠の上端に貼りついていない");
+  assert.match(rtRule[1], /line-height:1\b/,
+    "ふりがなの行の高さが書体まかせになっている（書体が変わるとすき間も変わる）");
+  assert.ok(!/padding-bottom/.test(rtRule[1]),
+    "padding-bottom で押し上げる古いやり方が残っている（自分で位置を決める方式とけんかする）");
+
+  // 読み上げソフト向けの書き方（ruby / rt）は変えない
+  assert.match(html, /<h1><ruby><span class="h1-txt">分杭峠<\/span><rt>ぶんぐいとうげ<\/rt><\/ruby><\/h1>/,
+    "題字の ruby / rt の書き方が変わっている（読み上げでのふりがなの扱いが崩れる）");
+});
