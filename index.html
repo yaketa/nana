@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分杭峠｜ゼロ磁場の里へ — 長野県 伊那市・大鹿村</title>
+<meta name="description" content="日本最大級の断層・中央構造線の真上にある峠、分杭峠（ぶんぐいとうげ）。“ゼロ磁場”と呼ばれる不思議な場所の物語としくみ、気場での過ごし方、バスでの行き方、周辺の楽しみまで、行きたくなる情報をまとめた非公式ガイドです。">
+<meta property="og:title" content="分杭峠｜ゼロ磁場の里へ">
+<meta property="og:description" content="中央構造線の真上、標高1,424mの峠でしずかに“気”を浴びる。ゼロ磁場の物語としくみ、行き方、過ごし方をまとめた非公式ガイド。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta name="theme-color" content="#122b34">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='46'%20fill='%23122b34'/%3E%3Ccircle%20cx='50'%20cy='50'%20r='38'%20fill='none'%20stroke='%23c9a25a'%20stroke-width='4'/%3E%3Cpolygon%20points='50,18%2058,50%2050,44%2042,50'%20fill='%23d3564a'/%3E%3Cpolygon%20points='50,82%2042,50%2050,56%2058,50'%20fill='%23f3ecdd'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f6f4ec;
+  --card:#fffdf6;
+  --ink:#26332f;
+  --ink-soft:#5b6a64;
+  --line:#e3ddcc;
+  --green:#2d5c4a;
+  --green-deep:#1d4034;
+  --teal:#6fa08f;
+  --gold:#c9a25a;
+  --gold-ink:#8a6a2b;
+  --red:#c4574e;
+  --night-1:#0e1b2c;
+  --night-2:#14313a;
+  --night-3:#1d4a44;
+  --serif:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","BIZ UDPMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","BIZ UDPGothic",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.9;
+  overflow-wrap:anywhere;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.4;margin:0}
+p{margin:0 0 1.1em}
+a{color:var(--green);text-underline-offset:.2em}
+a:hover{color:var(--green-deep)}
+.skip{
+  position:absolute;left:-999px;top:0;background:#fff;color:var(--ink);
+  padding:.5em 1em;z-index:100;border-radius:0 0 .5em 0;
+}
+.skip:focus{left:0}
+.wrap{max-width:66rem;margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
+section{scroll-margin-top:4.2rem}
+
+/* ---------- ナビ ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(16,34,30,.86);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav-inner{
+  display:flex;align-items:center;gap:.4rem;
+  max-width:66rem;margin-inline:auto;
+  padding:.55rem clamp(1.1rem,4vw,2rem);
+}
+.brand{
+  font-family:var(--serif);color:#f3eeda;text-decoration:none;
+  font-size:1.02rem;letter-spacing:.08em;white-space:nowrap;margin-right:.4rem;
+}
+.brand b{color:var(--gold);font-weight:600}
+.nav-links{
+  display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  color:#dfe7dd;text-decoration:none;font-size:.82rem;white-space:nowrap;
+  padding:.34em .85em;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+}
+.nav-links a:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* ---------- ヒーロー ---------- */
+.hero{
+  position:relative;color:#f2efe2;
+  background:
+    radial-gradient(58rem 30rem at 78% 62%, rgba(235,166,97,.28), transparent 60%),
+    linear-gradient(180deg,var(--night-1) 0%,var(--night-2) 55%,var(--night-3) 100%);
+  min-height:min(46rem,92svh);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;
+}
+.hero-copy{
+  position:relative;z-index:3;
+  padding-top:clamp(4rem,12vh,7rem);
+  padding-bottom:clamp(13rem,34vw,19rem);
+  max-width:38rem;
+}
+.eyebrow{
+  font-size:.78rem;letter-spacing:.24em;color:var(--gold);
+  margin:0 0 1rem;font-weight:700;
+}
+.hero h1{
+  font-size:clamp(2.7rem,9vw,4.6rem);letter-spacing:.06em;color:#faf7ea;
+}
+.hero h1 rt{font-size:.24em;letter-spacing:.5em;color:#cfd8c8;font-family:var(--sans)}
+.hero .lead{
+  margin-top:1.2rem;font-size:clamp(.95rem,2.6vw,1.08rem);
+  color:#dde4d6;text-wrap:balance;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+.btn{
+  display:inline-block;text-decoration:none;border-radius:999px;
+  padding:.62em 1.5em;font-size:.92rem;letter-spacing:.06em;
+}
+.btn-gold{background:var(--gold);color:#20221a;font-weight:700}
+.btn-gold:hover{background:#d9b26a;color:#20221a}
+.btn-ghost{border:1px solid rgba(255,255,255,.45);color:#f2efe2}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
+.hero-art{position:absolute;inset:auto 0 0 0;z-index:1}
+.hero-art svg{display:block;width:100%;height:auto}
+.compass{
+  position:absolute;z-index:2;right:clamp(.6rem,6vw,5rem);
+  top:clamp(4.2rem,10vh,6.5rem);
+  width:clamp(4.6rem,13vw,7.5rem);opacity:.92;
+}
+.needle{transform-origin:50% 50%;animation:sway 7s ease-in-out infinite alternate}
+@keyframes sway{
+  0%{transform:rotate(-24deg)}
+  35%{transform:rotate(14deg)}
+  60%{transform:rotate(-8deg)}
+  100%{transform:rotate(26deg)}
+}
+.mist{animation:drift 46s linear infinite}
+.mist-b{animation-duration:64s;animation-direction:reverse}
+@keyframes drift{
+  0%{transform:translateX(-4%)}
+  50%{transform:translateX(4%)}
+  100%{transform:translateX(-4%)}
+}
+@media (prefers-reduced-motion:reduce){
+  .needle,.mist,.mist-b{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- セクション共通 ---------- */
+.section{padding-block:clamp(3.2rem,8vw,5.2rem)}
+.section-alt{background:#efece0}
+.section-green{background:#e8eee5}
+.kicker{
+  font-size:.76rem;letter-spacing:.26em;color:var(--gold-ink);
+  font-weight:700;margin:0 0 .6rem;
+}
+.section h2{font-size:clamp(1.65rem,5vw,2.3rem);color:var(--green-deep);margin-bottom:1.4rem}
+.section h3{font-size:1.13rem;color:var(--green-deep);margin:0 0 .6rem}
+.prose{max-width:42rem}
+.note{font-size:.82rem;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.4rem 0 0;padding:0;list-style:none}
+.chips li{
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:.4em 1em;font-size:.85rem;color:var(--green-deep);
+}
+.chips b{color:var(--gold-ink)}
+.cards{display:grid;gap:1rem;margin-top:1.8rem;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:1.3rem 1.3rem 1.1rem;box-shadow:0 1px 0 rgba(38,51,47,.04);
+}
+.card p{margin-bottom:0;font-size:.92rem}
+.card .tag{
+  display:inline-block;font-size:.72rem;letter-spacing:.14em;color:var(--gold-ink);
+  border:1px solid var(--line);border-radius:999px;padding:.1em .8em;margin-bottom:.7rem;
+}
+figure{margin:2rem 0}
+figure svg{display:block;width:100%;height:auto;border-radius:16px}
+figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
+
+/* ---------- 正直パネル ---------- */
+.honest{
+  background:var(--green-deep);color:#e9eee4;border-radius:18px;
+  padding:clamp(1.4rem,4vw,2.2rem);margin-top:2.2rem;
+}
+.honest h3{color:var(--gold);font-size:1.15rem;margin-bottom:.7rem}
+.honest p{color:#dde5d6;font-size:.95rem}
+.honest p:last-child{margin-bottom:0}
+
+/* ---------- 声 ---------- */
+.voices{display:grid;gap:1rem;margin-top:1.6rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.voice{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:1.2rem 1.3rem;font-size:.92rem;position:relative;
+}
+.voice::before{
+  content:"“";font-family:var(--serif);font-size:2.6rem;line-height:1;
+  color:var(--gold);position:absolute;top:.5rem;left:.9rem;
+}
+.voice p{margin:0;padding-top:1.1rem}
+.voice .who{display:block;margin-top:.6rem;font-size:.78rem;color:var(--ink-soft)}
+
+/* ---------- 過ごし方ステップ ---------- */
+.steps{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:.9rem;counter-reset:step}
+.steps li{
+  counter-increment:step;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:1rem 1.2rem 1rem 3.4rem;position:relative;font-size:.94rem;
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:1rem;top:1rem;
+  width:1.7rem;height:1.7rem;border-radius:50%;background:var(--green);
+  color:#f4f1e4;font-family:var(--serif);font-size:.95rem;
+  display:grid;place-items:center;
+}
+.steps b{color:var(--green-deep)}
+
+/* ---------- アクセス ---------- */
+.alert{
+  border:1.5px solid var(--gold);background:#faf3df;border-radius:16px;
+  padding:1.1rem 1.3rem;margin:0 0 1.8rem;font-size:.95rem;
+}
+.alert b{color:var(--gold-ink)}
+.access-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));margin-top:1.4rem}
+table{
+  width:100%;border-collapse:collapse;font-size:.92rem;margin:.6rem 0 .3rem;
+  font-variant-numeric:tabular-nums;
+}
+caption{text-align:left;font-size:.85rem;color:var(--ink-soft);margin-bottom:.4rem}
+th,td{border:1px solid var(--line);padding:.5em .7em;text-align:center;background:var(--card)}
+th{background:#eee9d9;color:var(--green-deep);font-weight:600}
+.fare{display:flex;flex-wrap:wrap;gap:.6rem;margin:.4rem 0 .6rem;padding:0;list-style:none}
+.fare li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.5em .9em;font-size:.9rem}
+.fare b{color:var(--green-deep);font-size:1.05em}
+
+/* ---------- モデルコース ---------- */
+.timeline{list-style:none;margin:1.8rem 0 0;padding:0;position:relative}
+.timeline::before{
+  content:"";position:absolute;left:.55rem;top:.5rem;bottom:.5rem;
+  width:2px;background:var(--teal);opacity:.5;
+}
+.timeline li{position:relative;padding:0 0 1.35rem 2.2rem}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{
+  content:"";position:absolute;left:0;top:.42rem;width:1.1rem;height:1.1rem;
+  border-radius:50%;background:var(--paper);border:3px solid var(--green);
+}
+.timeline .t{
+  font-family:var(--serif);color:var(--gold-ink);font-size:.95rem;
+  letter-spacing:.05em;display:inline-block;min-width:4.4em;
+}
+.timeline p{margin:0;font-size:.93rem}
+
+/* ---------- FAQ ---------- */
+details{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  margin-bottom:.8rem;overflow:hidden;
+}
+summary{
+  cursor:pointer;list-style:none;padding:1rem 2.8rem 1rem 1.2rem;
+  font-weight:600;color:var(--green-deep);position:relative;font-size:.97rem;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"＋";position:absolute;right:1.1rem;top:50%;translate:0 -50%;
+  color:var(--gold-ink);font-size:1.05rem;transition:rotate .25s;
+}
+details[open] summary::after{rotate:45deg}
+details .a{padding:0 1.2rem 1.1rem;font-size:.93rem}
+details .a p:last-child{margin-bottom:0}
+
+/* ---------- フッター ---------- */
+footer{background:var(--night-1);color:#c9d2c5;padding:3.2rem 0 2.6rem;margin-top:0}
+footer h2{color:#efe9d3;font-size:1.2rem;margin-bottom:1rem}
+footer a{color:#a8c6b4}
+footer a:hover{color:#d7e6da}
+.src-list{margin:.4rem 0 1.6rem;padding-left:1.2em;font-size:.86rem}
+.src-list li{margin-bottom:.35em}
+.fineprint{font-size:.8rem;color:#8d9a8c;border-top:1px solid rgba(255,255,255,.12);padding-top:1.3rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へとばす</a>
+
+<nav class="nav" aria-label="ページ内メニュー">
+  <div class="nav-inner">
+    <a class="brand" href="#top">分杭峠<b>ガイド</b></a>
+    <div class="nav-links">
+      <a href="#about">分杭峠とは</a>
+      <a href="#zeroba">ゼロ磁場を知る</a>
+      <a href="#visit">過ごし方</a>
+      <a href="#access">行き方</a>
+      <a href="#around">周辺スポット</a>
+      <a href="#faq">Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-copy">
+    <p class="eyebrow">NAGANO ／ 伊那市 × 大鹿村 ／ 標高 1,424m</p>
+    <h1><ruby>分杭峠<rt>ぶんぐいとうげ</rt></ruby></h1>
+    <p class="lead">日本最大級の断層「中央構造線」の、ちょうど真上。世界的な気功師が「世界でも有数の気場」と評したことから、“ゼロ磁場の聖地”と呼ばれるようになった峠です。深い森としずけさに、会いに行きませんか。</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold" href="#zeroba">ゼロ磁場って何？</a>
+      <a class="btn btn-ghost" href="#access">行き方を見る</a>
+    </div>
+  </div>
+
+  <svg class="compass" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+    <circle cx="60" cy="60" r="56" fill="rgba(10,20,26,.55)"/>
+    <circle cx="60" cy="60" r="49" fill="none" stroke="#c9a25a" stroke-width="2.5"/>
+    <g stroke="#c9a25a" stroke-width="2" opacity=".8">
+      <line x1="60" y1="8" x2="60" y2="17"/><line x1="60" y1="103" x2="60" y2="112"/>
+      <line x1="8" y1="60" x2="17" y2="60"/><line x1="103" y1="60" x2="112" y2="60"/>
+    </g>
+    <g fill="#e8dfc6" font-size="11" font-family="serif" text-anchor="middle">
+      <text x="60" y="30">N</text><text x="60" y="99">S</text>
+      <text x="27" y="64">W</text><text x="93" y="64">E</text>
+    </g>
+    <g class="needle">
+      <polygon points="60,24 67,60 60,54 53,60" fill="#d3564a"/>
+      <polygon points="60,96 53,60 60,66 67,60" fill="#f3ecdd"/>
+    </g>
+    <circle cx="60" cy="60" r="4" fill="#c9a25a"/>
+  </svg>
+
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <g fill="#fff" opacity=".55">
+        <circle cx="150" cy="60" r="1.4"/><circle cx="380" cy="112" r="1"/>
+        <circle cx="640" cy="48" r="1.2"/><circle cx="905" cy="90" r="1"/>
+        <circle cx="1150" cy="42" r="1.4"/><circle cx="1330" cy="120" r="1"/>
+        <circle cx="255" cy="160" r="1"/><circle cx="1040" cy="150" r="1.1"/>
+      </g>
+      <path d="M0,300 C130,262 250,286 370,246 C490,206 575,254 690,228 C805,202 900,246 1020,218 C1140,190 1265,238 1440,206 L1440,560 L0,560 Z" fill="#3c5a63" opacity=".55"/>
+      <g class="mist" fill="#cfe4dc" opacity=".16">
+        <ellipse cx="330" cy="318" rx="290" ry="30"/>
+        <ellipse cx="1010" cy="296" rx="330" ry="26"/>
+      </g>
+      <path d="M0,382 C150,340 270,372 390,330 C510,288 630,340 750,312 C870,284 985,332 1105,302 C1225,272 1330,322 1440,292 L1440,560 L0,560 Z" fill="#28464b" opacity=".8"/>
+      <g class="mist mist-b" fill="#d8e9e0" opacity=".14">
+        <ellipse cx="560" cy="402" rx="360" ry="32"/>
+        <ellipse cx="1230" cy="380" rx="240" ry="24"/>
+      </g>
+      <path d="M0,462 C170,414 330,446 480,404 C630,362 770,424 910,394 C1050,364 1190,420 1440,384 L1440,560 L0,560 Z" fill="#16302c"/>
+      <path d="M705,560 C680,528 736,514 712,492 C692,474 650,478 664,458 C678,440 716,444 706,426" fill="none" stroke="#d8cfa8" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 8" opacity=".38"/>
+      <path d="M0,522 C240,486 470,516 720,494 C970,472 1210,510 1440,482 L1440,560 L0,560 Z" fill="#0e211d"/>
+      <path d="M0,532 C240,560 480,540 720,552 C960,564 1200,544 1440,556 L1440,560 L0,560 Z" fill="#f6f4ec"/>
+      <path d="M0,546 C240,566 480,548 720,556 C960,564 1200,550 1440,558 L1440,560 L0,560 Z" fill="#f6f4ec"/>
+    </svg>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= 分杭峠とは ================= -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <p class="kicker">ABOUT</p>
+      <h2>分杭峠とは</h2>
+      <div class="prose">
+        <p>分杭峠は、長野県の伊那市長谷と大鹿村のさかいにある、標高1,424mの峠です。南アルプスのふもと、深い山あいを縫う国道152号の途中にあり、あたりは鳥の声と風の音しか聞こえないような、静かな森につつまれています。</p>
+        <p>この道はかつて「秋葉街道」と呼ばれ、信州と遠州（静岡）をむすぶ塩の道・信仰の道として、旅人が行き交いました。峠の名前は、江戸時代に高遠藩が領地のさかいに「分杭（くい）」を立てたことに由来するといわれます。</p>
+        <p>そして1995年。この静かな峠は、ある出来事をきっかけに「ゼロ磁場の聖地」「日本有数のパワースポット」として、全国にその名を知られることになります。</p>
+      </div>
+      <ul class="chips">
+        <li>標高 <b>1,424m</b></li>
+        <li>中央構造線の<b>真上</b></li>
+        <li>旧・秋葉街道（塩の道）</li>
+        <li>“日本三大パワースポット”に数えられることも</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= ゼロ磁場を知る ================= -->
+  <section class="section section-alt" id="zeroba">
+    <div class="wrap">
+      <p class="kicker">LEARN</p>
+      <h2>ゼロ磁場を知る</h2>
+
+      <div class="prose">
+        <h3>はじまりの物語 — 1995年夏</h3>
+        <p>1995年7月、「気」の研究をしていた工学者・佐々木茂美氏の招きで、中国の著名な気功師・張志祥（ちょう・ししょう）氏が、この峠を訪れました。張氏は、中国で気功の聖地とされる蓮花山（れんかざん）を見いだした人物。その張氏が分杭峠に立ち、「ここは蓮花山に勝るとも劣らない、世界でも有数の気場だ」と語ったのです。</p>
+        <p>このひとことが、すべてのはじまりでした。以来、分杭峠は「ゼロ磁場」という言葉とともにテレビや雑誌でくり返し紹介され、全国から人が訪れる場所になりました。</p>
+
+        <h3>「ゼロ磁場」といわれるわけ</h3>
+        <p>分杭峠の足もとには、九州から関東まで約1,000kmもつづく日本最大級の断層「中央構造線」が走っています。この断層を境に、西側と東側の大地が長い年月をかけて押し合っており、その力がぶつかり合う場所では、磁力などのエネルギーが打ち消し合って「ゼロ」の状態になっている——。これが「ゼロ磁場」と呼ばれる理由として語られている説です。</p>
+        <p>「方位磁石の針がゆれて定まらない」「手をかざすとぴりぴりする」といった体験談も、まことしやかに語りつがれています。</p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 760 400" role="img" aria-label="ゼロ磁場のしくみの模式図。断層を境に両側の大地が押し合い、その真上の峠で力がつり合っているイメージ">
+          <rect width="760" height="400" fill="#fffdf6"/>
+          <rect width="760" height="400" fill="none" stroke="#e3ddcc"/>
+          <text x="380" y="46" text-anchor="middle" font-size="19" fill="#1d4034" font-family="serif">「ゼロ磁場」といわれるしくみ（イメージ）</text>
+          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 C388,214 405,225 440,232 C540,252 640,238 760,258 L760,400 L0,400 Z" fill="#dfe8da"/>
+          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 L380,400 L0,400 Z" fill="#cfdec6"/>
+          <path d="M380,206 L380,400" stroke="#c4574e" stroke-width="4" stroke-dasharray="10 7"/>
+          <text x="380" y="388" text-anchor="middle" font-size="13" fill="#c4574e">中央構造線（断層）</text>
+          <g fill="#2d5c4a" font-size="14">
+            <text x="150" y="315" text-anchor="middle">西側の大地</text>
+            <text x="150" y="334" text-anchor="middle" font-size="12" fill="#5b6a64">（伊那山地がわ）</text>
+            <text x="610" y="315" text-anchor="middle">東側の大地</text>
+            <text x="610" y="334" text-anchor="middle" font-size="12" fill="#5b6a64">（南アルプスがわ）</text>
+          </g>
+          <g stroke="#2d5c4a" stroke-width="7" fill="#2d5c4a">
+            <line x1="215" y1="290" x2="305" y2="280"/>
+            <polygon points="330,277 300,266 306,294"/>
+            <line x1="545" y1="290" x2="455" y2="280"/>
+            <polygon points="430,277 460,266 454,294"/>
+          </g>
+          <g>
+            <circle cx="380" cy="150" r="34" fill="#fffdf6" stroke="#c9a25a" stroke-width="2.5"/>
+            <g stroke="#c9a25a" stroke-width="1.6" opacity=".8">
+              <line x1="380" y1="120" x2="380" y2="127"/><line x1="380" y1="173" x2="380" y2="180"/>
+              <line x1="350" y1="150" x2="357" y2="150"/><line x1="403" y1="150" x2="410" y2="150"/>
+            </g>
+            <polygon points="380,128 386,152 380,148 374,152" fill="#d3564a" transform="rotate(28 380 150)"/>
+            <polygon points="380,172 374,148 380,152 386,148" fill="#9aa79e" transform="rotate(28 380 150)"/>
+            <circle cx="380" cy="150" r="2.6" fill="#c9a25a"/>
+          </g>
+          <text x="380" y="106" text-anchor="middle" font-size="13" fill="#5b6a64">針がゆれて定まらない…？</text>
+          <text x="380" y="240" text-anchor="middle" font-size="13" fill="#1d4034">押し合う力がつり合い、エネルギーが打ち消し合う——という説</text>
+        </svg>
+        <figcaption>※あくまで語られている「説」のイメージ図です。科学的に確認されたしくみではありません。</figcaption>
+      </figure>
+
+      <div class="prose">
+        <h3>中央構造線 — 足もとにある、日本の大断層</h3>
+        <p>ゼロ磁場のうわさを抜きにしても、分杭峠が地質学的にとくべつな場所であることは本当です。中央構造線は、日本列島がまだ大陸のふちにあった約1億年前にはたらいた、日本最大級の断層。九州から四国、紀伊半島をとおって関東へとつづき、分杭峠のある谷は、まさにその断層がつくった地形です。</p>
+        <p>峠の南、大鹿村には断層の境目をじかに見られる「北川露頭（きたがわろとう）」や、日本でここだけの断層専門博物館「中央構造線博物館」もあり、このあたり一帯は「南アルプスジオパーク」にも認定されています。大地のエネルギーを、科学の目でたしかめられる場所でもあるのです。</p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 760 190" role="img" aria-label="中央構造線の位置を示す模式図。九州から四国、紀伊半島、分杭峠を通って関東へつづく線のイメージ">
+          <rect width="760" height="190" fill="#fffdf6"/>
+          <rect width="760" height="190" fill="none" stroke="#e3ddcc"/>
+          <text x="380" y="40" text-anchor="middle" font-size="17" fill="#1d4034" font-family="serif">中央構造線はどこを通る？（イメージ）</text>
+          <path d="M60,140 C180,150 300,138 420,128 C520,120 600,98 700,78" fill="none" stroke="#c4574e" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+          <g fill="#2d5c4a">
+            <circle cx="60" cy="140" r="7"/>
+            <circle cx="215" cy="145" r="7"/>
+            <circle cx="360" cy="133" r="7"/>
+            <circle cx="700" cy="78" r="7"/>
+          </g>
+          <circle cx="530" cy="112" r="11" fill="#c9a25a" stroke="#fffdf6" stroke-width="3"/>
+          <g font-size="13" fill="#26332f" text-anchor="middle">
+            <text x="60" y="168">九州</text>
+            <text x="215" y="173">四国</text>
+            <text x="360" y="161">紀伊半島</text>
+            <text x="700" y="106">関東へ</text>
+          </g>
+          <text x="530" y="88" text-anchor="middle" font-size="15" fill="#8a6a2b" font-weight="bold">★ 分杭峠</text>
+          <text x="530" y="142" text-anchor="middle" font-size="12" fill="#5b6a64">全長 約1,000km</text>
+        </svg>
+        <figcaption>※位置関係をごく簡単にあらわしたイメージ図です。</figcaption>
+      </figure>
+
+      <div class="honest">
+        <h3>正直にいうと — 科学的には、どうなの？</h3>
+        <p>「ゼロ磁場」や「気場」は、いまのところ科学的に確認・証明されたものではありません。公的な機関が「ここは磁場が特別だ」と認めた事実もなく、方位磁石が必ず狂うわけでもない、というのが正直なところです。</p>
+        <p>それでも、多くの人が「なんだか落ち着く」「すっきりした」と感じて帰っていきます。標高1,400mの澄んだ空気、断層がつくった深い谷、森のしずけさ。理屈はどうあれ、心と体がゆるむ場所であることはたしかです。不思議は不思議のまま、たしかめに行く——それがこの峠のいちばん楽しい歩き方だと思います。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 気場での過ごし方 ================= -->
+  <section class="section section-green" id="visit">
+    <div class="wrap">
+      <p class="kicker">EXPERIENCE</p>
+      <h2>「気場」でのしずかな過ごし方</h2>
+      <div class="prose">
+        <p>バスを降りたら、案内にそって坂道を3〜5分ほど下ります。木々のあいだに、斜面にそって段々に置かれたベンチが見えてきたら、そこが「気場（きば）」。張志祥氏が「とくに気が強い」と示したと伝わる、分杭峠の中心スポットです。</p>
+        <p>ここでやることは、たったひとつ。<b>すわって、しずかに過ごすこと。</b>それだけです。</p>
+      </div>
+      <ol class="steps">
+        <li><b>ベンチにすわる。</b>あいている場所でOK。荷物をおろして、肩の力をぬきます。</li>
+        <li><b>目をとじて、深呼吸。</b>森のにおい、鳥の声、谷をわたる風。五感が少しずつひらいていきます。</li>
+        <li><b>30分〜1時間、ただ「いる」。</b>スマホはポケットへ。なにかを感じても、感じなくても、それが答えです。</li>
+        <li><b>帰るまえに、峠の空気をもうひと呼吸。</b>おみやげは、ゆるんだ心と体。ゴミはぜんぶ持ち帰りましょう。</li>
+      </ol>
+      <div class="voices">
+        <div class="voice">
+          <p>30分ほどすわっていたら、手のひらがじんわりあたたかくなってきた気がして。帰るころには肩が軽くなっていました。</p>
+          <span class="who">— 訪れた人の声（個人の感想です）</span>
+        </div>
+        <div class="voice">
+          <p>正直、とくべつな何かは感じませんでした。でも、標高1,400mの森で1時間ぼーっとする体験そのものが贅沢。ものすごくリフレッシュできました。</p>
+          <span class="who">— 訪れた人の声（個人の感想です）</span>
+        </div>
+        <div class="voice">
+          <p>方位磁石を持っていきました。狂ったかどうかは…ぜひ自分の目でたしかめてみてください。それが一番おもしろいので。</p>
+          <span class="who">— 訪れた人の声（個人の感想です）</span>
+        </div>
+      </div>
+      <p class="note" style="margin-top:1.4rem">※気場より下の沢（「水場」「裏気場」と呼ばれていた場所）は、落石などの危険があるため<b>立ち入り禁止</b>です。ロープの先には入らないでください。バス降り場の近くに水洗トイレがあります。</p>
+    </div>
+  </section>
+
+  <!-- ================= 行き方 ================= -->
+  <section class="section" id="access">
+    <div class="wrap">
+      <p class="kicker">ACCESS</p>
+      <h2>行き方 — 峠へはバスで</h2>
+      <div class="alert">
+        <b>だいじなポイント：</b>分杭峠には駐車場がなく、峠周辺は駐停車禁止です。ふもとの「<b>南アルプス長谷 戸台パーク</b>」（仙流荘となり・約600台駐車可）に車をとめて、路線バス「<b>分杭 気の里ライン</b>」で向かいます。
+      </div>
+
+      <div class="access-grid">
+        <div class="card">
+          <span class="tag">BUS</span>
+          <h3>分杭 気の里ライン（2026年）</h3>
+          <p>戸台パーク ⇔ 分杭峠頂上を約30分でむすぶ路線バス。2026年は<b>4月12日〜12月1日（予定）</b>の運行です。チケットは仙流荘内の発券機・窓口で（クレジットカード・電子マネー・コード決済OK）。</p>
+          <ul class="fare">
+            <li>往復 大人 <b>2,000円</b></li>
+            <li>往復 小学生 <b>1,260円</b></li>
+            <li>駐車場 1台 <b>1,000円</b></li>
+          </ul>
+          <p class="note">問い合わせ：南アルプス林道バス営業所 0265-98-2821（運行期間中 7:30〜17:00）</p>
+        </div>
+        <div class="card">
+          <span class="tag">CAR</span>
+          <h3>車で戸台パークへ</h3>
+          <p>中央道の<b>伊那IC・小黒川スマートIC</b>から約40分（駒ヶ根ICからも約20km）。東京方面からも名古屋方面からも、日帰りできる距離です。国道152号の峠区間は<b>冬期（12月〜3月ごろ）通行止め</b>になります。</p>
+        </div>
+        <div class="card">
+          <span class="tag">TRAIN &amp; BUS</span>
+          <h3>電車の人は茅野駅から</h3>
+          <p>JR中央本線の<b>茅野駅</b>から、登山バス「南アルプスジオライナー」で戸台パークへ。2026年は7月17日〜10月12日の金・土・日・祝を中心に運行（お盆・秋の連休期間は毎日）。運行日が限られるので、事前にJRバス関東の案内をご確認ください。</p>
+        </div>
+      </div>
+
+      <table>
+        <caption>バス時刻表（2026年・発車時刻）　＊印は土休日など特定日のみ運行</caption>
+        <thead>
+          <tr><th scope="col">のぼり：戸台パーク発</th><th scope="col">くだり：分杭峠発</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>9:00</td><td>10:00</td></tr>
+          <tr><td>9:45 ＊</td><td>10:45 ＊</td></tr>
+          <tr><td>10:30</td><td>12:00</td></tr>
+          <tr><td>11:30 ＊</td><td>12:30 ＊</td></tr>
+          <tr><td>13:00</td><td>14:00</td></tr>
+          <tr><td>14:00 ＊</td><td>15:00 ＊</td></tr>
+          <tr><td>14:30</td><td>16:00</td></tr>
+        </tbody>
+      </table>
+      <p class="note">所要は片道約30分。ダイヤ・料金は変わることがあります。おでかけ前に<a href="https://inashi-kankoukyoukai.jp/topics/bunkuitouge-bus-guide/" target="_blank" rel="noopener noreferrer">伊那市観光協会の最新運行情報</a>か<a href="https://www.inacity.jp/kankojoho/sangaku_alps/minamialps/bunkuikinosartorain.html" target="_blank" rel="noopener noreferrer">伊那市公式ページ</a>をご確認ください。</p>
+
+      <h3 style="margin-top:2.4rem">モデルコース — ゆったり半日プラン</h3>
+      <ol class="timeline">
+        <li><span class="t">8:40</span><p>戸台パーク着。駐車して、仙流荘でバスチケットを購入。</p></li>
+        <li><span class="t">9:00</span><p>バスで出発。断層の谷を見おろす山道を、のんびり30分。</p></li>
+        <li><span class="t">9:30</span><p>分杭峠に到着。坂を下って「気場」へ（徒歩3〜5分）。</p></li>
+        <li><span class="t">9:40</span><p>ベンチで約2時間、森にひたる。深呼吸、読書、うたた寝も◎。</p></li>
+        <li><span class="t">12:00</span><p>峠発のバスで下山。</p></li>
+        <li><span class="t">12:45</span><p>「道の駅 南アルプスむら長谷」で焼きたてクロワッサンのお昼。</p></li>
+        <li><span class="t">14:00</span><p>仙流荘の日帰り温泉でひとやすみ。山を眺めながらの湯は格別。</p></li>
+        <li><span class="t">15:00</span><p>帰路へ。時間があれば高遠の城下町に寄り道も。</p></li>
+      </ol>
+      <p class="note">※2026年の平日ダイヤをもとにした一例です。</p>
+    </div>
+  </section>
+
+  <!-- ================= 周辺スポット ================= -->
+  <section class="section section-alt" id="around">
+    <div class="wrap">
+      <p class="kicker">AROUND</p>
+      <h2>あわせて寄りたい、ふもとの楽しみ</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="tag">GOURMET</span>
+          <h3>道の駅 南アルプスむら長谷</h3>
+          <p>峠へ向かう国道152号ぞい。焼きたてのミニクロワッサンが大人気で、お昼どきには地元食材のランチも。行き帰りの立ち寄り定番です。</p>
+        </div>
+        <div class="card">
+          <span class="tag">ONSEN</span>
+          <h3>仙流荘（戸台パーク）</h3>
+          <p>バス発着地のすぐとなりにある温泉宿。日帰り入浴ができ、山なみを眺めるお風呂とサウナで、峠のしずけさの余韻にひたれます。</p>
+        </div>
+        <div class="card">
+          <span class="tag">GEO</span>
+          <h3>中央構造線博物館・北川露頭</h3>
+          <p>峠の南、大鹿村へ。日本でここだけの断層専門博物館と、断層の境目をじかに観察できる露頭。ゼロ磁場の「足もとの正体」に出会えます。</p>
+        </div>
+        <div class="card">
+          <span class="tag">SAKURA</span>
+          <h3>高遠城址公園</h3>
+          <p>「天下第一の桜」とうたわれる、日本屈指の桜の名所。春に訪れるなら、淡紅色のタカトオコヒガンザクラと峠をセットでどうぞ。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 心得 ================= -->
+  <section class="section" id="tips">
+    <div class="wrap">
+      <p class="kicker">TIPS</p>
+      <h2>訪れるまえの、ちいさな心得</h2>
+      <ul class="chips">
+        <li>標高1,424m。夏でも<b>羽織りもの</b>を1枚</li>
+        <li>坂道があるので<b>歩きやすい靴</b>で</li>
+        <li>夏は<b>虫よけ</b>があると安心</li>
+        <li>お試し用の<b>方位磁石</b>（100円のでOK）</li>
+        <li>ゴミは<b>ぜんぶ持ち帰り</b></li>
+        <li>ロープの先・立入禁止の場所には入らない</li>
+        <li>みんなの場所。<b>しずかに</b>過ごす</li>
+        <li>バスの<b>最終便の時刻</b>を先にチェック</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section section-alt" id="faq">
+    <div class="wrap">
+      <p class="kicker">Q&amp;A</p>
+      <h2>よくある質問</h2>
+
+      <details>
+        <summary>本当に方位磁石が狂うんですか？</summary>
+        <div class="a">
+          <p>「針がゆれて定まらなかった」という体験談は昔からたくさんありますが、公的に確認された事実ではなく、「ふつうに北を指した」という報告も同じくらいあります。だからこそ、自分の磁石でたしかめるのが一番おもしろいところ。結果がどちらでも、話のタネになります。</p>
+        </div>
+      </details>
+      <details>
+        <summary>どのくらい滞在すればいい？</summary>
+        <div class="a">
+          <p>バスの組み合わせで、滞在時間はおよそ30分か、約2時間半になります（例：9:00発で上がって10:00発で下りる／12:00発で下りる）。はじめてなら、気場でゆっくりできる2時間半コースがおすすめです。</p>
+        </div>
+      </details>
+      <details>
+        <summary>車で峠まで行けませんか？</summary>
+        <div class="a">
+          <p>国道152号を通り抜けること自体はできますが、峠に駐車場はなく、周辺は駐停車禁止です（以前あった臨時駐車場は廃止されました）。見学するなら、戸台パークからバスを使うのが唯一の方法です。</p>
+        </div>
+      </details>
+      <details>
+        <summary>冬でも行けますか？</summary>
+        <div class="a">
+          <p>バスの運行は2026年は12月1日まで（予定）で、国道152号の峠区間も冬のあいだ（12月〜3月ごろ）は通行止めになります。訪れるなら、新緑〜紅葉のシーズンがおすすめです。</p>
+        </div>
+      </details>
+      <details>
+        <summary>行くと体にいいことがありますか？</summary>
+        <div class="a">
+          <p>健康への効果が証明されているわけではありません。体験は人それぞれで、「何も感じなかった」という人もたくさんいます。効能を期待しすぎず、「森の中でしずかに過ごす、とびきり上等な休憩」と思って出かけるのが、いちばん満足度の高い楽しみ方です。</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>おでかけ前に、最新情報を</h2>
+    <p style="font-size:.9rem">バスの運行日・料金・道路状況は変わることがあります。公式の情報源はこちら。</p>
+    <ul class="src-list">
+      <li><a href="https://www.inacity.jp/kankojoho/sangaku_alps/bungui/bungui.html" target="_blank" rel="noopener noreferrer">伊那市公式「分杭峠」</a></li>
+      <li><a href="https://www.inacity.jp/kankojoho/sangaku_alps/minamialps/bunkuikinosartorain.html" target="_blank" rel="noopener noreferrer">伊那市公式「分杭 気の里ライン（分杭峠線）」</a></li>
+      <li><a href="https://inashi-kankoukyoukai.jp/topics/bunkuitouge-bus-guide/" target="_blank" rel="noopener noreferrer">伊那市観光協会「分杭気の里ライン 運行情報」</a></li>
+      <li><a href="https://www.inadanikankou.jp/spot/page/id=2076" target="_blank" rel="noopener noreferrer">長野伊那谷観光局「分杭峠」</a></li>
+      <li><a href="https://www.jrbuskanto.co.jp/jwp/topics/topics02/20260501_geoliner.html" target="_blank" rel="noopener noreferrer">JRバス関東「南アルプスジオライナー」</a></li>
+      <li><a href="https://mtl-muse.com/" target="_blank" rel="noopener noreferrer">大鹿村 中央構造線博物館</a></li>
+      <li><a href="https://www.vill.ooshika.nagano.jp/info-dorokotu/" target="_blank" rel="noopener noreferrer">大鹿村「道路情報」</a></li>
+    </ul>
+    <p class="fineprint">このページは、分杭峠が好きな個人がつくった非公式の紹介サイトです。掲載情報は2026年8月時点の調べにもとづきます。バスの時刻・料金・通行止めなどの最新情報は、上の公式サイトでご確認ください。効果・効能をうたうものではありません。</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -6,7 +6,12 @@ on:
   pull_request:
 
 jobs:
-  ready:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ready
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: サイトのチェック（node --test）
+        run: node --test
