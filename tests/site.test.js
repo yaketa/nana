@@ -225,6 +225,21 @@ test("セクションの境目と余白が整っている（境界線・ジャ�
     "余白の指定が HTML に直書きされている（余白はスタイル表でまとめて管理する）");
 });
 
+test("内容の幅が 1 本の基準（--page）にそろっている（本文の横に大きな空白を作らない）", () => {
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  assert.match(css, /--page:48rem/, "基準幅 --page の定義が消えている");
+  assert.match(css, /\.wrap\{max-width:var\(--page\)/, ".wrap が基準幅 --page を使っていない");
+  assert.match(css, /\.nav-inner\{[\s\S]{0,200}?max-width:var\(--page\)/,
+    "ナビの内枠（nav-inner）が基準幅 --page を使っていない");
+  // 部品にバラバラの max-width を足すと、基準幅との差のぶん右横に空白の帯ができて目立つ。
+  // 例外は表紙の紹介パネル（hero-lead）だけ（表紙の演出として意図的に狭くしている）
+  const rules = css.replace(/@media[^{]*/g, ""); // @media (max-width:…) の条件部分を除いてから調べる
+  const extra = [...rules.matchAll(/([^{}]+)\{[^{}]*?max-width:(?!var\(--page\))/g)]
+    .map((m) => m[1].trim());
+  assert.deepStrictEqual(extra, [".hero-lead"],
+    `基準幅（--page）以外の max-width がある: ${extra.join(" / ") || "（検出失敗）"}`);
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });
