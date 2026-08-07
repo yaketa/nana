@@ -183,23 +183,20 @@ main b{
   html{scroll-behavior:auto}
 }
 
-/* ---------- 写真・図解のプレースホルダー ----------
-   手描きイラストは置かない方針。あとで実物に差しかえる枠。 */
-.ph{
-  display:grid;place-content:center;justify-items:center;gap:.5rem;text-align:center;
-  background:repeating-linear-gradient(45deg,#f4f0e5 0 14px,#eae4d2 14px 28px);
-  border:2.5px dashed var(--ink);border-radius:14px;
-  padding:1.2rem;color:var(--ink-soft);
+/* ---------- 写真 ----------
+   Wikimedia Commons の自由に使える写真。枠に合わせて切り抜き済みなので、
+   img は幅100%で置くだけ。誌面らしく太い縁取り＋ずらし影をつける。 */
+.shot{margin:2rem 0}
+.shot img{
+  display:block;width:100%;height:auto;
+  border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);
+  background:#f4f0e5;   /* 読み込み中の下地 */
 }
-.ph b{
-  background:#fff;border:2px solid var(--ink);border-radius:999px;
-  font-family:var(--pop);font-weight:900;color:var(--ink);
-  padding:.25em 1.2em;font-size:.95rem;box-shadow:2px 2px 0 rgba(51,48,42,.14);
-}
-.ph span{font-size:.82rem}
-.ph-hero{aspect-ratio:16/9;max-height:24rem;margin:2.2rem 0 0}
-figure .ph{aspect-ratio:16/7;max-height:20rem}
-figure .ph--wide{aspect-ratio:16/5;max-height:13rem}
+.shot-hero{margin:2.2rem 0 0}
+.shot-hero img{box-shadow:6px 6px 0 rgba(51,48,42,.22)}
+.shot-hero figcaption{color:var(--ink)}   /* 水色の背景でも読める濃さに */
+.credit,.cap-note{display:block;margin-top:.15rem}
 
 /* ---------- セクション共通 ---------- */
 .section{padding-block:clamp(2.8rem,7vw,4.6rem);--c:var(--red)}
@@ -516,9 +513,15 @@ footer a:hover{color:#ffd966}
       <a class="btn btn-white" href="#access">行き方を見る</a>
     </div>
 
-    <figure class="ph ph-hero" role="img" aria-label="ここに分杭峠の写真が入る予定です">
-      <b>写真を準備中</b>
-      <span>峠と「気場」の実際の写真に、あとで差しかわります</span>
+    <figure class="shot shot-hero">
+      <img src="images/bungui-touge-1136.jpg"
+           srcset="images/bungui-touge-720.jpg 720w, images/bungui-touge-1136.jpg 1136w"
+           sizes="(min-width:68rem) 62rem, 92vw"
+           width="1136" height="639" decoding="async"
+           alt="夏の緑につつまれた分杭峠の頂上。国道152号ぞいに「分杭峠 Bunkuitoge 標高1424m」と書かれた青い道路標識が立っている">
+      <figcaption>峠の頂上、国道152号ぞいの標識。ここが標高1,424mの分杭峠です。
+        <span class="credit">写真：alonfloc／<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>（切り抜いて使用）</span>
+      </figcaption>
     </figure>
   </div>
 
@@ -579,12 +582,16 @@ footer a:hover{color:#ffd966}
         <p>「方位磁石の針がゆれて定まらない」「手をかざすとぴりぴりする」といった体験談も、まことしやかに語りつがれています。</p>
       </div>
 
-      <figure>
-        <div class="ph" role="img" aria-label="図解は準備中です。断層を境に両側の大地が押し合い、その真上の峠で力がつり合っているイメージ図が入る予定">
-          <b>イメージ図を準備中</b>
-          <span>断層の上で押し合う力がつり合う——「ゼロ磁場」といわれるしくみ</span>
-        </div>
-        <figcaption>※あくまで語られている「説」のイメージ図です。科学的に確認されたしくみではありません。</figcaption>
+      <figure class="shot">
+        <img src="images/kitagawa-rotou-1200.jpg"
+             srcset="images/kitagawa-rotou-800.jpg 800w, images/kitagawa-rotou-1200.jpg 1200w"
+             sizes="(min-width:68rem) 62rem, 92vw"
+             width="1200" height="525" loading="lazy" decoding="async"
+             alt="斜面の左半分は茶色っぽい岩、右半分は灰色の岩。断層を境に、まったくちがう岩がななめの線でぶつかり合っている">
+        <figcaption>これが、押し合っている大地の境目。大鹿村の「北川露頭（きたがわろとう）」では、中央構造線をはさんで左右の岩の色がまるでちがいます。分杭峠の足もとにも、この境目がつづいています。
+          <span class="cap-note">※断層があるのは事実ですが、そこで磁場が打ち消し合うという話は、科学的に確認されたものではありません。</span>
+          <span class="credit">写真：Kumiko Korezumi／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span>
+        </figcaption>
       </figure>
 
       <div class="prose">
@@ -593,12 +600,15 @@ footer a:hover{color:#ffd966}
         <p>峠の南、大鹿村には断層の境目をじかに見られる「北川露頭（きたがわろとう）」や、日本でここだけの断層専門博物館「中央構造線博物館」もあり、このあたり一帯は「南アルプスジオパーク」にも認定されています。大地のエネルギーを、科学の目でたしかめられる場所でもあるのです。</p>
       </div>
 
-      <figure>
-        <div class="ph ph--wide" role="img" aria-label="図解は準備中です。中央構造線が九州から四国、紀伊半島、分杭峠を通って関東へつづく位置を示す図が入る予定">
-          <b>イメージ図を準備中</b>
-          <span>中央構造線はどこを通る？（九州〜四国〜紀伊半島〜分杭峠〜関東）</span>
-        </div>
-        <figcaption>※位置関係をごく簡単にあらわしたイメージ図です。</figcaption>
+      <figure class="shot">
+        <img src="images/ankou-rotou-1280.jpg"
+             srcset="images/ankou-rotou-800.jpg 800w, images/ankou-rotou-1280.jpg 1280w"
+             sizes="(min-width:68rem) 62rem, 92vw"
+             width="1280" height="400" loading="lazy" decoding="async"
+             alt="川ぞいにむき出しになった岩壁。オレンジ色と灰色の岩が帯のように交互にならんでいる">
+        <figcaption>大鹿村の「安康露頭（あんこうろとう）」。川に削られて、断層の断面がむき出しになっています。オレンジと灰色の帯は、押し合ってくだかれた岩です。
+          <span class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜いて使用）</span>
+        </figcaption>
       </figure>
 
       <div class="column-box">
@@ -839,6 +849,13 @@ footer a:hover{color:#ffd966}
       <li><a href="https://www.jrbuskanto.co.jp/jwp/topics/topics02/20260501_geoliner.html" target="_blank" rel="noopener noreferrer">JRバス関東「南アルプスジオライナー」</a></li>
       <li><a href="https://mtl-muse.com/" target="_blank" rel="noopener noreferrer">大鹿村 中央構造線博物館</a></li>
       <li><a href="https://www.vill.ooshika.nagano.jp/info-dorokotu/" target="_blank" rel="noopener noreferrer">大鹿村「道路情報」</a></li>
+    </ul>
+    <h2>写真について</h2>
+    <p style="font-size:.9rem">掲載写真は Wikimedia Commons の自由に使える写真です。いずれも枠に合わせて切り抜いて使っています。</p>
+    <ul class="src-list">
+      <li>分杭峠の標識 — 撮影：alonfloc／<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>（<a href="https://commons.wikimedia.org/wiki/File:%E5%88%86%E6%9D%AD%E5%B3%A0_-_panoramio.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
+      <li>北川露頭 — 撮影：Kumiko Korezumi／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（<a href="https://commons.wikimedia.org/wiki/File:MedianTectonicLine.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
+      <li>安康露頭 — 撮影：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（<a href="https://commons.wikimedia.org/wiki/File:Median_Tectonic_Line-Ankou_outcrop-01.jpg" target="_blank" rel="noopener noreferrer">元の写真</a>）</li>
     </ul>
     <p class="fineprint">このページは、分杭峠が好きな個人がつくった非公式の紹介サイトです。掲載情報は2026年8月時点の調べにもとづきます。バスの時刻・料金・通行止めなどの最新情報は、上の公式サイトでご確認ください。効果・効能をうたうものではありません。</p>
   </div>

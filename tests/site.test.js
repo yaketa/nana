@@ -42,6 +42,70 @@ test("画像タグにはすべて alt（代替テキスト）がある", () => {
   }
 });
 
+// <img> タグをぜんぶ取り出して、属性を扱いやすい形にする
+const images = [...html.matchAll(/<img\b[^>]*>/g)].map((m) => {
+  const attr = (name) => (m[0].match(new RegExp(`\\b${name}="([^"]*)"`)) || [])[1];
+  const srcset = (attr("srcset") || "")
+    .split(",")
+    .map((s) => s.trim().split(/\s+/)[0])
+    .filter(Boolean);
+  return { tag: m[0], src: attr("src"), srcset, width: attr("width"), height: attr("height") };
+});
+
+// JPEG のファイルから実際の縦横を読む（追加インストールなしで済ませるための最小実装）
+function jpegSize(file) {
+  const buf = fs.readFileSync(file);
+  let i = 2; // 先頭の SOI マーカーをとばす
+  while (i + 9 < buf.length) {
+    if (buf[i] !== 0xff) {
+      i++;
+      continue;
+    }
+    const marker = buf[i + 1];
+    const isSizeMarker =
+      marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker);
+    if (isSizeMarker) return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+    i += 2 + buf.readUInt16BE(i + 2);
+  }
+  throw new Error(`JPEG の大きさが読めない: ${file}`);
+}
+
+test("写真ファイルがすべて実在する（src と srcset の両方）", () => {
+  assert.ok(images.length >= 3, "写真が少なすぎる（差しかえで消えた？）");
+  for (const img of images) {
+    for (const ref of [img.src, ...img.srcset]) {
+      assert.ok(ref, `src の無い画像: ${img.tag}`);
+      assert.ok(!/^https?:/.test(ref), `写真は同じリポジトリに置く方針: ${ref}`);
+      assert.ok(fs.existsSync(path.join(__dirname, "..", ref)), `写真ファイルが無い: ${ref}`);
+    }
+  }
+});
+
+test("写真の width / height がファイルの実寸と一致している（表示がゆがまない）", () => {
+  for (const img of images) {
+    assert.ok(img.width && img.height, `width / height が無い画像: ${img.src}`);
+    const real = jpegSize(path.join(__dirname, "..", img.src));
+    assert.strictEqual(Number(img.width), real.w, `width が実寸と違う: ${img.src}`);
+    assert.strictEqual(Number(img.height), real.h, `height が実寸と違う: ${img.src}`);
+  }
+});
+
+test("どの写真にも出典（撮影者とライセンス）が書かれている", () => {
+  const figures = [
+    ...html.matchAll(/<figure\b[^>]*class="[^"]*\bshot\b[^"]*"[^>]*>([\s\S]*?)<\/figure>/g),
+  ];
+  assert.strictEqual(figures.length, images.length, "出典を書く枠に入っていない写真がある");
+  for (const [, inner] of figures) {
+    assert.match(inner, /<figcaption\b/, "説明文（figcaption）の無い写真がある");
+    assert.match(inner, /写真：\S/, "撮影者の表示が無い写真がある");
+    assert.match(inner, /creativecommons\.org\/licenses\//, "ライセンス表示が無い写真がある");
+  }
+});
+
+test("写真の「準備中」プレースホルダーが残っていない", () => {
+  assert.ok(!/準備中/.test(html), "差しかえ待ちの表示が残っている");
+});
+
 test("書きかけのメモ（TODO など）が残っていない", () => {
   assert.ok(!/TODO|FIXME|XXX|lorem ipsum/i.test(html), "書きかけの目印が残っている");
 });
