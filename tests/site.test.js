@@ -123,6 +123,23 @@ test("心得のチェックリストが、チェックできる形になって�
   }
 });
 
+test("周辺スポットが 2×2 の 4 枚で、どのカードにも写真が入っている", () => {
+  const sec = html.match(/<section[^>]*id="around"[\s\S]*?<\/section>/);
+  assert.ok(sec, "周辺スポットのセクションが見つからない");
+  const inner = sec[0];
+  assert.match(inner, /class="cards cards--2"/, "2列そろえの指定（cards--2）が外れている");
+  assert.match(html, /\.cards--2\{grid-template-columns:1fr\}/, "cards--2 の CSS が無い");
+  assert.match(html, /@media \(min-width:52rem\)\{\.cards--2\{grid-template-columns:1fr 1fr\}\}/,
+    "広い画面で 2 列にする CSS が無い");
+
+  const cards = [...inner.matchAll(/<div class="card[^"]*"[^>]*>([\s\S]*?)<\/div>\s*(?=<div class="card|<\/div>)/g)];
+  assert.strictEqual(cards.length, 4, "カードが 4 枚ではない（2×2 が崩れる）");
+  for (const [, body] of cards) {
+    assert.match(body, /<figure class="shot card-shot">/, "写真の入っていないカードがある");
+    assert.match(body, /<h3>/, "見出しの無いカードがある");
+  }
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });
