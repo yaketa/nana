@@ -226,7 +226,9 @@ main b{
    見え方はこれまでどおり */
 .hero h1 rt{
   position:absolute;top:0;left:0;right:0;
-  display:block;line-height:1;
+  /* 余白は 0 と言い切る。言わずにおくとブラウザの初期値が効いてしまい、
+     結局そこで端末差が出る（この不具合の元と同じ理屈） */
+  display:block;line-height:1;margin:0;padding:0;
   font-family:var(--pop);font-weight:700;font-size:.2em;letter-spacing:.55em;
   color:var(--ink);-webkit-text-stroke:0;
   text-align:justify;text-align-last:justify;

@@ -360,6 +360,8 @@ test("表紙のふりがなは、題字の枠に自分で貼りつけてある�
     "ふりがなの行の高さが書体まかせになっている（書体が変わるとすき間も変わる）");
   assert.ok(!/padding-bottom/.test(rtRule[1]),
     "padding-bottom で押し上げる古いやり方が残っている（自分で位置を決める方式とけんかする）");
+  assert.match(rtRule[1], /margin:0/, "ふりがなの margin を 0 と言い切っていない（ブラウザの初期値でずれる）");
+  assert.match(rtRule[1], /padding:0/, "ふりがなの padding を 0 と言い切っていない（ブラウザの初期値でずれる）");
 
   // 読み上げソフト向けの書き方（ruby / rt）は変えない
   assert.match(html, /<h1><ruby><span class="h1-txt">分杭峠<\/span><rt>ぶんぐいとうげ<\/rt><\/ruby><\/h1>/,
