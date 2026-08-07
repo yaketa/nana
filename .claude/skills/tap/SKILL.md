@@ -5,7 +5,10 @@ description: >-
   以降は黙って完走し、作業を終えたターンの最後に次の行動をタップで選ばせる。報告はスマホ幅に収める。
   `/tap` で明示的に呼ばれたときに加えて、「スマホから」「移動中」「電車」「片手」「手が離せない」「打つのが面倒」
   「タップで選ばせて」「選択肢で」のように入力が制約されている合図が出たら、モード名を言われていなくても必ず使うこと。
-  Also use for mobile / phone / on-the-go / thumb-typing contexts.
+  Also use when the user signals they are typing from a phone or are otherwise input-constrained
+  (on my phone, on mobile right now, one-handed, on the go, keep it short I am typing on my phone).
+  Do NOT use merely because a request concerns mobile apps, phone numbers, or responsive layouts —
+  those are product domains, not input constraints.
   一度読み込んだら、セッションが終わるか解除を言われるまでこのモードを維持する。
 ---
 
