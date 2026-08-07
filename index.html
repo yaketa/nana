@@ -73,7 +73,12 @@ main b{
   background:linear-gradient(transparent 60%,var(--marker) 60% 92%,transparent 92%);
 }
 
-/* ---------- ナビ ---------- */
+/* ---------- ナビ ----------
+   広い画面：チップを1行にならべる（従来どおり）。
+   せまい画面：チップは全部入らず読みにくいので「メニュー」ボタンにし、
+   タップで下がり出るパネルに大きな字で全項目を出す。
+   JS は使わない。開く＝URLの#が #menu を指す（:target）、
+   とじる＝#を どこも指さない「#_」に変える、だけで動かす */
 .nav{
   position:sticky;top:0;z-index:50;
   background:#fff;
@@ -92,22 +97,81 @@ main b{
   white-space:nowrap;letter-spacing:.04em;
 }
 .brand:hover{color:#fff;background:var(--red-deep)}
-.nav-links{
-  display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;padding-block:.15rem;min-width:0;
-}
-.nav-links::-webkit-scrollbar{display:none}
 .nav-links a{
-  display:inline-flex;align-items:center;gap:.38em;
+  display:flex;align-items:center;gap:.45em;
   color:var(--ink);text-decoration:none;
-  font-family:var(--pop);font-weight:700;font-size:.8rem;white-space:nowrap;
-  padding:.28em .8em;border-radius:999px;border:2px solid var(--ink);background:#fff;
+  font-family:var(--pop);font-weight:700;
 }
 .nav-links a::before{
   content:"";width:.55em;height:.55em;border-radius:50%;
   background:var(--c,var(--red));flex:none;
 }
 .nav-links a:hover{background:var(--marker);color:var(--ink)}
+
+/* 広い画面：1行チップ。ボタンと「とじる」行は出さない */
+@media (min-width:54rem){
+  .menu-btn,.menu-scrim,.nav-links .menu-close{display:none}
+  .nav-links{
+    display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;padding-block:.15rem;min-width:0;
+  }
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{
+    display:inline-flex;gap:.38em;
+    font-size:.8rem;white-space:nowrap;
+    padding:.28em .8em;border-radius:999px;border:2px solid var(--ink);background:#fff;
+  }
+}
+
+/* せまい画面：メニューボタン式 */
+@media (max-width:53.98rem){
+  .nav-links{display:none}
+  .menu-btn{
+    margin-left:auto;
+    display:inline-flex;align-items:center;gap:.5em;
+    font-family:var(--pop);font-weight:900;font-size:.9rem;
+    color:var(--ink);background:#fff;text-decoration:none;
+    padding:.34em 1em;border-radius:999px;border:2px solid var(--ink);
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .menu-btn:hover{background:var(--marker);color:var(--ink)}
+  .menu-btn::before{      /* 三本線の印。文字化けしないよう文字は使わず線で描く */
+    content:"";flex:none;width:1em;height:.16em;border-radius:99px;
+    background:var(--ink);
+    box-shadow:0 .32em 0 var(--ink),0 .64em 0 var(--ink);
+    translate:0 -.32em;
+  }
+  .menu-scrim{display:none}
+  /* 開いた状態：ナビの下に浮かぶパネル */
+  #menu:target{
+    display:block;
+    position:fixed;z-index:60;
+    top:3.9rem;right:clamp(1.1rem,4vw,2rem);
+    width:min(19rem,calc(100vw - 2.2rem));
+    max-height:calc(100vh - 5rem);overflow:auto;
+    background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+    box-shadow:5px 5px 0 rgba(51,48,42,.3);
+  }
+  #menu:target a{padding:.7em 1.15em;font-size:1rem;line-height:1.6}
+  #menu:target a+a{border-top:1.5px dashed var(--line)}
+  #menu:target .menu-close{
+    justify-content:center;
+    font-size:.88rem;color:var(--ink-soft);
+    background:var(--paper);border-top:2px solid var(--line);
+  }
+  #menu:target .menu-close::before{
+    content:"×";width:auto;height:auto;background:none;border-radius:0;
+  }
+  /* パネルの後ろは薄暗くし、どこをタップしてもとじられるようにする */
+  #menu:target ~ .menu-scrim{
+    display:block;position:fixed;inset:0;z-index:55;
+    background:rgba(51,48,42,.4);
+  }
+}
+@media (prefers-reduced-motion:no-preference){
+  #menu:target{animation:menu-pop .16s ease-out}
+}
+@keyframes menu-pop{from{opacity:0;translate:0 -.4rem}}
 
 /* ---------- ヒーロー（表紙） ---------- */
 .hero{
@@ -595,14 +659,17 @@ footer a:hover{color:#ffd966}
 <nav class="nav" aria-label="ページ内メニュー">
   <div class="nav-inner">
     <a class="brand" href="#top">分杭峠ガイド</a>
-    <div class="nav-links">
+    <a class="menu-btn" href="#menu">メニュー</a>
+    <div class="nav-links" id="menu">
       <a href="#about" style="--c:var(--orange)">分杭峠とは</a>
       <a href="#zeroba" style="--c:var(--indigo)">ゼロ磁場を知る</a>
       <a href="#visit" style="--c:var(--green)">過ごし方</a>
       <a href="#access" style="--c:var(--blue)">行き方</a>
       <a href="#around" style="--c:var(--pink)">周辺スポット</a>
       <a href="#faq" style="--c:var(--teal)">Q&amp;A</a>
+      <a class="menu-close" href="#_">とじる</a>
     </div>
+    <a class="menu-scrim" href="#_" aria-label="メニューをとじる"></a>
   </div>
 </nav>
 

@@ -22,7 +22,8 @@ test("スマホ対応と基本設定（lang / viewport / description）がある
 
 test("ページ内リンク（#〜）の飛び先がすべて存在する", () => {
   const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
-  const targets = [...html.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]);
+  // 「#_」だけは例外：メニューをとじるための、わざと飛び先のないリンク
+  const targets = [...html.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]).filter((t) => t !== "_");
   assert.ok(targets.length >= 5, "ページ内リンクが少なすぎる（構造が変わった？）");
   for (const t of targets) {
     assert.ok(ids.has(t), `リンク先 #${t} に対応する id が見つからない`);
@@ -215,4 +216,27 @@ test("バス時刻表：caption は表題だけ、時刻は tt-time、「土休�
 
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
+});
+
+test("スマホ用メニュー：ボタン・パネル・とじる仕掛けがそろっている", () => {
+  // ボタンはパネル（#menu）を指す
+  assert.match(html, /<a class="menu-btn" href="#menu">メニュー<\/a>/, "「メニュー」ボタンが無い");
+
+  // パネルの中に 6 つの章リンクが全部ある
+  const panel = html.match(/<div class="nav-links" id="menu">([\s\S]*?)<\/div>/);
+  assert.ok(panel, "パネル（nav-links, id=menu）が見つからない");
+  for (const t of ["#about", "#zeroba", "#visit", "#access", "#around", "#faq"]) {
+    assert.ok(panel[1].includes(`href="${t}"`), `パネルに ${t} へのリンクが無い`);
+  }
+
+  // とじる手段は 2 つ：パネル内の「とじる」行と、外側の薄暗い部分（scrim）
+  assert.match(panel[1], /<a class="menu-close" href="#_">とじる<\/a>/, "「とじる」リンクが無い");
+  assert.match(html, /<a class="menu-scrim" href="#_"[^>]*aria-label="メニューをとじる"/,
+    "外側タップでとじる仕掛け（menu-scrim）が無い");
+
+  // JS なしで開閉する要：CSS の :target と、飛び先の無い「#_」
+  assert.match(html, /#menu:target\{/, "タップで開くための CSS（#menu:target）が消えている");
+  assert.match(html, /#menu:target\s*~\s*\.menu-scrim\{/, "開いたとき後ろを薄暗くする CSS が消えている");
+  assert.ok(!/\bid="_"/.test(html),
+    'id="_" を作ってはいけない（「#_」はどこにも飛ばないからこそ、画面を動かさずにとじられる）');
 });
