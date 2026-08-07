@@ -111,18 +111,16 @@ main b{
 
 /* ---------- ヒーロー（表紙） ---------- */
 .hero{
-  position:relative;overflow:hidden;
-  background:#a6ddf2;
-  min-height:min(46rem,94svh);
-  display:flex;flex-direction:column;justify-content:flex-start;
+  position:relative;
+  background-color:#bfe5f2;
+  background-image:radial-gradient(rgba(255,255,255,.6) 1.4px,transparent 1.5px);
+  background-size:19px 19px;
+  border-bottom:3px solid var(--ink);
 }
-.hero-art{position:absolute;inset:0;z-index:1}
-.hero-art svg{display:block;width:100%;height:100%}
 .hero-copy{
   position:relative;z-index:3;
   padding-top:clamp(2.6rem,7vh,4.6rem);
-  padding-bottom:clamp(15rem,42vw,21rem);
-  max-width:44rem;
+  padding-bottom:clamp(2.4rem,5vw,3.6rem);
 }
 .hero-badges{display:flex;align-items:center;gap:.7rem;margin:0 0 1rem}
 .pill-loc{
@@ -181,28 +179,27 @@ main b{
   rotate:-8deg;
   filter:drop-shadow(3px 3px 0 rgba(51,48,42,.25));
 }
-.compass{
-  position:absolute;z-index:2;
-  right:clamp(.7rem,5vw,4.5rem);top:clamp(3rem,7vh,4.2rem);
-  width:clamp(3.6rem,9vw,5.4rem);
-}
-.needle{transform-origin:50% 50%;animation:sway 7s ease-in-out infinite alternate}
-@keyframes sway{
-  0%{transform:rotate(-24deg)}
-  35%{transform:rotate(14deg)}
-  60%{transform:rotate(-8deg)}
-  100%{transform:rotate(26deg)}
-}
-.cloud{animation:drift 40s ease-in-out infinite alternate}
-.cloud-b{animation-duration:55s;animation-direction:alternate-reverse}
-@keyframes drift{
-  from{transform:translateX(-18px)}
-  to{transform:translateX(18px)}
-}
 @media (prefers-reduced-motion:reduce){
-  .needle,.cloud,.cloud-b{animation:none}
   html{scroll-behavior:auto}
 }
+
+/* ---------- 写真・図解のプレースホルダー ----------
+   手描きイラストは置かない方針。あとで実物に差しかえる枠。 */
+.ph{
+  display:grid;place-content:center;justify-items:center;gap:.5rem;text-align:center;
+  background:repeating-linear-gradient(45deg,#f4f0e5 0 14px,#eae4d2 14px 28px);
+  border:2.5px dashed var(--ink);border-radius:14px;
+  padding:1.2rem;color:var(--ink-soft);
+}
+.ph b{
+  background:#fff;border:2px solid var(--ink);border-radius:999px;
+  font-family:var(--pop);font-weight:900;color:var(--ink);
+  padding:.25em 1.2em;font-size:.95rem;box-shadow:2px 2px 0 rgba(51,48,42,.14);
+}
+.ph span{font-size:.82rem}
+.ph-hero{aspect-ratio:16/9;max-height:24rem;margin:2.2rem 0 0}
+figure .ph{aspect-ratio:16/7;max-height:20rem}
+figure .ph--wide{aspect-ratio:16/5;max-height:13rem}
 
 /* ---------- セクション共通 ---------- */
 .section{padding-block:clamp(2.8rem,7vw,4.6rem);--c:var(--red)}
@@ -289,11 +286,6 @@ main b{
   padding:.1em .75em;margin:0 0 .7rem;box-shadow:2px 2px 0 rgba(51,48,42,.25);
 }
 figure{margin:2rem 0}
-figure svg{
-  display:block;width:100%;height:auto;
-  background:#fff;border:2.5px solid var(--ink);border-radius:14px;
-  box-shadow:var(--hard);
-}
 figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
 
 /* ---------- コラム（正直パネル） ---------- */
@@ -523,122 +515,15 @@ footer a:hover{color:#ffd966}
       <a class="btn btn-red" href="#zeroba">ゼロ磁場って何？</a>
       <a class="btn btn-white" href="#access">行き方を見る</a>
     </div>
+
+    <figure class="ph ph-hero" role="img" aria-label="ここに分杭峠の写真が入る予定です">
+      <b>写真を準備中</b>
+      <span>峠と「気場」の実際の写真に、あとで差しかわります</span>
+    </figure>
   </div>
 
   <p class="burst">標高<br>1,424m</p>
 
-  <svg class="compass" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-    <circle cx="60" cy="60" r="54" fill="#fff" stroke="#33302a" stroke-width="5"/>
-    <g stroke="#33302a" stroke-width="3" stroke-linecap="round" opacity=".85">
-      <line x1="60" y1="14" x2="60" y2="24"/><line x1="60" y1="96" x2="60" y2="106"/>
-      <line x1="14" y1="60" x2="24" y2="60"/><line x1="96" y1="60" x2="106" y2="60"/>
-    </g>
-    <g class="needle">
-      <polygon points="60,22 69,60 60,53 51,60" fill="#e8442e" stroke="#33302a" stroke-width="2.5" stroke-linejoin="round"/>
-      <polygon points="60,98 51,60 60,67 69,60" fill="#fff" stroke="#33302a" stroke-width="2.5" stroke-linejoin="round"/>
-    </g>
-    <circle cx="60" cy="60" r="5" fill="#33302a"/>
-  </svg>
-
-  <div class="hero-art" aria-hidden="true">
-    <svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax slice" focusable="false">
-      <defs>
-        <pattern id="ht" width="24" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="6" cy="6" r="2.6" fill="#ffffff"/>
-        </pattern>
-      </defs>
-      <rect width="1440" height="640" fill="#a6ddf2"/>
-      <rect x="880" y="24" width="560" height="170" fill="url(#ht)" opacity=".45"/>
-      <rect x="0" y="24" width="300" height="120" fill="url(#ht)" opacity=".3"/>
-
-      <!-- 太陽 -->
-      <g transform="translate(400,84)">
-        <g stroke="#f58220" stroke-width="8" stroke-linecap="round">
-          <line x1="0" y1="-64" x2="0" y2="-86"/><line x1="0" y1="64" x2="0" y2="86"/>
-          <line x1="-64" y1="0" x2="-86" y2="0"/><line x1="64" y1="0" x2="86" y2="0"/>
-          <line x1="-45" y1="-45" x2="-61" y2="-61"/><line x1="45" y1="-45" x2="61" y2="-61"/>
-          <line x1="-45" y1="45" x2="-61" y2="61"/><line x1="45" y1="45" x2="61" y2="61"/>
-        </g>
-        <circle r="50" fill="#ffc72c" stroke="#33302a" stroke-width="4"/>
-      </g>
-
-      <!-- 雲 -->
-      <g class="cloud" fill="#ffffff" opacity=".95">
-        <ellipse cx="255" cy="128" rx="58" ry="26"/>
-        <ellipse cx="300" cy="112" rx="44" ry="22"/>
-        <ellipse cx="215" cy="114" rx="36" ry="19"/>
-      </g>
-      <g class="cloud-b" fill="#ffffff" opacity=".92">
-        <ellipse cx="640" cy="82" rx="50" ry="22"/>
-        <ellipse cx="682" cy="70" rx="36" ry="18"/>
-        <ellipse cx="606" cy="70" rx="30" ry="15"/>
-      </g>
-      <g class="cloud" fill="#ffffff" opacity=".9">
-        <ellipse cx="1180" cy="205" rx="52" ry="22"/>
-        <ellipse cx="1222" cy="192" rx="36" ry="17"/>
-      </g>
-
-      <!-- 鳥 -->
-      <g fill="none" stroke="#33302a" stroke-width="3.5" stroke-linecap="round">
-        <path d="M508,196 q7,-8 14,0 q7,-8 14,0"/>
-        <path d="M566,172 q6,-7 12,0 q6,-7 12,0"/>
-      </g>
-
-      <!-- 山なみ（奥→手前） -->
-      <path d="M0,352 L120,300 L230,344 L360,272 L490,342 L610,296 L720,336 L840,276 L960,338 L1090,290 L1210,340 L1330,302 L1440,344 L1440,640 L0,640 Z"
-            fill="#cbe7a9" stroke="#33302a" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M0,432 L150,364 L300,428 L440,352 L580,430 L720,380 L860,436 L1010,356 L1160,430 L1300,376 L1440,428 L1440,640 L0,640 Z"
-            fill="#8fcb6b" stroke="#33302a" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M0,520 L130,468 L280,516 L430,452 L560,508 L668,452 L708,436 L732,436 L772,452 L880,506 L1020,452 L1160,514 L1300,464 L1440,512 L1440,640 L0,640 Z"
-            fill="#4fa35b" stroke="#33302a" stroke-width="3" stroke-linejoin="round"/>
-
-      <!-- 峠へのぼる道 -->
-      <path d="M640,660 C600,600 660,560 700,530 C740,500 704,472 722,448"
-            fill="none" stroke="#33302a" stroke-width="36" stroke-linecap="round"/>
-      <path d="M640,660 C600,600 660,560 700,530 C740,500 704,472 722,448"
-            fill="none" stroke="#f6eeda" stroke-width="29" stroke-linecap="round"/>
-      <path d="M640,660 C600,600 660,560 700,530 C740,500 704,472 722,448"
-            fill="none" stroke="#f58220" stroke-width="3.5" stroke-dasharray="14 12" stroke-linecap="round"/>
-
-      <!-- 峠の旗とかんばん -->
-      <g stroke="#33302a" stroke-linejoin="round">
-        <line x1="780" y1="458" x2="780" y2="400" stroke-width="5" stroke-linecap="round"/>
-        <polygon points="782,400 830,412 782,426" fill="#e8442e" stroke-width="3.5"/>
-      </g>
-      <g transform="translate(766,470)">
-        <line x1="34" y1="30" x2="34" y2="54" stroke="#33302a" stroke-width="5"/>
-        <rect x="-4" y="0" width="76" height="32" rx="6" fill="#fff" stroke="#33302a" stroke-width="3.5"/>
-        <text x="34" y="23" text-anchor="middle" font-size="17" font-weight="900" fill="#33302a">分杭峠</text>
-      </g>
-
-      <!-- 木 -->
-      <g stroke="#33302a" stroke-width="3" stroke-linejoin="round">
-        <polygon points="180,520 208,458 236,520" fill="#1f6b3a"/>
-        <polygon points="320,540 350,470 380,540" fill="#2c7a3f"/>
-        <polygon points="520,540 546,482 572,540" fill="#1f6b3a"/>
-        <polygon points="812,530 840,466 868,530" fill="#2c7a3f"/>
-        <polygon points="950,548 980,480 1010,548" fill="#1f6b3a"/>
-        <polygon points="1120,540 1146,486 1172,540" fill="#2c7a3f"/>
-        <polygon points="1250,530 1280,462 1310,530" fill="#1f6b3a"/>
-      </g>
-
-      <!-- バス -->
-      <g transform="translate(618,540) rotate(-9)">
-        <rect x="0" y="0" width="118" height="52" rx="12" fill="#e8442e" stroke="#33302a" stroke-width="3.5"/>
-        <rect x="10" y="9" width="30" height="20" rx="4" fill="#dff3fb" stroke="#33302a" stroke-width="3"/>
-        <rect x="48" y="9" width="30" height="20" rx="4" fill="#dff3fb" stroke="#33302a" stroke-width="3"/>
-        <rect x="86" y="9" width="22" height="20" rx="4" fill="#dff3fb" stroke="#33302a" stroke-width="3"/>
-        <rect x="8" y="36" width="102" height="7" rx="3.5" fill="#fff" stroke="#33302a" stroke-width="2.5"/>
-        <circle cx="28" cy="52" r="10" fill="#33302a"/>
-        <circle cx="28" cy="52" r="4" fill="#fff"/>
-        <circle cx="90" cy="52" r="10" fill="#33302a"/>
-        <circle cx="90" cy="52" r="4" fill="#fff"/>
-      </g>
-
-      <!-- 誌面へつづく紙の波 -->
-      <path d="M0,612 C240,592 480,632 720,614 C960,596 1200,634 1440,610 L1440,640 L0,640 Z" fill="#fff8ed"/>
-    </svg>
-  </div>
 </header>
 
 <main id="main">
@@ -695,38 +580,10 @@ footer a:hover{color:#ffd966}
       </div>
 
       <figure>
-        <svg viewBox="0 0 760 400" role="img" aria-label="ゼロ磁場のしくみの模式図。断層を境に両側の大地が押し合い、その真上の峠で力がつり合っているイメージ">
-          <rect width="760" height="400" fill="#ffffff"/>
-          <text x="380" y="46" text-anchor="middle" font-size="20" font-weight="900" fill="#33302a">「ゼロ磁場」といわれるしくみ（イメージ）</text>
-          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 C388,214 405,225 440,232 C540,252 640,238 760,258 L760,400 L0,400 Z" fill="#cdebb4"/>
-          <path d="M0,258 C120,238 220,252 320,232 C355,225 372,214 380,206 L380,400 L0,400 Z" fill="#a9db8e"/>
-          <path d="M380,206 L380,400" stroke="#e8442e" stroke-width="5" stroke-dasharray="11 8"/>
-          <text x="380" y="388" text-anchor="middle" font-size="13" font-weight="700" fill="#c22f1b">中央構造線（断層）</text>
-          <g fill="#1c7a49" font-size="14" font-weight="700">
-            <text x="150" y="315" text-anchor="middle">西側の大地</text>
-            <text x="150" y="334" text-anchor="middle" font-size="12" font-weight="400" fill="#6e675c">（伊那山地がわ）</text>
-            <text x="610" y="315" text-anchor="middle">東側の大地</text>
-            <text x="610" y="334" text-anchor="middle" font-size="12" font-weight="400" fill="#6e675c">（南アルプスがわ）</text>
-          </g>
-          <g stroke="#279b5e" stroke-width="8" fill="#279b5e">
-            <line x1="215" y1="290" x2="305" y2="280"/>
-            <polygon points="332,277 300,265 306,295"/>
-            <line x1="545" y1="290" x2="455" y2="280"/>
-            <polygon points="428,277 460,265 454,295"/>
-          </g>
-          <g>
-            <circle cx="380" cy="150" r="34" fill="#ffffff" stroke="#33302a" stroke-width="3"/>
-            <g stroke="#33302a" stroke-width="2" opacity=".7">
-              <line x1="380" y1="120" x2="380" y2="127"/><line x1="380" y1="173" x2="380" y2="180"/>
-              <line x1="350" y1="150" x2="357" y2="150"/><line x1="403" y1="150" x2="410" y2="150"/>
-            </g>
-            <polygon points="380,128 386,152 380,148 374,152" fill="#e8442e" transform="rotate(28 380 150)"/>
-            <polygon points="380,172 374,148 380,152 386,148" fill="#9aa79e" transform="rotate(28 380 150)"/>
-            <circle cx="380" cy="150" r="2.8" fill="#33302a"/>
-          </g>
-          <text x="380" y="106" text-anchor="middle" font-size="13" fill="#6e675c">針がゆれて定まらない…？</text>
-          <text x="380" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#33302a">押し合う力がつり合い、エネルギーが打ち消し合う——という説</text>
-        </svg>
+        <div class="ph" role="img" aria-label="図解は準備中です。断層を境に両側の大地が押し合い、その真上の峠で力がつり合っているイメージ図が入る予定">
+          <b>イメージ図を準備中</b>
+          <span>断層の上で押し合う力がつり合う——「ゼロ磁場」といわれるしくみ</span>
+        </div>
         <figcaption>※あくまで語られている「説」のイメージ図です。科学的に確認されたしくみではありません。</figcaption>
       </figure>
 
@@ -737,26 +594,10 @@ footer a:hover{color:#ffd966}
       </div>
 
       <figure>
-        <svg viewBox="0 0 760 190" role="img" aria-label="中央構造線の位置を示す模式図。九州から四国、紀伊半島、分杭峠を通って関東へつづく線のイメージ">
-          <rect width="760" height="190" fill="#ffffff"/>
-          <text x="380" y="40" text-anchor="middle" font-size="18" font-weight="900" fill="#33302a">中央構造線はどこを通る？（イメージ）</text>
-          <path d="M60,140 C180,150 300,138 420,128 C520,120 600,98 700,78" fill="none" stroke="#e8442e" stroke-width="6" stroke-linecap="round" opacity=".9"/>
-          <g fill="#279b5e" stroke="#33302a" stroke-width="2">
-            <circle cx="60" cy="140" r="7"/>
-            <circle cx="215" cy="145" r="7"/>
-            <circle cx="360" cy="133" r="7"/>
-            <circle cx="700" cy="78" r="7"/>
-          </g>
-          <circle cx="530" cy="112" r="12" fill="#ffc72c" stroke="#33302a" stroke-width="3"/>
-          <g font-size="13" fill="#33302a" text-anchor="middle">
-            <text x="60" y="168">九州</text>
-            <text x="215" y="173">四国</text>
-            <text x="360" y="161">紀伊半島</text>
-            <text x="700" y="106">関東へ</text>
-          </g>
-          <text x="530" y="88" text-anchor="middle" font-size="16" fill="#c22f1b" font-weight="900">★ 分杭峠</text>
-          <text x="530" y="142" text-anchor="middle" font-size="12" fill="#6e675c">全長 約1,000km</text>
-        </svg>
+        <div class="ph ph--wide" role="img" aria-label="図解は準備中です。中央構造線が九州から四国、紀伊半島、分杭峠を通って関東へつづく位置を示す図が入る予定">
+          <b>イメージ図を準備中</b>
+          <span>中央構造線はどこを通る？（九州〜四国〜紀伊半島〜分杭峠〜関東）</span>
+        </div>
         <figcaption>※位置関係をごく簡単にあらわしたイメージ図です。</figcaption>
       </figure>
 
