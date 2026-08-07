@@ -110,6 +110,19 @@ test("書きかけのメモ（TODO など）が残っていない", () => {
   assert.ok(!/TODO|FIXME|XXX|lorem ipsum/i.test(html), "書きかけの目印が残っている");
 });
 
+test("心得のチェックリストが、チェックできる形になっている", () => {
+  const items = [...html.matchAll(/<li>([\s\S]*?)<\/li>/g)]
+    .map(([, inner]) => inner)
+    .filter((inner) => inner.includes("check-txt"));
+  assert.ok(items.length >= 8, "チェックリストの項目が少なすぎる（作りが変わった？）");
+  for (const inner of items) {
+    assert.match(inner, /<input type="checkbox">/, `チェックボックスの無い項目: ${inner.trim()}`);
+    assert.match(inner, /<label>[\s\S]*<input/, "label で囲まれていない（タップで反応しない）");
+    const txt = inner.match(/<span class="check-txt">([\s\S]*?)<\/span>/);
+    assert.ok(txt && txt[1].replace(/<[^>]*>/g, "").trim(), "文言の無い項目がある");
+  }
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });

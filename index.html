@@ -418,18 +418,57 @@ td+td,th+th{border-left:1.5px solid var(--line)}
 }
 .timeline p{margin:0;font-size:.93rem;padding-top:.1rem}
 
-/* ---------- 心得チップ ---------- */
-.chips{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0 0;padding:0;list-style:none}
-.chips li{
-  display:inline-flex;align-items:center;gap:.45em;
-  background:#fff;border:2px solid var(--ink);border-radius:999px;
-  box-shadow:2px 2px 0 rgba(51,48,42,.14);
-  padding:.4em 1.05em;font-size:.86rem;
+/* ---------- 心得チェックリスト ----------
+   出発前にひとつずつ潰していく「持ちものメモ」の見た目。
+   チェックは HTML の checkbox ＋ CSS だけで動く（JS なし）。 */
+.checklist{
+  position:relative;background:#fff;
+  border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:var(--hard);
+  padding:1.9rem 1.15rem 1.25rem;margin-top:1.9rem;
 }
-.chips li::before{
-  content:"";flex:none;width:.62em;height:.34em;
-  border-left:3px solid var(--red);border-bottom:3px solid var(--red);
-  transform:rotate(-45deg) translateY(-25%);
+.check-groups{display:grid;gap:1.6rem}
+@media (min-width:52rem){.check-groups{grid-template-columns:1fr 1fr;gap:1.2rem 2.2rem}}
+.check-group h3{
+  display:inline-block;font-size:.92rem;letter-spacing:.05em;
+  background:color-mix(in srgb,var(--c) 55%,#fff);
+  border:2px solid var(--ink);border-radius:8px;
+  box-shadow:2px 2px 0 rgba(51,48,42,.14);
+  padding:.06em .85em .1em;margin:0 0 .5rem;
+}
+.check-list{margin:0;padding:0;list-style:none}
+.check-list li+li{border-top:1.5px dashed var(--line)}
+.check-list label{
+  display:flex;align-items:flex-start;gap:.65em;
+  padding:.6rem .35rem;font-size:.92rem;line-height:1.7;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.check-list input{position:absolute;width:1px;height:1px;opacity:0}
+.check-box{
+  flex:none;display:grid;place-items:center;
+  width:1.5em;height:1.5em;margin-top:.08em;
+  background:#fff;border:2.5px solid var(--ink);border-radius:6px;
+  transition:background .15s;
+}
+.check-box::after{      /* チェックの「レ」 */
+  content:"";width:.6em;height:.32em;
+  border-left:3px solid #fff;border-bottom:3px solid #fff;
+  rotate:-45deg;translate:0 -12%;
+  opacity:0;transition:opacity .15s;
+}
+.check-list label:hover input:not(:checked)+.check-box{background:var(--marker)}
+.check-list input:focus-visible+.check-box{outline:3px solid var(--red);outline-offset:3px}
+.check-list input:checked+.check-box{background:var(--red);border-color:var(--red)}
+.check-list input:checked+.check-box::after{opacity:1}
+.check-list input:checked~.check-txt{
+  color:var(--ink-soft);
+  text-decoration:line-through;
+  text-decoration-color:var(--red);text-decoration-thickness:2px;
+}
+.check-list input:checked~.check-txt b{background:none;font-weight:500}
+.check-note{margin:1rem .35rem 0;font-size:.8rem;color:var(--ink-soft)}
+@media (prefers-reduced-motion:reduce){
+  .check-box,.check-box::after{transition:none}
 }
 
 /* ---------- FAQ ---------- */
@@ -778,16 +817,62 @@ footer a:hover{color:#ffd966}
           <h2>訪れるまえの、ちいさな心得</h2>
         </div>
       </header>
-      <ul class="chips">
-        <li>標高1,424m。夏でも<b>羽織りもの</b>を1枚</li>
-        <li>坂道があるので<b>歩きやすい靴</b>で</li>
-        <li>夏は<b>虫よけ</b>があると安心</li>
-        <li>お試し用の<b>方位磁石</b>（100円のでOK）</li>
-        <li>ゴミは<b>ぜんぶ持ち帰り</b></li>
-        <li>ロープの先・立入禁止の場所には入らない</li>
-        <li>みんなの場所。<b>しずかに</b>過ごす</li>
-        <li>バスの<b>最終便の時刻</b>を先にチェック</li>
-      </ul>
+      <div class="checklist">
+        <span class="data-label">CHECK ✔</span>
+        <div class="check-groups">
+          <div class="check-group">
+            <h3>持ちもの</h3>
+            <ul class="check-list">
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">標高1,424m。夏でも<b>羽織りもの</b>を1枚</span>
+              </label></li>
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">坂道があるので<b>歩きやすい靴</b>で</span>
+              </label></li>
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">夏は<b>虫よけ</b>があると安心</span>
+              </label></li>
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">お試し用の<b>方位磁石</b>（100円のでOK）</span>
+              </label></li>
+            </ul>
+          </div>
+          <div class="check-group">
+            <h3>気をつけること</h3>
+            <ul class="check-list">
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">バスの<b>最終便の時刻</b>を先にチェック</span>
+              </label></li>
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">ゴミは<b>ぜんぶ持ち帰り</b></span>
+              </label></li>
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">ロープの先・立入禁止の場所には入らない</span>
+              </label></li>
+              <li><label>
+                <input type="checkbox">
+                <span class="check-box" aria-hidden="true"></span>
+                <span class="check-txt">みんなの場所。<b>しずかに</b>過ごす</span>
+              </label></li>
+            </ul>
+          </div>
+        </div>
+        <p class="check-note">タップすると印が付きます（このページを閉じると消えます）。</p>
+      </div>
     </div>
   </section>
 
