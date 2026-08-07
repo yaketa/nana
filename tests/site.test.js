@@ -124,7 +124,7 @@ test("心得のチェックリストが、チェックできる形になって�
   }
 });
 
-test("標高バッジ（星形）は本文の枠の中にある（広い画面で本文から離れない）", () => {
+test("標高バッジ（星形）：本文の枠の中にあり、インキの縁取りが消えない作りになっている", () => {
   const hero = html.match(/<header class="hero"[\s\S]*?<\/header>/);
   assert.ok(hero, "表紙（hero）が見つからない");
   const openAt = hero[0].indexOf('<div class="wrap hero-copy">');
@@ -142,6 +142,19 @@ test("標高バッジ（星形）は本文の枠の中にある（広い画面�
     "バッジが本文の枠（wrap hero-copy）の外にある。外だと画面の右端が基準になり、広い画面で本文から遠く離れる");
   assert.match(html, /\.hero-copy\{[^}]*position:relative/,
     "位置の基準になる .hero-copy の position:relative が消えている");
+
+  // 星の形は SVG の path、縁取りは stroke（インキ色）で描く決まり。
+  // CSS の clip-path 方式に戻すと、filter との同居で縁取りが消える
+  // Chrome 系の不具合を踏むうえ、深いトゲで縁の太さが不ぞろいになる
+  assert.match(html, /<p class="burst"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M[^"]+"\/><\/svg>標高<br>1,424m<\/p>/,
+    "バッジの作りが変わっている（p.burst の中に aria-hidden の SVG（星の path）＋標高の文字、の形にする）");
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  const burstPath = css.match(/\.burst svg path\{([^}]*)\}/);
+  assert.ok(burstPath, "バッジの星のスタイル（.burst svg path）が見つからない");
+  assert.match(burstPath[1], /stroke:var\(--ink\)/,
+    "バッジのインキ縁取り（stroke:var(--ink)）が消えている（縁が無いと切り紙のようで安っぽく見える）");
+  assert.ok(!css.includes(".burst::before"),
+    "旧方式（.burst::before の clip-path）が復活している。星は SVG で描く");
 });
 
 test("表紙の題字：赤の版ズレは filter 方式で行う（text-shadow だと iPhone で崩れる）", () => {
