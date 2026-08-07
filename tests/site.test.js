@@ -215,8 +215,8 @@ test("バス時刻表：caption は表題だけ、時刻は tt-time、「土休�
 });
 
 test("セクションの境目と余白が整っている（境界線・ジャンプの着地・末尾の余白）", () => {
-  assert.match(html, /\.section\+\.section\{border-top:3px solid var\(--ink\)\}/,
-    "となり合うセクションを区切るインキの線が消えている（淡い色どうしだと境目がぼやける）");
+  assert.match(html, /\.section\+\.section\{border-top:2px solid rgba\(51,48,42,\.4\)\}/,
+    "となり合うセクションを区切る線が変わっている（淡い色どうしだと境目がぼやける。真っ黒の線は強すぎ、と利用者が選んだ控えめな濃さ）");
   assert.match(html, /\[id\]\{scroll-margin-top:3\.2rem\}/,
     "ページ内ジャンプの着地位置の指定が変わっている（ナビの高さ 約59px より深くすると、ナビの下に前のセクションの色が帯状に見える）");
   assert.match(html, /\.section \.wrap>:last-child\{margin-bottom:0\}/,
