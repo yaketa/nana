@@ -140,6 +140,45 @@ test("周辺スポットが 2×2 の 4 枚で、どのカードにも写真が�
   }
 });
 
+// 行き方セクションを取り出して、カードの並びときっぷの帯に切り分ける
+function accessParts() {
+  const sec = html.match(/<section[^>]*id="access"[\s\S]*?<\/section>/);
+  assert.ok(sec, "行き方のセクションが見つからない");
+  const inner = sec[0];
+  const gridAt = inner.indexOf('<div class="access-grid">');
+  const fareAt = inner.indexOf('<div class="fare-block">');
+  assert.ok(gridAt >= 0, "行き方の 3 枚カード（access-grid）が見つからない");
+  assert.ok(fareAt > gridAt, "きっぷ（fare-block）がカードの外・下に置かれていない");
+  return { inner, grid: inner.slice(gridAt, fareAt), fare: inner.slice(fareAt) };
+}
+
+test("料金のきっぷが 3 枚あり、カードの外に置かれている", () => {
+  const { inner, grid, fare } = accessParts();
+  assert.ok(!/class="ticket"/.test(grid), "きっぷがカードの中に残っている（カードが長くなる）");
+
+  const tickets = [...fare.matchAll(/<li class="ticket"[\s\S]*?<\/li>/g)].map(([t]) => t);
+  assert.strictEqual(tickets.length, 3, "きっぷが 3 枚ではない");
+  for (const t of tickets) {
+    assert.match(t, /class="ticket-label"/, `ラベルの無いきっぷがある: ${t}`);
+    assert.match(t, /class="ticket-price"/, `金額の無いきっぷがある: ${t}`);
+  }
+  for (const yen of ["2,000", "1,260", "1,000"]) {
+    assert.ok(inner.includes(yen), `料金 ${yen}円 が消えている`);
+  }
+});
+
+test("行き方の 3 枚カードは分量がそろっている（下に大きな余白が出ない）", () => {
+  const { grid } = accessParts();
+  const cards = [...grid.matchAll(/<div class="card"[^>]*>([\s\S]*?)<\/div>/g)]
+    .map(([, body]) => body.replace(/<[^>]*>/g, "").replace(/\s+/g, ""));
+  assert.strictEqual(cards.length, 3, "カードが 3 枚ではない");
+  const lens = cards.map((c) => c.length);
+  assert.ok(
+    Math.max(...lens) / Math.min(...lens) < 1.6,
+    `カードの文章量が偏っている（${lens.join(" / ")} 文字）。短いカードの下に空白ができる`
+  );
+});
+
 test("方針どおり JavaScript を使っていない（HTML と CSS だけで動く）", () => {
   assert.ok(!/<script\b/i.test(html), "<script> タグが入っている（方針は JS なしの静的サイト）");
 });
