@@ -341,27 +341,32 @@ test("スマホ用メニュー：ボタン・パネル・とじる仕掛けが�
     'id="_" を作ってはいけない（「#_」はどこにも飛ばないからこそ、画面を動かさずにとじられる）');
 });
 
-test("表紙のふりがなは、題字の枠に自分で貼りつけてある（端末まかせにしない）", () => {
-  // ふりがな（ぶんぐいとうげ）が題字から離れて浮いて見える不具合の再発防止。
-  // 原因は、ふりがなの位置をブラウザの自動配置にまかせていたこと。
-  // すき間が書体の内部余白とブラウザごとのルビ実装で決まるため、
-  // iPhone など環境によって題字から大きく離れてしまっていた。
-  const h1Rule = html.match(/\.hero h1\{([\s\S]*?)\}/);
-  assert.ok(h1Rule, ".hero h1 の指定が見つからない");
-  assert.match(h1Rule[1], /position:relative/, "題字が基準の枠になっていない（ふりがなの貼り先が消える）");
-  assert.match(h1Rule[1], /width:fit-content/, "題字の幅が中身ぴったりでない（ふりがなの幅が題字とずれる）");
-  assert.match(h1Rule[1], /padding-top:/, "ふりがなの席（上の余白）が確保されていない");
-
+test("表紙のふりがなは、ブラウザ標準のルビ配置のまま。位置ずらしの指定を足さない", () => {
+  // ふりがな（ぶんぐいとうげ）が題字の右へ流れ出て並んでしまった不具合の再発防止。
+  // 原因は rt に position / display を足して「自分で貼りつけよう」としたこと。
+  // iPhone（Safari）のルビは rt を専用の部品として組む作りで、position が付くと
+  // その部品から外れ、ただの文字として本文に混ざってしまう。
+  // ルビの配置自体はブラウザに任せ、その中で決められる余白だけを指定する。
   const rtRule = html.match(/\.hero h1 rt\{([\s\S]*?)\}/);
   assert.ok(rtRule, ".hero h1 rt の指定が見つからない");
-  assert.match(rtRule[1], /position:absolute/, "ふりがなが自動配置に戻っている（端末ごとに位置がずれる）");
-  assert.match(rtRule[1], /top:0/, "ふりがなが題字の枠の上端に貼りついていない");
+  for (const ng of ["position", "display", "top:", "left:", "right:", "bottom:", "float", "transform", "translate"]) {
+    assert.ok(!rtRule[1].includes(ng),
+      `ふりがなに ${ng} を足してはいけない（iPhone でルビでなくなり、題字の横に並んでしまう）`);
+  }
+
+  // 題字の側も、ふりがなを貼りつけるための細工を残さない
+  const h1Rule = html.match(/\.hero h1\{([\s\S]*?)\}/);
+  assert.ok(h1Rule, ".hero h1 の指定が見つからない");
+  for (const ng of ["position:relative", "width:fit-content", "padding-top:"]) {
+    assert.ok(!h1Rule[1].includes(ng), `題字に ${ng} は不要（ふりがなの手動配置をやめたため）`);
+  }
+
+  // すき間が端末で変わらないよう、行の高さと余白は数値で言い切る
   assert.match(rtRule[1], /line-height:1\b/,
-    "ふりがなの行の高さが書体まかせになっている（書体が変わるとすき間も変わる）");
-  assert.ok(!/padding-bottom/.test(rtRule[1]),
-    "padding-bottom で押し上げる古いやり方が残っている（自分で位置を決める方式とけんかする）");
+    "ふりがなの行の高さが書体まかせになっている（Chrome は normal、Safari は継承で食い違う）");
   assert.match(rtRule[1], /margin:0/, "ふりがなの margin を 0 と言い切っていない（ブラウザの初期値でずれる）");
-  assert.match(rtRule[1], /padding:0/, "ふりがなの padding を 0 と言い切っていない（ブラウザの初期値でずれる）");
+  assert.match(rtRule[1], /padding:0 0 [.\d]+em/,
+    "ふりがなの余白を「上下左右まとめて」言い切っていない（指定し忘れた側に初期値が入る）");
 
   // 読み上げソフト向けの書き方（ruby / rt）は変えない
   assert.match(html, /<h1><ruby><span class="h1-txt">分杭峠<\/span><rt>ぶんぐいとうげ<\/rt><\/ruby><\/h1>/,
