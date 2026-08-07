@@ -305,7 +305,19 @@ main b{
   margin:0;font-family:var(--pop);font-weight:700;
   font-size:.68rem;letter-spacing:.3em;opacity:.9;
 }
-.sec-head h2{font-size:clamp(1.2rem,4.6vw,2rem);letter-spacing:.03em;color:inherit;text-wrap:balance}
+.sec-head h2{font-size:clamp(1.1rem,4.6vw,2rem);letter-spacing:.03em;color:inherit;text-wrap:balance}
+/* 見出しの中の span は「語句のまとまり」。2 行に折れるときは span の切れ目で改行され、
+   「〜って、ど / んなところ？」のような変な位置で切れない */
+.sec-head h2 span{display:inline-block}
+/* スマホの幅では帯の中の余白と字間を少しつめて、見出しをできるだけ 1 行に収める。
+   2 行に折れると帯の右側に大きな空白の塊ができて、壊れて見えるため。
+   文字サイズの下限 1.1rem とこの 3 つのつめは 1 セット。どれかを緩めると、
+   幅 375px（ふつうの iPhone）で 14 字の見出し（03）がまた 2 行に戻る */
+@media (max-width:25.98rem){
+  .sec-no{min-width:3rem}
+  .sec-head-body{padding-inline:.8rem}
+  .sec-head h2{letter-spacing:0}
+}
 .sec-head--ink{color:var(--ink)}
 .sec-head--ink .sec-no{background:rgba(51,48,42,.1);border-right-color:rgba(51,48,42,.35)}
 
@@ -729,7 +741,7 @@ footer a:hover{color:#ffd966}
         <span class="sec-no" aria-hidden="true">01</span>
         <div class="sec-head-body">
           <p class="sec-en">ABOUT</p>
-          <h2>分杭峠って、どんなところ？</h2>
+          <h2><span>分杭峠って、</span><span>どんなところ？</span></h2>
         </div>
       </header>
       <div class="duo">
@@ -818,7 +830,7 @@ footer a:hover{color:#ffd966}
         <span class="sec-no" aria-hidden="true">03</span>
         <div class="sec-head-body">
           <p class="sec-en">EXPERIENCE</p>
-          <h2>「気場」でのしずかな過ごし方</h2>
+          <h2><span>「気場」での</span><span>しずかな過ごし方</span></h2>
         </div>
       </header>
       <div class="prose">
@@ -944,7 +956,7 @@ footer a:hover{color:#ffd966}
         <span class="sec-no" aria-hidden="true">05</span>
         <div class="sec-head-body">
           <p class="sec-en">AROUND</p>
-          <h2>あわせて寄りたい、ふもとの楽しみ</h2>
+          <h2><span>あわせて寄りたい、</span><span>ふもとの楽しみ</span></h2>
         </div>
       </header>
       <div class="cards cards--2">
@@ -1011,7 +1023,7 @@ footer a:hover{color:#ffd966}
         <span class="sec-no" aria-hidden="true">06</span>
         <div class="sec-head-body">
           <p class="sec-en">TIPS</p>
-          <h2>訪れるまえの、ちいさな心得</h2>
+          <h2><span>訪れるまえの、</span><span>ちいさな心得</span></h2>
         </div>
       </header>
       <div class="checklist">
