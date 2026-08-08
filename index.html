@@ -319,7 +319,27 @@ main b{
 .shot-hero{margin:2.2rem 0 0}
 .shot-hero img{box-shadow:6px 6px 0 rgba(51,48,42,.22)}
 .shot-hero figcaption{color:var(--ink)}   /* 水色の背景でも読める濃さに */
-.credit,.cap-note{display:block;margin-top:.15rem}
+.cap-note{display:block;margin-top:.15rem}
+
+/* 写真の出典（撮影者・ライセンス）。ライセンス上まず消せないが、本文の流れに置くと
+   読みものの調子を切ってしまうので、写真の右下に小さく重ねる。
+   写真には明るいものも暗いものもあるため、インキ色の下敷きを敷いて字を白く抜く。
+   下敷きの濃さ .72 は、まっ白な写真に重なった最悪の場合でも白文字とのコントラスト比が
+   約 5:1 になる値（小さい字に必要な 4.5:1 を満たす）。薄くするとここが崩れる */
+.shot-pic{position:relative}
+/* セレクタは .credit 単体にしない。カードの中では .card p（本文の字の大きさ）に
+   負けて、出典だけ大きく組まれてしまう */
+.shot-pic .credit{
+  /* 左右どちらの端も .5rem と決めたうえで、幅は中身ぶん（fit-content）にし、
+     あまりを左マージンに寄せて右づけする。長い出典は左端の .5rem で折り返る */
+  position:absolute;left:.5rem;right:.5rem;bottom:.5rem;
+  width:fit-content;margin:0 0 0 auto;padding:.25em .55em;
+  font-size:.62rem;line-height:1.5;text-align:right;
+  color:#fff;background:rgba(51,48,42,.72);
+  border-radius:6px;
+}
+.shot-pic .credit a{color:#fff;text-decoration-thickness:1px;text-underline-offset:.15em}
+.shot-pic .credit a:hover{color:var(--marker)}
 
 /* ---------- セクション共通 ---------- */
 .section{padding-block:clamp(2.8rem,7vw,4.6rem);--c:var(--red)}
@@ -435,10 +455,8 @@ main b{
   border:0;border-radius:0;border-bottom:2.5px solid var(--ink);
   box-shadow:none;aspect-ratio:16/9;object-fit:cover;
 }
-.card-shot figcaption{
-  margin:.45rem 1.2rem 0;text-align:right;
-  font-size:.68rem;line-height:1.5;
-}
+/* カードの写真は下に線が入るので、出典はその線に乗らない高さに置く */
+.card-shot .shot-pic .credit{bottom:.65rem}
 figure{margin:2rem 0}
 figcaption{font-size:.8rem;color:var(--ink-soft);margin-top:.6rem}
 
@@ -769,14 +787,15 @@ footer a:hover{color:#ffd966}
     </div>
 
     <figure class="shot shot-hero">
-      <img src="images/bunkui-touge-1136.jpg"
-           srcset="images/bunkui-touge-720.jpg 720w, images/bunkui-touge-1136.jpg 1136w"
-           sizes="(min-width:48rem) 44rem, 92vw"
-           width="1136" height="639" decoding="async"
-           alt="夏の緑につつまれた分杭峠の頂上。国道152号ぞいに「分杭峠 Bunkuitoge 標高1424m」と書かれた青い道路標識が立っている">
-      <figcaption>峠の頂上、国道152号ぞいの標識。ここが標高1,424mの分杭峠です。
-        <span class="credit">写真：alonfloc／<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>（切り抜いて使用）</span>
-      </figcaption>
+      <div class="shot-pic">
+        <img src="images/bunkui-touge-1136.jpg"
+             srcset="images/bunkui-touge-720.jpg 720w, images/bunkui-touge-1136.jpg 1136w"
+             sizes="(min-width:48rem) 44rem, 92vw"
+             width="1136" height="639" decoding="async"
+             alt="夏の緑につつまれた分杭峠の頂上。国道152号ぞいに「分杭峠 Bunkuitoge 標高1424m」と書かれた青い道路標識が立っている">
+        <p class="credit">写真：alonfloc／<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>（切り抜き）</p>
+      </div>
+      <figcaption>峠の頂上、国道152号ぞいの標識。ここが標高1,424mの分杭峠です。</figcaption>
     </figure>
 
     <p class="burst"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60.0 10.0L67.6 21.7L79.1 13.8L81.7 27.6L95.4 24.6L92.4 38.3L106.2 40.9L98.3 52.4L110.0 60.0L98.3 67.6L106.2 79.1L92.4 81.7L95.4 95.4L81.7 92.4L79.1 106.2L67.6 98.3L60.0 110.0L52.4 98.3L40.9 106.2L38.3 92.4L24.6 95.4L27.6 81.7L13.8 79.1L21.7 67.6L10.0 60.0L21.7 52.4L13.8 40.9L27.6 38.3L24.6 24.6L38.3 27.6L40.9 13.8L52.4 21.7Z"/></svg>標高<br>1,424m</p>
@@ -837,14 +856,16 @@ footer a:hover{color:#ffd966}
       </div>
 
       <figure class="shot">
-        <img src="images/kitagawa-rotou-1200.jpg"
-             srcset="images/kitagawa-rotou-800.jpg 800w, images/kitagawa-rotou-1200.jpg 1200w"
-             sizes="(min-width:48rem) 44rem, 92vw"
-             width="1200" height="525" loading="lazy" decoding="async"
-             alt="斜面の左半分は茶色っぽい岩、右半分は灰色の岩。断層を境に、まったくちがう岩がななめの線でぶつかり合っている">
+        <div class="shot-pic">
+          <img src="images/kitagawa-rotou-1200.jpg"
+               srcset="images/kitagawa-rotou-800.jpg 800w, images/kitagawa-rotou-1200.jpg 1200w"
+               sizes="(min-width:48rem) 44rem, 92vw"
+               width="1200" height="525" loading="lazy" decoding="async"
+               alt="斜面の左半分は茶色っぽい岩、右半分は灰色の岩。断層を境に、まったくちがう岩がななめの線でぶつかり合っている">
+          <p class="credit">写真：Kumiko Korezumi／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜き）</p>
+        </div>
         <figcaption>これが、押し合っている大地の境目。大鹿村の「北川露頭（きたがわろとう）」では、中央構造線をはさんで左右の岩の色がまるでちがいます。分杭峠の足もとにも、この境目がつづいています。
           <span class="cap-note">※断層があるのは事実ですが、そこで磁場が打ち消し合うという話は、科学的に確認されたものではありません。</span>
-          <span class="credit">写真：Kumiko Korezumi／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span>
         </figcaption>
       </figure>
 
@@ -855,14 +876,15 @@ footer a:hover{color:#ffd966}
       </div>
 
       <figure class="shot">
-        <img src="images/ankou-rotou-1280.jpg"
-             srcset="images/ankou-rotou-800.jpg 800w, images/ankou-rotou-1280.jpg 1280w"
-             sizes="(min-width:48rem) 44rem, 92vw"
-             width="1280" height="400" loading="lazy" decoding="async"
-             alt="川ぞいにむき出しになった岩壁。オレンジ色と灰色の岩が帯のように交互にならんでいる">
-        <figcaption>大鹿村の「安康露頭（あんこうろとう）」。川に削られて、断層の断面がむき出しになっています。オレンジと灰色の帯は、押し合ってくだかれた岩です。
-          <span class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜いて使用）</span>
-        </figcaption>
+        <div class="shot-pic">
+          <img src="images/ankou-rotou-1280.jpg"
+               srcset="images/ankou-rotou-800.jpg 800w, images/ankou-rotou-1280.jpg 1280w"
+               sizes="(min-width:48rem) 44rem, 92vw"
+               width="1280" height="400" loading="lazy" decoding="async"
+               alt="川ぞいにむき出しになった岩壁。オレンジ色と灰色の岩が帯のように交互にならんでいる">
+          <p class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜き）</p>
+        </div>
+        <figcaption>大鹿村の「安康露頭（あんこうろとう）」。川に削られて、断層の断面がむき出しになっています。オレンジと灰色の帯は、押し合ってくだかれた岩です。</figcaption>
       </figure>
 
       <div class="column-box">
@@ -1013,12 +1035,14 @@ footer a:hover{color:#ffd966}
       <div class="cards cards--2">
         <div class="card card--photo" style="--tag:var(--orange)">
           <figure class="shot card-shot">
-            <img src="images/michinoeki-hase-960.jpg"
-                 srcset="images/michinoeki-hase-480.jpg 480w, images/michinoeki-hase-960.jpg 960w"
-                 sizes="(min-width:52rem) 21.4rem, 90vw"
-                 width="960" height="540" loading="lazy" decoding="async"
-                 alt="道の駅の売り場。焼きたてのミニクロワッサンが数個、四角い皿にのっている">
-            <figcaption><span class="credit">写真：Araisyohei／<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>（切り抜いて使用）</span></figcaption>
+            <div class="shot-pic">
+              <img src="images/michinoeki-hase-960.jpg"
+                   srcset="images/michinoeki-hase-480.jpg 480w, images/michinoeki-hase-960.jpg 960w"
+                   sizes="(min-width:52rem) 21.4rem, 90vw"
+                   width="960" height="540" loading="lazy" decoding="async"
+                   alt="道の駅の売り場。焼きたてのミニクロワッサンが数個、四角い皿にのっている">
+              <p class="credit">写真：Araisyohei／<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>（切り抜き）</p>
+            </div>
           </figure>
           <span class="tag">GOURMET</span>
           <h3>道の駅 南アルプスむら長谷</h3>
@@ -1026,12 +1050,14 @@ footer a:hover{color:#ffd966}
         </div>
         <div class="card card--photo" style="--tag:var(--pink)">
           <figure class="shot card-shot">
-            <img src="images/senryuso-960.jpg"
-                 srcset="images/senryuso-480.jpg 480w, images/senryuso-960.jpg 960w"
-                 sizes="(min-width:52rem) 21.4rem, 90vw"
-                 width="960" height="540" loading="lazy" decoding="async"
-                 alt="仙流荘となりのバス乗り場。木造の待合所の前に登山客がならび、奥に南アルプスの谷がひらけている">
-            <figcaption><span class="credit">写真：Koda6029／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span></figcaption>
+            <div class="shot-pic">
+              <img src="images/senryuso-960.jpg"
+                   srcset="images/senryuso-480.jpg 480w, images/senryuso-960.jpg 960w"
+                   sizes="(min-width:52rem) 21.4rem, 90vw"
+                   width="960" height="540" loading="lazy" decoding="async"
+                   alt="仙流荘となりのバス乗り場。木造の待合所の前に登山客がならび、奥に南アルプスの谷がひらけている">
+              <p class="credit">写真：Koda6029／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜き）</p>
+            </div>
           </figure>
           <span class="tag">ONSEN</span>
           <h3>仙流荘（戸台パーク）</h3>
@@ -1039,12 +1065,14 @@ footer a:hover{color:#ffd966}
         </div>
         <div class="card card--photo" style="--tag:var(--indigo)">
           <figure class="shot card-shot">
-            <img src="images/kozosen-museum-960.jpg"
-                 srcset="images/kozosen-museum-480.jpg 480w, images/kozosen-museum-960.jpg 960w"
-                 sizes="(min-width:52rem) 21.4rem, 90vw"
-                 width="960" height="540" loading="lazy" decoding="async"
-                 alt="新緑の山を背にした中央構造線博物館の建物。前庭にはいろいろな種類の岩石がならべて展示されている">
-            <figcaption><span class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜いて使用）</span></figcaption>
+            <div class="shot-pic">
+              <img src="images/kozosen-museum-960.jpg"
+                   srcset="images/kozosen-museum-480.jpg 480w, images/kozosen-museum-960.jpg 960w"
+                   sizes="(min-width:52rem) 21.4rem, 90vw"
+                   width="960" height="540" loading="lazy" decoding="async"
+                   alt="新緑の山を背にした中央構造線博物館の建物。前庭にはいろいろな種類の岩石がならべて展示されている">
+              <p class="credit">写真：KAMUI／<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>（切り抜き）</p>
+            </div>
           </figure>
           <span class="tag">GEO</span>
           <h3>中央構造線博物館・北川露頭</h3>
@@ -1052,12 +1080,14 @@ footer a:hover{color:#ffd966}
         </div>
         <div class="card card--photo" style="--tag:var(--red)">
           <figure class="shot card-shot">
-            <img src="images/takato-sakura-960.jpg"
-                 srcset="images/takato-sakura-480.jpg 480w, images/takato-sakura-960.jpg 960w"
-                 sizes="(min-width:52rem) 21.4rem, 90vw"
-                 width="960" height="540" loading="lazy" decoding="async"
-                 alt="淡紅色の桜におおわれた高遠城址公園を見おろした景色。桜の海のなかに朱色の屋根の建物がのぞいている">
-            <figcaption><span class="credit">写真：MaedaAkihiko／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜いて使用）</span></figcaption>
+            <div class="shot-pic">
+              <img src="images/takato-sakura-960.jpg"
+                   srcset="images/takato-sakura-480.jpg 480w, images/takato-sakura-960.jpg 960w"
+                   sizes="(min-width:52rem) 21.4rem, 90vw"
+                   width="960" height="540" loading="lazy" decoding="async"
+                   alt="淡紅色の桜におおわれた高遠城址公園を見おろした景色。桜の海のなかに朱色の屋根の建物がのぞいている">
+              <p class="credit">写真：MaedaAkihiko／<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>（切り抜き）</p>
+            </div>
           </figure>
           <span class="tag">SAKURA</span>
           <h3>高遠城址公園</h3>
