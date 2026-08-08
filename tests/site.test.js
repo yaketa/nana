@@ -91,16 +91,44 @@ test("写真の width / height がファイルの実寸と一致している（�
   }
 });
 
+// 写真の枠（figure.shot）をぜんぶ取り出す
+const figures = [
+  ...html.matchAll(/<figure\b[^>]*class="[^"]*\bshot\b[^"]*"[^>]*>([\s\S]*?)<\/figure>/g),
+].map((m) => m[1]);
+
 test("どの写真にも出典（撮影者とライセンス）が書かれている", () => {
-  const figures = [
-    ...html.matchAll(/<figure\b[^>]*class="[^"]*\bshot\b[^"]*"[^>]*>([\s\S]*?)<\/figure>/g),
-  ];
   assert.strictEqual(figures.length, images.length, "出典を書く枠に入っていない写真がある");
-  for (const [, inner] of figures) {
-    assert.match(inner, /<figcaption\b/, "説明文（figcaption）の無い写真がある");
+  for (const inner of figures) {
     assert.match(inner, /写真：\S/, "撮影者の表示が無い写真がある");
     assert.match(inner, /creativecommons\.org\/licenses\//, "ライセンス表示が無い写真がある");
   }
+});
+
+test("出典は写真の上に重ねる（本文の流れに割りこませない）", () => {
+  // 出典はライセンス上まず消せないが、本文の下に置くと読みものの調子を切る。
+  // 写真の右下に重ねる置き方に戻せなくなっていないかを見張る。
+  for (const inner of figures) {
+    const pic = inner.match(/<div class="shot-pic">([\s\S]*?)<\/div>/);
+    assert.ok(pic, "写真が shot-pic の中に入っていない（重ねる置き場所が無い）");
+    assert.match(pic[1], /<p class="credit">[\s\S]*写真：/,
+      "出典が写真に重なる位置（shot-pic の中）に無い");
+  }
+  // 説明文の中に出典が混ざって、また本文の下に出ていないか
+  for (const m of html.matchAll(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/g)) {
+    assert.ok(!/写真：/.test(m[1]), "出典が説明文（figcaption）の中に戻っている");
+  }
+
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1].replace(/\/\*[\s\S]*?\*\//g, "");
+  // セレクタは .shot-pic .credit。単なる .credit ではカードの中で .card p に負けて、
+  // 出典だけ本文と同じ大きさに組まれ、写真の半分を覆う帯になる
+  const credit = css.match(/\.shot-pic \.credit\{([\s\S]*?)\}/);
+  assert.ok(credit, "出典のスタイル（.shot-pic .credit）が見つからない");
+  assert.match(credit[1], /font-size:\.6\d+rem/, "出典の字が小さく指定されていない");
+  assert.match(credit[1], /position:absolute/, "出典を重ねる指定（position:absolute）が消えている");
+  // 下敷きが薄いと、明るい写真の上で白い字が読めなくなる（コントラスト比 4.5:1 を切る）
+  const alpha = credit[1].match(/background:rgba\(51,48,42,([\d.]+)\)/);
+  assert.ok(alpha, "出典の下敷き（背景色）が消えている。写真によっては字が読めなくなる");
+  assert.ok(Number(alpha[1]) >= 0.7, `出典の下敷きが薄すぎる（${alpha[1]}）。0.7 以上にする`);
 });
 
 test("写真の「準備中」プレースホルダーが残っていない", () => {
